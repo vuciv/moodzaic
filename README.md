@@ -9,11 +9,12 @@ Within repo directory, create and activate a virtualenv.
 `python3 -m venv path/env`
 
 `(Linux/mac) source env/bin/activate`
+
 `(windows) \env\Scripts\activate.bat`
 
 Install Django and other dependencies.
 
-`pip install -r requirements`
+`pip install -r requirements.txt`
 
 (optional) Create your project:
 
