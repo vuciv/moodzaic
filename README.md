@@ -19,9 +19,9 @@ Install Django and other dependencies.
 
 `django-admin.py startproject <name>`
 
-Create a new app:
+Create a new app (inside django project folder):
 
-`python manage.py startapp moodzaic_django/apps/<appname>`
+`python manage.py startapp <appname>`
 
 Add your app to the `INSTALLED_APPS` tuple in project `setting.py`
 
