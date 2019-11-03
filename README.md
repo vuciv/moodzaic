@@ -9,6 +9,7 @@ Within repo directory, create and activate a virtualenv.
 `python3 -m venv path/env`
 
 `(Linux/mac) source env/bin/activate`
+`(windows) \env\Scripts\activate.bat`
 
 Install Django and other dependencies.
 
@@ -20,7 +21,7 @@ Install Django and other dependencies.
 
 Create a new app:
 
-`python manage.py startapp <appname>`
+`python manage.py startapp moodzaic_django/apps/<appname>`
 
 Add your app to the `INSTALLED_APPS` tuple in project `setting.py`
 
