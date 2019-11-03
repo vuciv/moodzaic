@@ -63,6 +63,30 @@ node_modules/
 
 # dotenv environment variables file
 .env
-
 env/
 venv/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# django variables
+**/*.sqlite3
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# Django stuff:
+*.log
+*.pot
+
+# Sphinx documentation
+docs/_build/
+
+# Unit test / coverage reports
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
