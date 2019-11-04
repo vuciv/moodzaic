@@ -5,6 +5,18 @@ import renderer from 'react-test-renderer';
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
+/* Component hierarchy for reference
+* App
+* 1. LoginPage
+*   a. LoginInstruction
+*   b. LoginForm
+*     i. UsernameForm
+*     ii. PasswordForm
+* 2. Menu
+* 3. MoodInputPage
+* 4. ProfilePage
+* 5. CommunityPage
+*/
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -26,6 +38,7 @@ afterEach(() => {
   container = null;
 });
 
+//example
 it("renders with or without a name", () => {
   act(() => {
     render(<Hello />, container);
@@ -42,3 +55,9 @@ it("renders with or without a name", () => {
   });
   expect(container.textContent).toBe("Hello, Margaret!");
 });
+
+//Outputs existing username and password to backend as expected
+//it("Entering username and password updates state", () => {
+//Outputs new username and password to backend as expected (backend will initialize new user)
+//Load user profile information properly
+//Switch to menu/input page
