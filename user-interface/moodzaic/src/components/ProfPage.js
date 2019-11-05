@@ -13,7 +13,7 @@ import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 
 
-const ProfilePage = () => (
+const ProfilePage = ({Name, Username, Age, Gender, ProgressScore}) => (
   <div>
     <MyMenu />
     <Container text style={{ marginTop: '7em' }}>

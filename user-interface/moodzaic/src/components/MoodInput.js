@@ -14,7 +14,7 @@ import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 
 
-const MoodPage = ({lastTimeRecording}) => (
+const MoodPage = ({LastObservationTime}) => (
   <div>
     <MyMenu />
     <Container text style={{ marginTop: '7em' }}>

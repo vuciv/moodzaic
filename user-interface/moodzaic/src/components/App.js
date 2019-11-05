@@ -24,7 +24,10 @@ class App extends Component {
         Username: '',
         MyCommunityList: [],
         MyObservationList: [],
-        LastObservationTime: []
+        LastObservationTime: '',
+        Age: 0,
+        Gender: '',
+        ProgressScore: 0
   }
 
   toggleLogIn = () => {
