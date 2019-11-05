@@ -9,6 +9,9 @@ import { act } from "react-dom/test-utils";
 * App
 * 1. LoginPage
 *   a. LoginInstruction
+    b. MakeAccount
+*     i. NewUsernameForm
+*     ii. NewPasswordForm
 *   b. LoginForm
 *     i. UsernameForm
 *     ii. PasswordForm
@@ -37,6 +40,13 @@ afterEach(() => {
   container.remove();
   container = null;
 });
+
+it("Menu changes color appropriately", () => {
+//ok actually hear me out, what if
+//we actually just didn't implement this and just made them buttons
+//we could implement it next iteration maybe?
+});
+
 
 //example
 it("renders with or without a name", () => {
