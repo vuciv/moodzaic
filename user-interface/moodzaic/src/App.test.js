@@ -41,9 +41,9 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-describe('Test suite 1', () => {
+describe('Things relating to the login screen', () => {
   //beforeEach stuff
-  it("Entering username and password updates state", () => {
+  it("Entering correct username and password opens main page", () => {
     act(() => {
       render(<App />, container);
     });

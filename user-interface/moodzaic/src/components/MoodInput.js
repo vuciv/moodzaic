@@ -1,60 +1,38 @@
 import React from 'react'
+import logo from '../logo.png';
 import {
   Container,
   Divider,
-  Dropdown,
   Grid,
   Header,
   Image,
   List,
-  Menu,
   Segment,
+  Form
 } from 'semantic-ui-react'
+import MyMenu from './Menu.js';
 
-const FixedMenuLayout = () => (
+const MoodPage = () => (
   <div>
-    <Menu fixed='top' inverted>
-      <Container>
-        <Menu.Item as='a' header>
-          <Image size='mini' src='/logo.png' style={{ marginRight: '1.5em' }} />
-          Project Name
-        </Menu.Item>
-        <Menu.Item as='a'>Home</Menu.Item>
-
-        <Dropdown item simple text='Dropdown'>
-          <Dropdown.Menu>
-            <Dropdown.Item>List Item</Dropdown.Item>
-            <Dropdown.Item>List Item</Dropdown.Item>
-            <Dropdown.Divider />
-            <Dropdown.Header>Header Item</Dropdown.Header>
-            <Dropdown.Item>
-              <i className='dropdown icon' />
-              <span className='text'>Submenu</span>
-              <Dropdown.Menu>
-                <Dropdown.Item>List Item</Dropdown.Item>
-                <Dropdown.Item>List Item</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown.Item>
-            <Dropdown.Item>List Item</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      </Container>
-    </Menu>
-
+    <MyMenu />
     <Container text style={{ marginTop: '7em' }}>
       <Header as='h1'>Semantic UI React Fixed Template</Header>
-      <p>This is a basic fixed menu template using fixed size containers.</p>
+      <p>Some ~important~ questions for you about your mood today.</p>
+      <Form>
+        <Form.Field>
+          <label>What did you eat for the last 3 meals?</label>
+          <input />
+        </Form.Field>
+      </Form>
+      <Form>
+        <Form.Field>
+          <label>What do you want from me????</label>
+          <input />
+        </Form.Field>
+      </Form>
       <p>
-        A text container is used for the main container, which is useful for single column layouts.
+        Anyways thats all have a nice day I guess
       </p>
-
-      <Image src='/images/wireframe/media-paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
     </Container>
 
     <Segment inverted vertical style={{ margin: '5em 0em 0em', padding: '5em 0em' }}>
@@ -96,7 +74,7 @@ const FixedMenuLayout = () => (
         </Grid>
 
         <Divider inverted section />
-        <Image centered size='mini' src='/logo.png' />
+        <Image centered size='mini' src={ logo } />
         <List horizontal inverted divided link size='small'>
           <List.Item as='a' href='#'>
             Site Map
@@ -116,4 +94,4 @@ const FixedMenuLayout = () => (
   </div>
 )
 
-export default FixedMenuLayout
+export default MoodPage;

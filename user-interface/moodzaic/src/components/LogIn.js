@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
-import logo from './logo.png'
+import logo from '../logo.png'
 
 const LoginForm = () => (
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
@@ -10,7 +10,7 @@ const LoginForm = () => (
       </Header>
       <Form size='large'>
         <Segment stacked>
-          <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' />
+          <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' />
           <Form.Input
             fluid
             icon='lock'
