@@ -41,6 +41,19 @@ it('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
+describe('Test suite 1', () => {
+  //beforeEach stuff
+  it("Entering username and password updates state", () => {
+    act(() => {
+      render(<App />, container);
+    });
+    //expect();
+  });
+  it("Entering username and password updates state", () => {
+      //update and expect
+  });
+})
+
 //example
 /*it("renders with or without a name", () => {
   act(() => {
@@ -60,11 +73,7 @@ it('renders without crashing', () => {
 });*/
 
 //Outputs existing username and password to backend as expected
-it("Entering username and password updates state", () => {
-  act(() => {
-    render(<App />, container);
-  });
-});
+
 //Outputs new username and password to backend as expected (backend will initialize new user)
 //Load user profile information properly
 //Switch to menu/input page

@@ -5,6 +5,7 @@ import LoginForm from './LogIn.js'
 import FixedMenuLayout from './MainPage.js'
 
 function App() {
+  console.log("Hey");
   return (
     <LoginForm />
     // <FixedMenuLayout />
