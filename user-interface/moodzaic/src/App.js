@@ -1,10 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import LoginPage from './LoginPage.js'
 
 function App() {
   return (
     <div className="App">
+      <LoginPage />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

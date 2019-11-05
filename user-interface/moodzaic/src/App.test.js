@@ -21,12 +21,6 @@ import { act } from "react-dom/test-utils";
 * 5. CommunityPage
 */
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
-
 let container = null;
 beforeEach(() => {
   // setup a DOM element as a render target
@@ -41,15 +35,14 @@ afterEach(() => {
   container = null;
 });
 
-it("Menu changes color appropriately", () => {
-//ok actually hear me out, what if
-//we actually just didn't implement this and just made them buttons
-//we could implement it next iteration maybe?
+it('renders without crashing', () => {
+  const div = document.createElement('div');
+  ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
 });
 
-
 //example
-it("renders with or without a name", () => {
+/*it("renders with or without a name", () => {
   act(() => {
     render(<Hello />, container);
   });
@@ -64,10 +57,14 @@ it("renders with or without a name", () => {
     render(<Hello name="Margaret" />, container);
   });
   expect(container.textContent).toBe("Hello, Margaret!");
-});
+});*/
 
 //Outputs existing username and password to backend as expected
-//it("Entering username and password updates state", () => {
+it("Entering username and password updates state", () => {
+  act(() => {
+    render(<App />, container);
+  });
+});
 //Outputs new username and password to backend as expected (backend will initialize new user)
 //Load user profile information properly
 //Switch to menu/input page
