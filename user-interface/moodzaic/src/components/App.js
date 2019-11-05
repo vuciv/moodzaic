@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import LoginForm from './LogIn.js'
 import ProfilePage from './ProfPage.js'
 import MoodPage from './MoodInput.js'
-import CommunityPage from './Community.js'
+import CommunityPage from './CommunityPage.js'
 
 
 class App extends Component {
@@ -21,7 +21,10 @@ class App extends Component {
   state = {
         LoggedIn: true,
         Name: '',
-        Username: ''
+        Username: '',
+        MyCommunityList: [],
+        MyObservationList: [],
+        LastObservationTime: []
   }
 
   toggleLogIn = () => {

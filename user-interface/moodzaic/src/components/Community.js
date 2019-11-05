@@ -87,7 +87,7 @@ const CommentExampleComment = () => (
   </Comment.Group>
 )
 
-const CommunityPage = () => (
+const Community = ({communityName, members, amIMod}) => (
   <div>
     <MyMenu />
     <Container text style={{ marginTop: '7em' }}>
@@ -97,4 +97,4 @@ const CommunityPage = () => (
   </div>
 )
 
-export default CommunityPage
+export default Community
