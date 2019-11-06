@@ -4,7 +4,7 @@ from users.models import User
 # Create your models here.
 class Community(models.Model):
     name = models.CharField(max_length=30)
-    users = models.ManyToManyField(User, on_delete=models.CASCADE)
+    users = models.ManyToManyField(User)
 
     def setName(self, name):
         self.name = name
