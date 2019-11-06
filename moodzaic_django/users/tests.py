@@ -14,6 +14,9 @@ class UserTestCase(TestCase):
     def test_setUsernameLengthFailure(self):
         testUser = User.objects.get(username = "emil")
         self.assertFalse(testUser.setUserUsername("123456789012345678901"))
+    def test_setUsernameNotStringFailure(self):
+        testUser = User.objects.get(username = "emil")
+        self.assertFalse(testUser.setUserUsername(13))
 
     def test_setUserPasswordSuccess(self):
         testUser = User.objects.get(username = "emil")
@@ -33,6 +36,9 @@ class UserTestCase(TestCase):
     def test_setUserAgeTooYoungFailure(self):
         testUser = User.objects.get(username = "emil")
         self.assertFalse(testUser.setUserAge(17))
+    def test_setUserAgeNotIntFailure(self):
+        testUser = User.objects.get(username = "emil")
+        self.assertFalse(testUser.setUserAge("emil"))
 
     def test_setUserGenderManSuccess(self):
         testUser = User.objects.get(username = "emil")
