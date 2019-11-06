@@ -21,28 +21,68 @@ import { act } from "react-dom/test-utils";
 * 5. CommunityPage
 */
 
-let container = null;
-beforeEach(() => {
-  // setup a DOM element as a render target
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
+// describe('App Component', () => {
+//
+//     let wrapper;
+//     beforeEach(() => {
+//         const initialState = {
+//             posts: [{
+//                 title: 'Example title 1',
+//                 body: 'Some text'
+//             }, {
+//                 title: 'Example title 2',
+//                 body: 'Some text'
+//             }, {
+//                 title: 'Example title 3',
+//                 body: 'Some text'
+//             }]
+//         }
+//         wrapper = setUp(initialState);
+//     });
+//
+//     it('Should render without errors', () => {
+//         const component = findByTestAtrr(wrapper, 'appComponent');
+//         expect(component.length).toBe(1);
+//     });
+//
+//     it('exampleMethod_updatesState Method should update state as expected', () => {
+//         const classInstance = wrapper.instance();
+//         classInstance.exampleMethod_updatesState();
+//         const newState = classInstance.state.hideBtn;
+//         expect(newState).toBe(true);
+//     });
+//
+//     it('exampleMethod_returnsAValue Method should return value as expected', () => {
+//         const classInstance = wrapper.instance();
+//         const newValue = classInstance.exampleMethod_returnsAValue(6);
+//         expect(newValue).toBe(7);
+//     });
+//
+//
+// });
 
-afterEach(() => {
-  // cleanup on exiting
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
-
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+// let container = null;
+// beforeEach(() => {
+//   // setup a DOM element as a render target
+//   container = document.createElement("div");
+//   document.body.appendChild(container);
+// });
+//
+// afterEach(() => {
+//   // cleanup on exiting
+//   unmountComponentAtNode(container);
+//   container.remove();
+//   container = null;
+// });
 
 describe('Things relating to the login screen', () => {
   //beforeEach stuff
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<App />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
+
   it("Entering correct username and password opens main page", () => {
     act(() => {
       render(<App />, container);

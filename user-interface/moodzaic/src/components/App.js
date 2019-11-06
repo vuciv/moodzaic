@@ -4,6 +4,8 @@ import LoginForm from './LogIn.js'
 import ProfilePage from './ProfPage.js'
 import MoodPage from './MoodInput.js'
 import CommunityPage from './CommunityPage.js'
+import Community from './Community.js'
+
 
 
 class App extends Component {
@@ -40,7 +42,7 @@ class App extends Component {
       <div>
       {console.log(this.state)}
         {this.state.LoggedIn ?
-        <CommunityPage /> :
+        <Community /> :
         <LoginForm />}
       </div>
     )
