@@ -61,7 +61,41 @@ class GoalTestCase(TestCase):
     def setUp(self):
         Goal.objects.create(goal = "Drink water", frequency = "5", time = "16:00 AM")
     
-    def test_setGoalGoal(self):
+    def test_setGoalGoalSuccess(self):
         testGoal = Goal.objects.get(goal = "Drink water")
         testGoal.setGoalGoal("Drink more water")
         self.assertEqual("Drink more water", testGoal.goal)
+    def test_setGoalGoalLengthFailure(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testGoal.setGoalGoal("1234567890123456789012345678901"))
+    def test_setGoalGoalNotStringFailure(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testGoal.setGoalGoal(1))
+
+    def test_setGoalFrequencySuccess(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        testGoal.setGoalFrequency(3)
+        self.assertEqual(3, testGoal.frequency)
+    def test_setGoalFrequencyNotIntFailure(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testGoal.setGoalFrequency("emil"))
+
+    def test_setGoalTimeSuccess(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        testGoal.setGoalTime("14:00")
+        self.assertEqual("14:00", testGoal.time)
+    def test_setGoalTimeAMPMFormatFailure(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testGoal.setGoalTime("2:00 PM"))
+    def test_setGoalTimeNoPaddingFailure(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testGoal.setGoalTime("1:00"))
+    def test_setGoalTimeNotStringFailure(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testGoal.setGoalTime(2))
+    def test_setGoalTimeBadHourFailure(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testGoal.setGoalTime("25:19"))
+    def test_setGoalTimeBadMinuteFailure(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testGoal.setGoalTime("13:62"))

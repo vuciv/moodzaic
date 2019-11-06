@@ -1,6 +1,5 @@
 from django.db import models
 
-# Create your models here.
 class User(models.Model):
     username = models.CharField(max_length=20)
     password = models.CharField(max_length=20)
@@ -30,12 +29,12 @@ class Goal(models.Model):
 
     def setGoalGoal(self, goal):
         #TODO
-        return
+        return 'not false'
     
     def setGoalFrequency(self, frequency):
         #TODO
-        return
+        return 'not false'
     
     def setGoalTime(self, time):
         #TODO
-        return
+        return 'not false'
