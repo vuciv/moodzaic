@@ -15,7 +15,7 @@ import {
 import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 import Community from './Community.js'
-import CommunitiesPage from './CommunitiesPage.js'
+import CommunitiesPage from './MyCommunities.js'
 
 
 const CommunityPage = ({myCommunities}) => (
