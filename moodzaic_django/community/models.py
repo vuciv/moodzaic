@@ -18,10 +18,14 @@ class Community(models.Model):
         return
 
     def getUsers(self):
-        return self.users
+        return self.users.all()
 
-    def addUserToCommunity(community, user):
-        community.users.add(user)
+    def addUserToCommunity(self, user):
+        self.users.add(user)
+        return
+
+    def removeUserFromCommunity(self, user):
+        self.users.remove(user)
         return
 
 
