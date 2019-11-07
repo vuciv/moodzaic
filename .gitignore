@@ -90,3 +90,7 @@ docs/_build/
 .cache
 nosetests.xml
 coverage.xml
+
+# migrations
+**/migrations/
+**/migrations/*.pyc
