@@ -95,13 +95,9 @@ class Profile(models.Model):
         #post: str
         return
 
-<<<<<<< HEAD
-    def setMood(self, mood):
-        ##TODO : mood is int
-=======
     def getUser(self):
         ## TODO:
->>>>>>> Hunter
+
         return
 
 
