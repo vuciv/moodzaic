@@ -138,3 +138,75 @@ class ProfileTestCase(TestCase):
         testProfile = Profile.objects.get(ProgressScore= 10)
         testUser =User.objects.get(username = "emil")
         self.assertEqual(testUser.username, "emil")
+
+class ObservationTestCase(TestCase):
+    def setUp(self):
+        Observation.objects.create(sleep = 7, exercise = 3, meals = 2)
+    def test_setSleep(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setSleep(4)
+        self.assertEqual(testObservation.sleep, 4)
+    def test_setSleep_negative(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setSleep(-5)
+        self.assertEqual(testObservation.sleep, 7)
+    def test_setSleep_tooHigh(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setSleep(25)
+        self.assertEqual(testObservation.sleep, 7)
+    def test_setExercise(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setExercise(4)
+        self.assertEqual(testObservation.exercise, 4)
+    def test_setExercise_negative(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setExercise(-4)
+        self.assertEqual(testObservation.exercise, 3)
+    def test_setExercise_tooHigh(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setExercise(25)
+        self.assertEqual(testObservation.exercise, 3)
+    def test_setMeals(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setMeals(3)
+        self.assertEqual(testObservation.meals, 3)
+    def test_setMeals_negative(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setMeals(-3)
+        self.assertEqual(testObservation.meals, 2)
+    def test_setWork(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setWork(7)
+        self.assertEqual(testObservation.work, 7)
+    def test_setWork_negative(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setWork(-7)
+        self.assertEqual(testObservation.work, -1)
+    def test_setWork_tooHigh(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setWork(25)
+        self.assertEqual(testObservation.work, -1)
+    def test_setMood(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setModd("happy", 3)
+        self.assertEqual(testObservation.mood.name, "happy")
+
+class MoodTestCase(TestCase):
+    def setUp(self):
+        Mood.objects.create(name = "sad", mood = 2)
+    def test_setName(self):
+        testMood = Mood.objects.get(mood = 2)
+        testMood.setName("happy")
+        self.assertEqual(testMood.name, "happy")
+    def test_setName_empty(self):
+        testMood = Mood.objects.get(mood = 2)
+        testMood.setName("")
+        self.assertEqual(testMood.name, "sad")
+    def test_setMood(self):
+        testMood = Mood.objects.get(mood = 2)
+        testMood.setMood(6)
+        self.assertEqual(testMood.mood, 6)
+    def test_setMood_negative(self):
+        testMood = Mood.objects.get(mood = 2)
+        testMood.setMood(-66)
+        self.assertEqual(testMood.mood, 2)
