@@ -87,7 +87,7 @@ const CommentExampleComment = () => (
   </Comment.Group>
 )
 
-const Community = ({communityName, members, amIMod}) => (
+const Community = ({communityName, posts, amIMod}) => (
   <div>
     <MyMenu />
     <Container text style={{ marginTop: '7em' }}>

@@ -16,14 +16,18 @@ import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 import Community from './Community.js'
 import CommunitiesPage from './MyCommunities.js'
+import AllCommunities from './AllCommunities.js'
+
 
 
 const CommunityPage = ({myCommunities}) => (
   <div>
     <MyMenu />
     <Container text style={{ marginTop: '7em' }}>
-    <p> should call my communities until a community is selected, then call community
-    and get that community</p>
+    <p> should call my communities
+    unless:
+    user chooses to see all communities, then calls AllCommunities
+    or a community is selected, then call community and open that community</p>
     </Container>
     <Footer />
   </div>
