@@ -5,6 +5,7 @@ from users.models import User
 
 # Create your tests here.
 
+# Testing our communities implementation and behaviour
 class CommunityTestCase(TestCase):
 
     def setUp(self):

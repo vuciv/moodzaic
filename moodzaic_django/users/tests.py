@@ -4,8 +4,8 @@ from datetime import datetime, date
 
 
 # Create your tests here.
-#Hi
 
+# Testing user and user methods in the database
 class UserTestCase(TestCase):
     def setUp(self):
         User.objects.create(username = "emil", password = "snibby")
@@ -59,6 +59,7 @@ class UserTestCase(TestCase):
         testUser = User.objects.get(username = "emil")
         self.assertFalse(testUser.setUserGender('gibberish'))
 
+# Testing the goals a user can set and keep track of
 class GoalTestCase(TestCase):
     def setUp(self):
         Goal.objects.create(goal = "Drink water", frequency = "5", time = "16:00 AM")
@@ -102,6 +103,7 @@ class GoalTestCase(TestCase):
         testGoal = Goal.objects.get(goal = "Drink water")
         self.assertFalse(testGoal.setGoalTime("13:62"))
 
+# Every user has a profile being tested here
 class ProfileTestCase(TestCase):
     def setUp(self):
         User.objects.create(username = "emil", password = "snibby")
@@ -139,11 +141,12 @@ class ProfileTestCase(TestCase):
         testUser =User.objects.get(username = "emil")
         self.assertEqual(testUser.username, "emil")
 
+# Observations are asked daily and stored in the database
 class ObservationTestCase(TestCase):
     def setUp(self):
         Observation.objects.create(
-            sleep = 7, 
-            exercise = 3, 
+            sleep = 7,
+            exercise = 3,
             meals = 2,
             mood = Mood.objects.create(name = "sad", mood = 2)
         )
@@ -196,6 +199,7 @@ class ObservationTestCase(TestCase):
         testObservation.setMood("happy", 3)
         self.assertEqual(testObservation.mood.name, "happy")
 
+# Testing that the user moods can set and changed
 class MoodTestCase(TestCase):
     def setUp(self):
         Mood.objects.create(name = "sad", mood = 2)

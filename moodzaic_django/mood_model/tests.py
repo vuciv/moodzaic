@@ -5,6 +5,7 @@ from mood_model.sample_neural_network import MoodNeuralNetwork
 
 # Create your tests here.
 
+# Testing the weights stored in the django database, and its functions
 class WeightsTestCase(TestCase):
     def setUp(self):
         User.objects.create(username = "user1", password = "password1")
@@ -93,13 +94,13 @@ class WeightsTestCase(TestCase):
 
     def test_retrainBiases(self):
         testWeights = Weights.objects.first()
-        old_biases = testWeights.bias_int_list        
+        old_biases = testWeights.bias_int_list
         testWeights.retrain()
         self.assertNotEqual(old_biases, testWeights.bias_int_list)
 
-    
-        
 
+
+# Testing the methods for our neural network to predict moods
 class MoodNeuralNetworkTestCase(TestCase):
     def setUp(self):
         rand_weights = list(range(11))
