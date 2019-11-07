@@ -5,7 +5,7 @@ class User(models.Model):
     password = models.CharField(max_length=20)
     age = models.IntegerField(default=18)
     gender = models.CharField(max_length=9)
-
+  
     def setUserUsername(self, username):
         #TODO
         return 'not false'
@@ -38,3 +38,40 @@ class Goal(models.Model):
     def setGoalTime(self, time):
         #TODO
         return 'not false'
+
+class Profile(models.Model):
+    ProgressScore = models.IntegerField(default=0)
+
+    def getProgressScore(self):
+        return self.ProgressScore
+
+    def setProgressScore(self, ProgressScore):
+        self.ProgressScore = ProgressScore
+
+    def ProgressScore_calc(self, goals, observations):
+        #TODO
+        #goals: list of goals
+        #observations: list of observations
+        return
+
+    def make_goal_post(self, goal, post):
+        ## TODO:
+        #goal: goal
+        #post: str
+        return
+
+    def make_post(self, post):
+        ## TODO
+        #post: str
+        return
+
+    def set_mood(self, mood):
+        ##TODO : mood is int
+        return
+
+ class Observation(models.Model):
+     activity = models.CharField()
+     date = models.DateTimeField('date observed')
+
+ class Mood(models.Model):
+     mood = models.IntegerField()
