@@ -5,19 +5,19 @@ class User(models.Model):
     password = models.CharField(max_length=20)
     age = models.IntegerField(default=18)
     gender = models.CharField(max_length=9)
-  
+
     def setUserUsername(self, username):
         #TODO
         return 'not false'
-    
+
     def setUserPassword(self, password):
         #TODO
         return 'not false'
-    
+
     def setUserAge(self, age):
         #TODO
         return 'not false'
-    
+
     def setUserGender(self, age):
         #TODO
         return 'not false'
@@ -30,11 +30,11 @@ class Goal(models.Model):
     def setGoalGoal(self, goal):
         #TODO
         return 'not false'
-    
+
     def setGoalFrequency(self, frequency):
         #TODO
         return 'not false'
-    
+
     def setGoalTime(self, time):
         #TODO
         return 'not false'
@@ -72,6 +72,11 @@ class Profile(models.Model):
  class Observation(models.Model):
      activity = models.CharField()
      date = models.DateTimeField('date observed')
+     sleep = models.FloatField(default=-1)
+     exercise_24hr = models.FloatField(default = -1)
+     meals_24hr = models.IntegerField(default=-1)
+     work_24hr = models.FloatField(default=-1)
 
  class Mood(models.Model):
-     mood = models.IntegerField()
+     name = models.CharField()
+     mood = models.FloatField(default=-1)
