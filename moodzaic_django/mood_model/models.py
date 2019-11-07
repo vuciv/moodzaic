@@ -1,12 +1,11 @@
 from django.db import models
-from users.models import User
 
 class ObservationWeights(models.Model):
 
     # ...
     user = models.OneToOneField(
-        User, 
-        unique=True, 
+        User,
+        unique=True,
         related_name='weight',
         on_delete='models.CASCADE'
     )
@@ -22,7 +21,7 @@ class ObservationWeights(models.Model):
     class Meta:
         db_table = 'weights'
         managed = False
-    
+
 
 class GoalWeights(models.Model):
 
@@ -35,11 +34,3 @@ class GoalWeights(models.Model):
     class Meta:
         db_table = 'weights'
         managed = False
-
-
-
-    
-
-
-
-
