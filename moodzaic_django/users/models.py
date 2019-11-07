@@ -40,6 +40,7 @@ class Goal(models.Model):
         return 'not false'
 
 class Profile(models.Model):
+    user = User()
     ProgressScore = models.IntegerField(default=0)
 
     def getProgressScore(self):
@@ -69,9 +70,11 @@ class Profile(models.Model):
         ##TODO : mood is int
         return
 
- class Observation(models.Model):
-     activity = models.CharField()
-     date = models.DateTimeField('date observed')
+User.profile = Profile()
 
- class Mood(models.Model):
-     mood = models.IntegerField()
+class Observation(models.Model):
+    activity = models.CharField(max_length=30)
+    date = models.DateTimeField('date observed')
+
+class Mood(models.Model):
+    mood = models.IntegerField()
