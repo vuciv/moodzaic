@@ -108,44 +108,32 @@ class Observation(models.Model):
     meals = models.IntegerField(default=-1)
     work = models.FloatField(default=-1)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
-    mood1 = models.OneToOneField(
+    mood = models.OneToOneField(
         Mood,
         on_delete=models.CASCADE,
         null=True
     )
 
-    def getDate(self):
-        ## TODO:
-        return
-
-    def getSleep(self):
-        ## TODO:
-        return
 
     def setSleep(self, hours):
         ## TODO:
         return
 
-    def getExercise(self):
-        ## TODO:
-        return
 
     def setExercise(self, hours):
         ## TODO:
         return
 
-    def getMeals(self):
-        ## TODO:
-        return
 
     def setMeals(self, num):
         ## TODO:
         return
 
-    def getWork(self):
+
+    def setWork(self, hours):
         ## TODO:
         return
 
-    def setWork(self, hours):
+    def setMood(self, mood_str, mood_int):
         ## TODO:
         return
