@@ -1,36 +1,36 @@
 from django.db import models
+from users.models import User
+from django.core.validators import int_list_validator 
 
-class ObservationWeights(models.Model):
+#from mood_model.sample_neural_network import MoodNeuralNetwork
+
+
+class Weights(models.Model):
 
     # ...
     user = models.OneToOneField(
-        User,
-        unique=True,
-        related_name='weight',
-        on_delete='models.CASCADE'
+        User, 
+        unique=True, 
+        related_name='weights',
+        on_delete='models.CASCADE',
+        null=True
     )
-    sleep = models.FloatField(default=1)
-    daily_exercise = models.FloatField(default=1)
-    weekly_exercise = models.FloatField(default=1)
-    daily_work = models.FloatField(default=1)
-    weekly_work = models.FloatField(default=1)
-    daily_meals = models.IntegerField(default=1)
-    past_mood = models.FloatField(default=1)
 
+    weights_int_list = models.TextField(
+        validators=[int_list_validator],
+        default=""
+    )
+    bias_int_list = models.TextField(
+        validators=[int_list_validator],
+        default=""
+    )
 
-    class Meta:
-        db_table = 'weights'
-        managed = False
+    
+    def predict(self):
 
+        pass
 
-class GoalWeights(models.Model):
+    def retrain(self):
 
-    goals_completed = models.IntegerField(default=0)
-    goals_missed = models.IntegerField(default=0)
-    existing_goals = models.IntegerField(default=0)
+        pass
 
-
-
-    class Meta:
-        db_table = 'weights'
-        managed = False
