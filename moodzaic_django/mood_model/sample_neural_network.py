@@ -9,28 +9,27 @@ class MoodNeuralNetwork:
     - a hidden layer with 3 neurons (h1... h3)
     - an output layer with 1 neuron (o1)
   '''
-  def __init__(self):
+  def __init__(self, weights = None):
     # Weights
-    raise ValueError("Todo")
 
     # Biases
-    raise ValueError("Todo")
+    pass
 
   def feedforward(self, x):
     # x is a numpy array with 11 elements.
-    return raise ValueError("Todo")
+    return "Todo"
 
-  def activation(x):
+  def activation(self, x):
     # activation function
-    return raise ValueError("Todo")
+    return "Todo"
 
-  def deriv_activation(x):
+  def deriv_activation(self, x):
     # Derivative of activation
-    raise ValueError("Todo")
+    return "Todo"
 
-  def loss(y_true, y_pred):
+  def loss(self, y_true, y_pred):
     # y_true and y_pred are numpy arrays of the same length.
-    return raise ValueError("Todo")
+    return "Todo"
 
   def train(self, data, all_y_trues):
     '''
@@ -44,17 +43,17 @@ class MoodNeuralNetwork:
     for epoch in range(epochs):
       for x, y_true in zip(data, all_y_trues):
         # --- Do a feedforward (we'll need these values later)
-        raise ValueError("Todo")
+        pass
 
         # --- Calculate partial derivatives.
         # --- Naming: d_L_d_w1 represents "partial L / partial w1"
-        raise ValueError("Todo")
+        pass
 
         # --- Update weights and biases
-        raise ValueError("Todo")
+        pass
 
       # --- Calculate total loss at the end of each epoch
-      if epoch % 10 == 0:
-        y_preds = np.apply_along_axis(self.feedforward, 1, data)
-        loss = self.loss(all_y_trues, y_preds)
-        print("Epoch %d loss: %.3f" % (epoch, loss))
+      #if epoch % 10 == 0:
+        #y_preds = np.apply_along_axis(self.feedforward, 1, data)
+        #loss = self.loss(all_y_trues, y_preds)
+        #print("Epoch %d loss: %.3f" % (epoch, loss))
