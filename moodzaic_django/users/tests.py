@@ -1,5 +1,6 @@
 from django.test import TestCase
-from users.models import User, Profile, Goal
+from users.models import User, Profile, Goal, Mood, Observation
+from datetime import datetime, date
 
 
 # Create your tests here.
@@ -104,14 +105,31 @@ class GoalTestCase(TestCase):
 class ProfileTestCase(TestCase):
     def setUp(self):
         Profile.objects.create(ProgressScore = 10)
+        Goal.objects.create(goal = "Drink water", frequency = "5", time = datetime.now())
     def test_setProgressScore(self):
         testProfile = Profile.objects.get(ProgressScore = 10)
         self.assertEqual(10, testProfile.getProgressScore())
         testProfile.setProgressScore(5)
         self.assertEqual(5, testProfile.getProgressScore())
     def test_setProgressScoreNeg(self):
-        testProfile = Profile.objects.get(ProgressScore = 5)
+        testProfile = Profile.objects.get(ProgressScore = 10)
         testProfile.setProgressScore(-5)
-        self.assertEqual(5, testProfile,getProgressScore())
+        self.assertEqual(5, testProfile.getProgressScore())
         testProfile.setProgressScore(10)
-    
+    def test_makeGoalPost(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertTrue(testProfile.makeGoalPost(testGoal, "Hi"))
+    def test_makeGoalPost_NullPost(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testProfile.makeGoalPost(testGoal, ""))
+    def test_makeGoalPost_invalidGoal(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        self.assertFalse(testProfile.makeGoalPost("hello", "Hi"))
+    def test_makePost(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        self.assertTrue(testProfile.makePost( "Hi, this is a post"))
+    def test_makePost_NullPost(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        self.assertFalse(testProfile.makePost(""))

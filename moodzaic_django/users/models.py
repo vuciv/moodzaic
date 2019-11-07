@@ -2,10 +2,10 @@ from django.db import models
 from datetime import date
 
 class User(models.Model):
-    username = models.CharField(max_length=20)
-    password = models.CharField(max_length=20)
+    username = models.CharField(max_length=20, default='')
+    password = models.CharField(max_length=20, default='')
     age = models.IntegerField(default=18)
-    gender = models.CharField(max_length=9)
+    gender = models.CharField(max_length=9, default='')
 
     def setUserUsername(self, username):
         #TODO
@@ -26,7 +26,7 @@ class User(models.Model):
 class Goal(models.Model):
     goal = models.CharField(max_length=30)
     frequency = models.IntegerField(default=1)
-    time = models.DateTimeField()
+    time = models.CharField(max_length=10)
 
     def setGoalGoal(self, goal):
         #TODO
@@ -43,18 +43,33 @@ class Goal(models.Model):
 
 
 class Mood(models.Model):
-     name = models.CharField(max_length=20)
+     name = models.CharField(max_length=20, default="")
      mood = models.FloatField(default=-1)
-     date = models.DateField('date observed', auto_now_add=True, blank=True)
+     #date = models.DateField('date observed', auto_now_add=True, blank=True)
      #make list of moods that will be kept track of
+     def getName(self):
+         #TODO
+         return
+
+     def setName(self, name):
+        #TODO
+        return
+
+     def getMood(self):
+        #TODO
+        return
+
+     def setMood(self, mood):
+        ## TODO:
+        return
 
 class Profile(models.Model):
     ProgressScore = models.IntegerField(default=0)
-    reminderList = models.ListCharField(base_field=CharField, size=None)
+    #reminderList = models.ListCharField(base_field=CharField, size=None)
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        primary_key=True,
+        null=True
     )
 
     def getProgressScore(self):
@@ -84,14 +99,55 @@ class Profile(models.Model):
         ##TODO : mood is int
         return
 
+    def getUser(self):
+        ## TODO:
+        return
+
 class Observation(models.Model):
     date = models.DateField('date observed', auto_now_add=True, blank=True)
     sleep = models.FloatField(default=-1)
-    exercise_24hr = models.FloatField(default = -1)
-    meals_24hr = models.IntegerField(default=-1)
-    work_24hr = models.FloatField(default=-1)
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    mood = models.OneToOneField(
+    exercise = models.FloatField(default = -1)
+    meals = models.IntegerField(default=-1)
+    work = models.FloatField(default=-1)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    mood1 = models.OneToOneField(
         Mood,
         on_delete=models.CASCADE,
+        null=True
     )
+
+    def getDate(self):
+        ## TODO:
+        return
+
+    def getSleep(self):
+        ## TODO:
+        return
+
+    def setSleep(self, hours):
+        ## TODO:
+        return
+
+    def getExercise(self):
+        ## TODO:
+        return
+
+    def setExercise(self, hours):
+        ## TODO:
+        return
+
+    def getMeals(self):
+        ## TODO:
+        return
+
+    def setMeals(self, num):
+        ## TODO:
+        return
+
+    def getWork(self):
+        ## TODO:
+        return
+
+    def setWork(self, hours):
+        ## TODO:
+        return
