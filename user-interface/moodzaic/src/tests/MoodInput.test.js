@@ -23,7 +23,4 @@ describe('MoodInput', () => {
     ReactDOM.render(<MoodPage />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
-  it("Entering username and password updates state", () => {
-      //update and expect
-  });
 })

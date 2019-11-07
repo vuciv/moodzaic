@@ -7,7 +7,7 @@ import ProfilePage from '../components/ProfPage';
 import App from '../components/App';
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
-
+import ReactDOM from 'react-dom';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -29,7 +29,11 @@ afterEach(() => {
 
 
 describe('Profile tests', function() {
-
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<ProfilePage />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
   it("Profile page initializes text properly", () => {
     act(() => {
       render(<ProfilePage Name="Jack" Username="GiveMeTheSalt" Gender="M" ProgressScore={33} />, container);
