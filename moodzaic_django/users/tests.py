@@ -141,7 +141,12 @@ class ProfileTestCase(TestCase):
 
 class ObservationTestCase(TestCase):
     def setUp(self):
-        Observation.objects.create(sleep = 7, exercise = 3, meals = 2)
+        Observation.objects.create(
+            sleep = 7, 
+            exercise = 3, 
+            meals = 2,
+            mood = Mood.objects.create(name = "sad", mood = 2)
+        )
     def test_setSleep(self):
         testObservation = Observation.objects.get(sleep = 7)
         testObservation.setSleep(4)
@@ -188,7 +193,7 @@ class ObservationTestCase(TestCase):
         self.assertEqual(testObservation.work, -1)
     def test_setMood(self):
         testObservation = Observation.objects.get(sleep = 7)
-        testObservation.setModd("happy", 3)
+        testObservation.setMood("happy", 3)
         self.assertEqual(testObservation.mood.name, "happy")
 
 class MoodTestCase(TestCase):

@@ -25,12 +25,18 @@ class Weights(models.Model):
         default=""
     )
 
-    
-    def predict(self):
 
+    def predict(self): 
         pass
 
     def retrain(self):
-
         pass
 
+    def setWeightsUser(self, User):
+        pass
+
+    def setWeightsWeights(self, weight_list):
+        pass
+
+    def setWeightsBias(self, bias_list):
+        pass
