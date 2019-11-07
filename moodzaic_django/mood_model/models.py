@@ -26,9 +26,6 @@ class Weights(models.Model):
     )
 
 
-    def predict(self): 
-        pass
-
     def retrain(self):
         pass
 
