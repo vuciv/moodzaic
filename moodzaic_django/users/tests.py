@@ -104,7 +104,7 @@ class GoalTestCase(TestCase):
 
 class ProfileTestCase(TestCase):
     def setUp(self):
-        #User.objects.create(username = "emil", password = "snibby")
+        User.objects.create(username = "emil", password = "snibby")
         Profile.objects.create(ProgressScore = 10, user = User.objects.get(username = "emil")))
         Goal.objects.create(goal = "Drink water", frequency = "5", time = datetime.now())
     def test_setProgressScore(self):
@@ -134,7 +134,7 @@ class ProfileTestCase(TestCase):
     def test_makePost_NullPost(self):
         testProfile = Profile.objects.get(ProgressScore= 10)
         self.assertFalse(testProfile.makePost(""))
-    #def test_getUser(self):
-    #    testProfile = Profile.objects.get(ProgressScore= 10)
-    #    testUser =User.objects.get(username = "emil")
-    #    self.assertEqual(testUser.username, "emil")
+    def test_getUser(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        testUser =User.objects.get(username = "emil")
+        self.assertEqual(testUser.username, "emil")
