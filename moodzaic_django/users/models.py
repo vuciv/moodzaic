@@ -100,19 +100,6 @@ class Profile(models.Model):
         ##TODO : mood is int
         return
 
-<<<<<<< HEAD
-User.profile = Profile()
-
-class Observation(models.Model):
-    activity = models.CharField(max_length=30)
-    date = models.DateTimeField('date observed')
-
-class Mood(models.Model):
-    mood = models.IntegerField()
-=======
-    def getUser(self):
-        ## TODO:
-        return
 
 class Observation(models.Model):
     date = models.DateField('date observed', auto_now_add=True, blank=True)
@@ -162,4 +149,3 @@ class Observation(models.Model):
     def setWork(self, hours):
         ## TODO:
         return
->>>>>>> Hunter
