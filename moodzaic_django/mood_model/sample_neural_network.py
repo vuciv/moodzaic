@@ -9,7 +9,7 @@ class MoodNeuralNetwork:
     - a hidden layer with 3 neurons (h1... h3)
     - an output layer with 1 neuron (o1)
   '''
-  def __init__(self):
+  def __init__(self, weights = None):
     # Weights
     raise ValueError("Todo")
 
@@ -18,11 +18,11 @@ class MoodNeuralNetwork:
 
   def feedforward(self, x):
     # x is a numpy array with 11 elements.
-    return raise ValueError("Todo")
+    raise ValueError("Todo")
 
   def activation(x):
     # activation function
-    return raise ValueError("Todo")
+    raise ValueError("Todo")
 
   def deriv_activation(x):
     # Derivative of activation
@@ -30,7 +30,7 @@ class MoodNeuralNetwork:
 
   def loss(y_true, y_pred):
     # y_true and y_pred are numpy arrays of the same length.
-    return raise ValueError("Todo")
+    raise ValueError("Todo")
 
   def train(self, data, all_y_trues):
     '''
