@@ -25,7 +25,7 @@ class User(models.Model):
 class Goal(models.Model):
     goal = models.CharField(max_length=30)
     frequency = models.IntegerField(default=1)
-    time = models.TimeField()
+    time = models.DateTimeField()
 
     def setGoalGoal(self, goal):
         #TODO
@@ -48,24 +48,24 @@ class Profile(models.Model):
     def setProgressScore(self, ProgressScore):
         self.ProgressScore = ProgressScore
 
-    def ProgressScore_calc(self, goals, observations):
+    def ProgressScoreCalc(self, goals, observations):
         #TODO
         #goals: list of goals
         #observations: list of observations
         return
 
-    def make_goal_post(self, goal, post):
+    def makeGoalPost(self, goal, post):
         ## TODO:
         #goal: goal
         #post: str
         return
 
-    def make_post(self, post):
+    def makePost(self, post):
         ## TODO
         #post: str
         return
 
-    def set_mood(self, mood):
+    def setMood(self, mood):
         ##TODO : mood is int
         return
 
@@ -76,7 +76,9 @@ class Profile(models.Model):
      exercise_24hr = models.FloatField(default = -1)
      meals_24hr = models.IntegerField(default=-1)
      work_24hr = models.FloatField(default=-1)
+     time = models.DateTimeField()
 
  class Mood(models.Model):
      name = models.CharField()
      mood = models.FloatField(default=-1)
+     #make list of moods that will be kept track of
