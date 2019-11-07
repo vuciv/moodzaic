@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 
+
 class User(models.Model):
     username = models.CharField(max_length=20, default='')
     password = models.CharField(max_length=20, default='')
@@ -64,7 +65,6 @@ class Mood(models.Model):
         return
 
 class Profile(models.Model):
-    user = User()
     ProgressScore = models.IntegerField(default=0)
     #reminderList = models.ListCharField(base_field=CharField, size=None)
     user = models.OneToOneField(
@@ -96,14 +96,10 @@ class Profile(models.Model):
         #post: str
         return
 
-    def setMood(self, mood):
-        ##TODO : mood is int
-        return
-
-
     def getUser(self):
         ## TODO:
         return
+
 
 class Observation(models.Model):
     date = models.DateField('date observed', auto_now_add=True, blank=True)
@@ -153,4 +149,3 @@ class Observation(models.Model):
     def setWork(self, hours):
         ## TODO:
         return
-
