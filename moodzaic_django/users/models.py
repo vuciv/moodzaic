@@ -64,7 +64,6 @@ class Mood(models.Model):
         return
 
 class Profile(models.Model):
-    user = User()
     ProgressScore = models.IntegerField(default=0)
     #reminderList = models.ListCharField(base_field=CharField, size=None)
     user = models.OneToOneField(
@@ -96,8 +95,9 @@ class Profile(models.Model):
         #post: str
         return
 
-    def setMood(self, mood):
-        ##TODO : mood is int
+
+    def getUser(self):
+        ## TODO:
         return
 
 
