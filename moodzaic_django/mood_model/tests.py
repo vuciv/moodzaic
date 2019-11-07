@@ -11,7 +11,7 @@ class WeightsTestCase(TestCase):
 class MoodNeuralNetworkTestCase(TestCase):
     def setUp(self):
         rand_weights = list(range(11))
-        MoodNeuralNetwork.objects.create(weights = rand_weights)
+        network = MoodNeuralNetwork(weights = rand_weights)
 
     def test_feedforward(self):
         some_weights = list(range(11))
@@ -23,36 +23,36 @@ class MoodNeuralNetworkTestCase(TestCase):
 
     def test_activation(self):
         network = MoodNeuralNetwork()
-        self.assertEqual(1, network.acivation(1))
-        self.assertEqual(0.5, network.acivation(0.5))
-        self.assertEqual(0, network.acivation(0))
-        self.assertEqual(-.5, network.acivation(-.5))
-        self.assertEqual(-100, network.acivation(0))
+        self.assertEqual(1, network.activation(1))
+        self.assertEqual(0.5, network.activation(0.5))
+        self.assertEqual(0, network.activation(0))
+        self.assertEqual(-.5, network.activation(-.5))
+        self.assertEqual(-100, network.activation(0))
 
     def test_deriv_activation(self):
         network = MoodNeuralNetwork()
-        self.assertEqual(0, network.deriv_acivation(1))
-        self.assertEqual(0.5, network.deriv_acivation(0.5))
-        self.assertEqual(1, network.deriv_acivation(0))
-        self.assertEqual(-.5, network.deriv_acivation(-.5))
-        self.assertEqual(-1, network.deriv_acivation(0))
+        self.assertEqual(0, network.deriv_activation(1))
+        self.assertEqual(0.5, network.deriv_activation(0.5))
+        self.assertEqual(1, network.deriv_activation(0))
+        self.assertEqual(-.5, network.deriv_activation(-.5))
+        self.assertEqual(-1, network.deriv_activation(0))
 
-    def test_loss(y_true, y_pred):
+    def test_loss(self):
         network = MoodNeuralNetwork()
         sample_data = list(range(100))
-        sample_real = list(range(0,100)) + 0.1
+        sample_real = [x + 0.1 for x in list(range(0,100))]
         self.assertEqual(1, network.loss(sample_data, sample_real))
         sample_real = list(range(0,100))
         self.assertEqual(0, network.loss(sample_data, sample_real))
 
-    def test_train(y_true, y_pred):
+    def test_train(self):
         some_weights = list(range(11))
-        network = MoodNeuralNetwork(sample_weights)
+        network = MoodNeuralNetwork(some_weights)
         sample_data = [2,1,4,5,6,2,6,7,3,6,6]
         true = 3.5
         prediction = network.feedforward(sample_data)
         loss1 = network.loss(true, prediction)
-        network.train()
+        network.train(sample_data, [true])
         prediction = network.feedforward(sample_data)
         loss2 = network.loss(true, prediction)
-        self.assertTrue(lass2 < loss1)
+        self.assertTrue(loss2 < loss1)

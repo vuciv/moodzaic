@@ -105,7 +105,7 @@ class GoalTestCase(TestCase):
 class ProfileTestCase(TestCase):
     def setUp(self):
         User.objects.create(username = "emil", password = "snibby")
-        Profile.objects.create(ProgressScore = 10, user = User.objects.get(username = "emil")))
+        Profile.objects.create(ProgressScore = 10, user = User.objects.get(username = "emil"))
         Goal.objects.create(goal = "Drink water", frequency = "5", time = datetime.now())
     def test_setProgressScore(self):
         testProfile = Profile.objects.get(ProgressScore = 10)
