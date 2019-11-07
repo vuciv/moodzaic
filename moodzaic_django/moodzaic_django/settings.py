@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'community.apps.CommunityConfig',
+    'mood_model.apps.MoodModelConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
