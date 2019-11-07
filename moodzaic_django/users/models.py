@@ -43,3 +43,10 @@ class Profile(models.Model):
     def set_mood(self, mood):
         ##TODO : mood is int
         return
+
+ class Observation(models.Model):
+     activity = models.CharField()
+     date = models.DateTimeField('date observed')
+
+ class Mood(models.Model):
+     mood = models.IntegerField()
