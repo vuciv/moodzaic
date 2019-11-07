@@ -1,7 +1,9 @@
 from django.test import TestCase
-from users.models import User, Goal
+from users.models import User, Profile, Goal
+
 
 # Create your tests here.
+#Hi
 
 class UserTestCase(TestCase):
     def setUp(self):
@@ -56,7 +58,6 @@ class UserTestCase(TestCase):
         testUser = User.objects.get(username = "emil")
         self.assertFalse(testUser.setUserGender('gibberish'))
 
-
 class GoalTestCase(TestCase):
     def setUp(self):
         Goal.objects.create(goal = "Drink water", frequency = "5", time = "16:00 AM")
@@ -99,3 +100,12 @@ class GoalTestCase(TestCase):
     def test_setGoalTimeBadMinuteFailure(self):
         testGoal = Goal.objects.get(goal = "Drink water")
         self.assertFalse(testGoal.setGoalTime("13:62"))
+
+class ProfileTestCase(TestCase):
+    def setUp(self):
+        Profile.objects.create(ProgressScore = 10)
+    def test_setUsername(self):
+        testProfile = Profile.objects.get(ProgressScore = 10)
+        self.assertEqual(10, testProfile.getProgressScore())
+        testProfile.setProgressScore(5)
+        self.assertEqual(5, testProfile.getProgressScore())
