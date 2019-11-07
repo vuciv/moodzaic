@@ -1,4 +1,4 @@
-//selectively displays either community component or mycommunities component
+//selectively displays either community component, mycommunities component, or allcommunities component
 import React from 'react';
 import ReactDOM from 'react-dom';
 import CommunityPage from '../components/CommunityPage';
