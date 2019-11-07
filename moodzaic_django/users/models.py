@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 
 class User(models.Model):
     username = models.CharField(max_length=20)
@@ -39,8 +40,22 @@ class Goal(models.Model):
         #TODO
         return 'not false'
 
+
+
+class Mood(models.Model):
+     name = models.CharField(max_length=20)
+     mood = models.FloatField(default=-1)
+     date = models.DateField('date observed', auto_now_add=True, blank=True)
+     #make list of moods that will be kept track of
+
 class Profile(models.Model):
     ProgressScore = models.IntegerField(default=0)
+    reminderList = models.ListCharField(base_field=CharField, size=None)
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
 
     def getProgressScore(self):
         return self.ProgressScore
@@ -69,16 +84,14 @@ class Profile(models.Model):
         ##TODO : mood is int
         return
 
- class Observation(models.Model):
-     activity = models.CharField()
-     date = models.DateTimeField('date observed')
-     sleep = models.FloatField(default=-1)
-     exercise_24hr = models.FloatField(default = -1)
-     meals_24hr = models.IntegerField(default=-1)
-     work_24hr = models.FloatField(default=-1)
-     time = models.DateTimeField()
-
- class Mood(models.Model):
-     name = models.CharField()
-     mood = models.FloatField(default=-1)
-     #make list of moods that will be kept track of
+class Observation(models.Model):
+    date = models.DateField('date observed', auto_now_add=True, blank=True)
+    sleep = models.FloatField(default=-1)
+    exercise_24hr = models.FloatField(default = -1)
+    meals_24hr = models.IntegerField(default=-1)
+    work_24hr = models.FloatField(default=-1)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    mood = models.OneToOneField(
+        Mood,
+        on_delete=models.CASCADE,
+    )

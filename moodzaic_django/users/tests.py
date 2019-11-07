@@ -61,7 +61,7 @@ class UserTestCase(TestCase):
 class GoalTestCase(TestCase):
     def setUp(self):
         Goal.objects.create(goal = "Drink water", frequency = "5", time = "16:00 AM")
-    
+
     def test_setGoalGoalSuccess(self):
         testGoal = Goal.objects.get(goal = "Drink water")
         testGoal.setGoalGoal("Drink more water")
@@ -104,8 +104,14 @@ class GoalTestCase(TestCase):
 class ProfileTestCase(TestCase):
     def setUp(self):
         Profile.objects.create(ProgressScore = 10)
-    def test_setUsername(self):
+    def test_setProgressScore(self):
         testProfile = Profile.objects.get(ProgressScore = 10)
         self.assertEqual(10, testProfile.getProgressScore())
         testProfile.setProgressScore(5)
         self.assertEqual(5, testProfile.getProgressScore())
+    def test_setProgressScoreNeg(self):
+        testProfile = Profile.objects.get(ProgressScore = 5)
+        testProfile.setProgressScore(-5)
+        self.assertEqual(5, testProfile,getProgressScore())
+        testProfile.setProgressScore(10)
+    
