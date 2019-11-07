@@ -5,6 +5,16 @@ import renderer from 'react-test-renderer';
 import { render, unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 
+describe('Application', () => {
+  //beforeEach stuff
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<App />, div);
+    ReactDOM.unmountComponentAtNode(div);
+  });
+});
+
+
 /* Component hierarchy for reference
 * App
 * 1. LoginPage
@@ -75,24 +85,24 @@ import { act } from "react-dom/test-utils";
 //   container = null;
 // });
 
-describe('Things relating to the login screen', () => {
-  //beforeEach stuff
-  it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<App />, div);
-    ReactDOM.unmountComponentAtNode(div);
-  });
-
-  it("Entering correct username and password opens main page", () => {
-    act(() => {
-      render(<App />, container);
-    });
-    //expect();
-  });
-  it("Entering username and password updates state", () => {
-      //update and expect
-  });
-})
+// describe('Things relating to the login screen', () => {
+//   //beforeEach stuff
+//   it('renders without crashing', () => {
+//     const div = document.createElement('div');
+//     ReactDOM.render(<App />, div);
+//     ReactDOM.unmountComponentAtNode(div);
+//   });
+//
+//   it("Entering correct username and password opens main page", () => {
+//     act(() => {
+//       render(<App />, container);
+//     });
+//     //expect();
+//   });
+//   it("Entering username and password updates state", () => {
+//       //update and expect
+//   });
+// })
 
 //example
 /*it("renders with or without a name", () => {

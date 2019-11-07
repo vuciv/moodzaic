@@ -12,7 +12,6 @@ import {
 import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 
-
 const ProfilePage = ({Name, Username, Age, Gender, ProgressScore}) => (
   <div>
     <MyMenu />
