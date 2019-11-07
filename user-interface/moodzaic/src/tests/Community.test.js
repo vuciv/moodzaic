@@ -31,7 +31,7 @@ describe('Community', function() {
     ReactDOM.render(<Community />, div);
     ReactDOM.unmountComponentAtNode(div);
   });
-  it("Profile page initializes text properly", () => {
+  it("community initializes text properly", () => {
     act(() => {
       render(<Community communityName="Idontwantthat" Posts={["hello","hello2"]}/>, container);
     })
