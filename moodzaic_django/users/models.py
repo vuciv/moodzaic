@@ -15,9 +15,15 @@ class User(models.Model):
         return self.username
 
 class Profile(models.Model):
-    progress_score = models.IntegerField(default=0)
+    ProgressScore = models.IntegerField(default=0)
 
-    def progress_score(self, goals, observations):
+    def getProgressScore(self):
+        return self.ProgressScore
+
+    def setProgressScore(self, ProgressScore):
+        self.ProgressScore = ProgressScore
+
+    def ProgressScore_calc(self, goals, observations):
         #TODO
         #goals: list of goals
         #observations: list of observations
