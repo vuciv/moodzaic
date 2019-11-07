@@ -13,6 +13,7 @@ class Community(models.Model):
     def getName(self):
         return self.name
 
+    # can you use a setter for a ManyToMany relationship in django...?
     def setUsers(self, users):
         self.users = users
         return
