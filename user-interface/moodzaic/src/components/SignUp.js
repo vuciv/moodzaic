@@ -2,13 +2,18 @@ import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import logo from '../logo.png'
 
-//hi I just copied and pasted login for right now, obv they have to put more info in but it's fine
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 const SignUpForm = () => (
   <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
       <Header as='h2' color='teal' textAlign='center'>
-        <Image src={logo} /> Log-in to your account
+        <Image src={logo} /> Sign up for an account
       </Header>
       <Form size='large'>
         <Segment stacked>
@@ -22,12 +27,12 @@ const SignUpForm = () => (
           />
 
           <Button color='teal' fluid size='large'>
-            Login
+            Sign Up
           </Button>
         </Segment>
       </Form>
       <Message>
-        New to us? <a href='#'>Sign Up</a>
+        Already have an account? <Link to='/'>Log In</Link>
       </Message>
     </Grid.Column>
   </Grid>

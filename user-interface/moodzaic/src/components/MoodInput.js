@@ -18,7 +18,7 @@ const MoodPage = ({LastObservationTime}) => (
   <div>
     <MyMenu />
     <Container text style={{ marginTop: '7em' }}>
-      <Header as='h1'>Semantic UI React Fixed Template</Header>
+      <Header as='h1'>How are you feeling?</Header>
       <p>Some ~important~ questions for you about your mood today.</p>
       <Form>
         <Form.Field>

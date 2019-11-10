@@ -16,12 +16,11 @@ const Footer = () => (
       <Container textAlign='center'>
         <Grid divided inverted stackable>
           <Grid.Column width={3}>
-            <Header inverted as='h4' content='Group 1' />
+            <Header inverted as='h4' content='Source' />
             <List link inverted>
-              <List.Item as='a'>Link One</List.Item>
-              <List.Item as='a'>Link Two</List.Item>
-              <List.Item as='a'>Link Three</List.Item>
-              <List.Item as='a'>Link Four</List.Item>
+              <List.Item as='a' href="https://github.com/reyesj5/moodzaic">
+                Our Github
+              </List.Item>
             </List>
           </Grid.Column>
           <Grid.Column width={3}>
