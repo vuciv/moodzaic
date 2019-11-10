@@ -15,6 +15,7 @@ import {
 import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 
+
 function addCommunity(c) {
   //add the community c to the list of all communities in the overall data
   //unless it's already added lol

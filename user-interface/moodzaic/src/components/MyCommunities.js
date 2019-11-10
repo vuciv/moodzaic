@@ -16,6 +16,7 @@ import Community from './Community.js';
 import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 
+
 // const CommunitiesPage = ({myCommunities}) => (
 //   <div>
 //     <MyMenu />

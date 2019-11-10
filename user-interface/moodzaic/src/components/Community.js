@@ -12,89 +12,166 @@ import {
   Button,
   Comment
 } from 'semantic-ui-react'
-import MyMenu from './Menu.js';
-import Footer from './Footer.js';
 
-const CommentExampleComment = () => (
-  <Comment.Group>
-    <Header as='h3' dividing>
-      Comments
-    </Header>
+const getPosts = (com) => {
+  //get a list of all the posts from the community
+  const ret = [];
+  // for each in com.posts {
+  //   ret.append({
+  //     poster: post.poster lol so like this is not in the class diagram
+  //     message: post.post,
+  //     time: post.post_time,
+  //     comment_list: post.comment_list (list of objects: poster (string) and message (string))
+  //   })
+  // }
+  return ret;
+}
 
-    <Comment>
-      <Comment.Avatar src='/images/avatar/small/matt.jpg' />
-      <Comment.Content>
-        <Comment.Author as='a'>Matt</Comment.Author>
-        <Comment.Metadata>
-          <div>Today at 5:42PM</div>
-        </Comment.Metadata>
-        <Comment.Text>How artistic!</Comment.Text>
-        <Comment.Actions>
-          <Comment.Action>Reply</Comment.Action>
-        </Comment.Actions>
-      </Comment.Content>
-    </Comment>
+const sendPost = (post) => {
+  //add a post to the backend's list of getPost
+  //complete with poster, message, time, and comment_list
+  return;
+}
 
-    <Comment>
-      <Comment.Avatar src='/images/avatar/small/elliot.jpg' />
-      <Comment.Content>
-        <Comment.Author as='a'>Elliot Fu</Comment.Author>
-        <Comment.Metadata>
-          <div>Yesterday at 12:30AM</div>
-        </Comment.Metadata>
-        <Comment.Text>
-          <p>This has been very useful for my research. Thanks as well!</p>
-        </Comment.Text>
-        <Comment.Actions>
-          <Comment.Action>Reply</Comment.Action>
-        </Comment.Actions>
-      </Comment.Content>
-      <Comment.Group>
-        <Comment>
-          <Comment.Avatar src='/images/avatar/small/jenny.jpg' />
+class Community extends React.Component {
+
+
+  render() {
+    const community = this.props.myCommunity;
+    const posts = getPosts(community);
+
+    function printComments(comments) {
+      return (
+        comments.map((c, i) => {
+          return(
+            <Comment key = {i}>
+              <Comment.Avatar src={logo} />
+              <Comment.Content>
+                <Comment.Author as='a'>{c.poster}</Comment.Author>
+                <Comment.Text>{c.message}</Comment.Text>
+              </Comment.Content>
+            </Comment>
+          )
+        })
+      )
+    }
+
+    const printPosts = posts.map((post, i) => {
+      return (
+        <Comment key = {i} >
+          <Comment.Avatar src={logo} />
           <Comment.Content>
-            <Comment.Author as='a'>Jenny Hess</Comment.Author>
+            <Comment.Author as='a'>{post.poster}</Comment.Author>
             <Comment.Metadata>
-              <div>Just now</div>
+              <div>{post.time}</div>
             </Comment.Metadata>
-            <Comment.Text>Elliot you are always so right :)</Comment.Text>
+            <Comment.Text>{post.message}</Comment.Text>
             <Comment.Actions>
               <Comment.Action>Reply</Comment.Action>
             </Comment.Actions>
           </Comment.Content>
+          {post.comment_list.empty ? '' :
+          <Comment.Group>
+            {printComments(post.comment_list)}
+          </Comment.Group>
+          }
         </Comment>
-      </Comment.Group>
-    </Comment>
+      )
+    })
 
-    <Comment>
-      <Comment.Avatar src='/images/avatar/small/joe.jpg' />
-      <Comment.Content>
-        <Comment.Author as='a'>Joe Henderson</Comment.Author>
-        <Comment.Metadata>
-          <div>5 days ago</div>
-        </Comment.Metadata>
-        <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
-        <Comment.Actions>
-          <Comment.Action>Reply</Comment.Action>
-        </Comment.Actions>
-      </Comment.Content>
-    </Comment>
+    return (
+      <div>
+        <Comment.Group>
+          <Header as='h3' dividing>
+            {community}
+          </Header>
+          {printPosts}
+          <Form reply>
+            <Form.TextArea />
+            <Button
+              content='Post'
+              labelPosition='left'
+              icon='edit' primary
+            />
+          </Form>
+        </Comment.Group>
+      </div>
+    )
+  }
+}
 
-    <Form reply>
-      <Form.TextArea />
-      <Button content='Add Reply' labelPosition='left' icon='edit' primary />
-    </Form>
-  </Comment.Group>
-)
+// const CommentExampleComment = () => (
+// <Comment.Group>
+//   <Header as='h3' dividing>
+//     Comments
+//   </Header>
+//
+//   <Comment>
+//     <Comment.Avatar src={logo} />
+//     <Comment.Content>
+//       <Comment.Author as='a'>Matt</Comment.Author>
+//       <Comment.Metadata>
+//         <div>Today at 5:42PM</div>
+//       </Comment.Metadata>
+//       <Comment.Text>How artistic!</Comment.Text>
+//       <Comment.Actions>
+//         <Comment.Action>Reply</Comment.Action>
+//       </Comment.Actions>
+//     </Comment.Content>
+//   </Comment>
+//
+//   <Comment>
+//     <Comment.Avatar src='/images/avatar/small/elliot.jpg' />
+//     <Comment.Content>
+//       <Comment.Author as='a'>Elliot Fu</Comment.Author>
+//       <Comment.Metadata>
+//         <div>Yesterday at 12:30AM</div>
+//       </Comment.Metadata>
+//       <Comment.Text>
+//         <p>This has been very useful for my research. Thanks as well!</p>
+//       </Comment.Text>
+//       <Comment.Actions>
+//         <Comment.Action>Reply</Comment.Action>
+//       </Comment.Actions>
+//     </Comment.Content>
+//     <Comment.Group>
+//       <Comment>
+//         <Comment.Avatar src={logo} />
+//         <Comment.Content>
+//           <Comment.Author as='a'>Jenny Hess</Comment.Author>
+//           <Comment.Metadata>
+//             <div>Just now</div>
+//           </Comment.Metadata>
+//           <Comment.Text>Elliot you are always so right :)</Comment.Text>
+//           <Comment.Actions>
+//             <Comment.Action>Reply</Comment.Action>
+//           </Comment.Actions>
+//         </Comment.Content>
+//       </Comment>
+//     </Comment.Group>
+//   </Comment>
+//
+//   <Comment>
+//     <Comment.Avatar src={logo} />
+//     <Comment.Content>
+//       <Comment.Author as='a'>Joe Henderson</Comment.Author>
+//       <Comment.Metadata>
+//         <div>5 days ago</div>
+//       </Comment.Metadata>
+//       <Comment.Text>Dude, this is awesome. Thanks so much</Comment.Text>
+//       <Comment.Actions>
+//         <Comment.Action>Reply</Comment.Action>
+//       </Comment.Actions>
+//     </Comment.Content>
+//   </Comment>
+//
+//   <Form reply>
+//     <Form.TextArea />
+//     <Button content='Add Reply' labelPosition='left' icon='edit' primary />
+//   </Form>
+// </Comment.Group>
+// )
 
-const Community = ({communityName, posts}) => (
-  <div>
-    <MyMenu />
-    <Container text style={{ marginTop: '7em' }}>
-    <CommentExampleComment />
-    </Container>
-    <Footer />
-  </div>
-)
+
 
 export default Community

@@ -20,12 +20,12 @@ import AllCommunities from './AllCommunities.js'
 
 const getMyCommunityList = (username) => {
   //get the community list of the username from the data
-  return;
+  return [];
 }
 
 const getAllCommunities = () => {
   //get the info of all the communities
-  return;
+  return [];
 }
 
 class CommunityPage extends React.Component {
@@ -39,7 +39,7 @@ class CommunityPage extends React.Component {
 
   toggleAddMode = () => {
     this.setState(prevState => ({
-      LoggedIn: !prevState.LoggedIn
+      AddMode: !prevState.AddMode
     }))
   }
 
@@ -81,6 +81,7 @@ class CommunityPage extends React.Component {
         See My Communities
       </Button>;
     }
+    console.log(this.state);
 
     return (
       <div>
