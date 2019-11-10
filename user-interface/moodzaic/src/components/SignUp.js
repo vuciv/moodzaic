@@ -25,6 +25,13 @@ const SignUpForm = () => (
             placeholder='Password'
             type='password'
           />
+          <Form.Input
+            fluid
+            icon='lock'
+            iconPosition='left'
+            placeholder='Confirm Password'
+            type='password'
+          />
           <Link to='/Welcome'>
             <Button color='teal' fluid size='large'>
               Sign Up
