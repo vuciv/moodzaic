@@ -18,7 +18,7 @@ const Footer = () => (
           <Grid.Column width={3}>
             <Header inverted as='h4' content='Source' />
             <List link inverted>
-              <List.Item as='a' href="https://github.com/reyesj5/moodzaic">
+              <List.Item as='a' target="_blank" href="https://github.com/reyesj5/moodzaic">
                 Our Github
               </List.Item>
             </List>

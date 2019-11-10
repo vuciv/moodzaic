@@ -1880,6 +1880,14 @@ array.prototype.flat@^1.2.1:
     es-abstract "^1.15.0"
     function-bind "^1.1.1"
 
+array@^0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/array/-/array-0.4.3.tgz#9e0fb19fef3929cfb8bc040b32f1d54eaffedb91"
+  integrity sha1-ng+xn+85Kc+4vAQLMvHVTq/+25E=
+  dependencies:
+    emitter-component "~1.1.0"
+    to-function "~1.2.1"
+
 arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
@@ -3620,6 +3628,11 @@ elliptic@^6.0.0:
     inherits "^2.0.1"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.0"
+
+emitter-component@~1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/emitter-component/-/emitter-component-1.1.1.tgz#065e2dbed6959bf470679edabeaf7981d1003ab6"
+  integrity sha1-Bl4tvtaVm/RwZ57avq95gdEAOrY=
 
 emoji-regex@^7.0.1, emoji-regex@^7.0.2:
   version "7.0.3"
@@ -8291,6 +8304,11 @@ prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
     object-assign "^4.1.1"
     react-is "^16.8.1"
 
+props-component@*:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/props-component/-/props-component-1.0.3.tgz#4b521bdf3332f32fc6d67483174b9d8db53ea1fe"
+  integrity sha1-S1Ib3zMy8y/G1nSDF0udjbU+of4=
+
 proxy-addr@~2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/proxy-addr/-/proxy-addr-2.0.5.tgz#34cbd64a2d81f4b1fd21e76f9f06c8a45299ee34"
@@ -9949,6 +9967,13 @@ to-fast-properties@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz#dc5e698cbd079265bc73e0377681a4e4e83f616e"
   integrity sha1-3F5pjL0HkmW8c+A3doGk5Og/YW4=
+
+to-function@~1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/to-function/-/to-function-1.2.1.tgz#7d2f341b11ffd534d42ad3e107f2bf93f88a2a6f"
+  integrity sha1-fS80GxH/1TTUKtPhB/K/k/iKKm8=
+  dependencies:
+    props-component "*"
 
 to-object-path@^0.3.0:
   version "0.3.0"

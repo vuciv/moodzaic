@@ -50,7 +50,7 @@ class App extends Component {
                 ProgressScore={this.state.ProgressScore}/>
             </Route>
             <Route path="/Communities">
-              <Community />
+              <CommunityPage />
             </Route>
             <Route path="/">
               {this.state.LoggedIn ?
