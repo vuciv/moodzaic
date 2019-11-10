@@ -1,67 +1,93 @@
 import React from 'react'
 import logo from '../logo.png';
 import {
-  Container,
-  Divider,
-  Grid,
   Header,
-  Image,
-  List,
-  Segment,
   Form,
-  Button,
   Comment
 } from 'semantic-ui-react'
+import { getPosts, sendPost } from '../integration_funcs.js'
 
-const getPosts = (com) => {
-  //get a list of all the posts from the community
-  const ret = [];
-  // for each in com.posts {
-  //   ret.append({
-  //     poster: post.poster lol so like this is not in the class diagram
-  //     message: post.post,
-  //     time: post.post_time,
-  //     comment_list: post.comment_list (list of objects: poster (string) and message (string))
-  //   })
-  // }
-  return ret;
-}
 
-const sendPost = (post) => {
-  //add a post to the backend's list of getPost
-  //complete with poster, message, time, and comment_list
-  return;
-}
+
+// class FormExampleClearOnSubmit extends React.Component {
+//   state = {}
+//
+//   handleChange = (e, { name, value }) => this.setState({ [name]: value })
+//
+//   handleSubmit = () => this.setState({ email: '', name: '' })
+//
+//   render() {
+//     const { name, email } = this.state
+//
+//     return (
+//       <Form onSubmit={this.handleSubmit}>
+//         <Form.Group>
+//           <Form.Input
+//             placeholder='Name'
+//             name='name'
+//             value={name}
+//             onChange={this.handleChange}
+//           />
+//           <Form.Input
+//             placeholder='Email'
+//             name='email'
+//             value={email}
+//             onChange={this.handleChange}
+//           />
+//           <Form.Button content='Submit' />
+//         </Form.Group>
+//       </Form>
+//     )
+//   }
+// }
 
 class Community extends React.Component {
+  state = {}
 
+  handleChange = (e, { message, value }) => this.setState({ [message]: value })
+
+  handleSubmit = () => {
+    // sendPost({poster: u,
+    //           message: m,
+    //           time: t,
+    //           comment_list: []
+    //         });
+    this.setState({ message: '' });
+  }
 
   render() {
+    const { message } = this.state
     const community = this.props.myCommunity;
+    const username = this.props.username;
     const posts = getPosts(community);
 
-    function printComments(comments) {
-      return (
-        comments.map((c, i) => {
-          return(
-            <Comment key = {i}>
-              <Comment.Avatar src={logo} />
-              <Comment.Content>
-                <Comment.Author as='a'>{c.poster}</Comment.Author>
-                <Comment.Text>{c.message}</Comment.Text>
-              </Comment.Content>
-            </Comment>
-          )
-        })
-      )
-    }
+    var today = new Date();
+    var date = (today.getMonth()+1)+'-'+today.getDate()+'/'+today.getFullYear();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var now = date+' '+time;
+
+    // function printComments(comments) {
+    //   return (
+    //     comments.map((c, i) => {
+    //       return(
+    //         <Comment key = {i}>
+    //           <Comment.Avatar src={logo} />
+    //           <Comment.Content>
+    //             <Comment.Author as='a'>{c.poster}</Comment.Author>
+    //             <Comment.Text>{c.message}</Comment.Text>
+    //           </Comment.Content>
+    //         </Comment>
+    //       )
+    //     })
+    //   )
+    // }
 
     const printPosts = posts.map((post, i) => {
       return (
         <Comment key = {i} >
           <Comment.Avatar src={logo} />
           <Comment.Content>
-            <Comment.Author as='a'>{post.poster}</Comment.Author>
+            <Comment.Author as='a'>{post.poster.name}</Comment.Author>
             <Comment.Metadata>
               <div>{post.time}</div>
             </Comment.Metadata>
@@ -72,7 +98,7 @@ class Community extends React.Component {
           </Comment.Content>
           {post.comment_list.empty ? '' :
           <Comment.Group>
-            {printComments(post.comment_list)}
+            {printPosts(post.comment_list)}
           </Comment.Group>
           }
         </Comment>
@@ -85,10 +111,17 @@ class Community extends React.Component {
           <Header as='h3' dividing>
             {community}
           </Header>
+
           {printPosts}
-          <Form reply>
-            <Form.TextArea />
-            <Button
+
+          <Form onSubmit={this.handleSubmit}>
+            <Form.TextArea
+              placeholder='Say something to the community!'
+              name='message'
+              value={message}
+              onChange={this.handleChange}
+            />
+            <Form.Button
               content='Post'
               labelPosition='left'
               icon='edit' primary

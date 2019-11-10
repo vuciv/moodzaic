@@ -11,7 +11,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
 class App extends Component {
@@ -50,7 +49,7 @@ class App extends Component {
                 ProgressScore={this.state.ProgressScore}/>
             </Route>
             <Route path="/Communities">
-              <CommunityPage />
+              <CommunityPage username={this.state.Username}/>
             </Route>
             <Route path="/">
               {this.state.LoggedIn ?

@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "array": "^0.4.3",
     "axios": "^0.19.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",

@@ -1,32 +1,16 @@
 import React from 'react'
-import logo from '../logo.png';
 import {
   Container,
-  Divider,
-  Grid,
-  Header,
-  Image,
-  List,
-  Segment,
-  Form,
   Button,
-  Comment
 } from 'semantic-ui-react'
 import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 import Community from './Community.js'
 import CommunitiesPage from './MyCommunities.js'
 import AllCommunities from './AllCommunities.js'
+import { getMyCommunityList, getAllCommunities } from '../integration_funcs.js'
 
-const getMyCommunityList = (username) => {
-  //get the community list of the username from the data
-  return [];
-}
 
-const getAllCommunities = () => {
-  //get the info of all the communities
-  return [];
-}
 
 class CommunityPage extends React.Component {
   state = {
@@ -56,10 +40,11 @@ class CommunityPage extends React.Component {
     const community = this.state.Community;
     const myCommunityList = this.state.MyCommunityList;
     const communityList = this.state.CommunityList;
+    const username = this.props.username;
     let myPage, myButton;
 
     if (community !== '') {
-      myPage = <Community myCommunity = {community} />;
+      myPage = <Community myCommunity = {community} username = {username} />;
       myButton =
       <Button color='teal' fluid size='large' onClick = {this.toggleCommunity('')}>
         See My Communities
@@ -91,8 +76,7 @@ class CommunityPage extends React.Component {
           unless:
           user chooses to see all communities, then calls AllCommunities
           or a community is selected, then call community and open that community</p>
-          {myPage}
-          {myButton}
+          <Community />
         </Container>
         <Footer />
       </div>
@@ -100,6 +84,8 @@ class CommunityPage extends React.Component {
   }
 }
 
+// {myPage}
+// {myButton}
 
 
 export default CommunityPage;
