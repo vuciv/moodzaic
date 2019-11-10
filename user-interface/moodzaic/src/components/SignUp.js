@@ -25,10 +25,11 @@ const SignUpForm = () => (
             placeholder='Password'
             type='password'
           />
-
-          <Button color='teal' fluid size='large'>
-            Sign Up
-          </Button>
+          <Link to='/Welcome'>
+            <Button color='teal' fluid size='large'>
+              Sign Up
+            </Button>
+          </Link>
         </Segment>
       </Form>
       <Message>
