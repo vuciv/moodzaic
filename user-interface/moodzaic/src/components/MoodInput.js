@@ -1,15 +1,9 @@
 import React from 'react'
-import logo from '../logo.png';
 import {
   Container,
-  Divider,
-  Grid,
   Header,
-  Image,
-  List,
-  Button,
   Form,
-  Rating
+  Button
 } from 'semantic-ui-react'
 import MyMenu from './Menu.js';
 import Footer from './Footer.js';
