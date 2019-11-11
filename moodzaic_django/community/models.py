@@ -13,6 +13,7 @@ class Community(models.Model):
     def getName(self):
         return self.name
 
+    # can you use a setter for a ManyToMany relationship in django...?
     def setUsers(self, users):
         self.users = users
         return
@@ -28,7 +29,42 @@ class Community(models.Model):
         self.users.remove(user)
         return
 
+class Post(models.Model):
+    post = models.CharField(max_length=1000)
+    community = models.ForeignKey(Community, on_delete=models.CASCADE)
+    poster = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def setPost(self, post):
+        self.post = post
+        return
 
+    def getPost(self):
+        return self.post
 
+    def setCommunity(self, community):
+        self.community = community
+        return
 
+    def getCommunity(self):
+        return self.community
+
+    def setPoster(self, poster):
+        self.poster = poster
+        return
+
+    def getPoster(self):
+        return self.poster
+
+    #TODO TIME?
+
+## Ahh! A data-class!
+## IDK what to do about this because you can't have recursive objects.
+class Comment(Post):
+    originalPost = models.ForeignKey(Post, related_name='+', on_delete=models.CASCADE)
+
+    def setOriginalPost(self, originalPost):
+        self.originalPost = originalPost
+        return
+
+    def getOriginalPost(self):
+        return self.originalPost
