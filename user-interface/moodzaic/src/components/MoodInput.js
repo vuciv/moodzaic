@@ -27,12 +27,45 @@ const getDailyQuestions = () => {
   return questions;
 }
 
+const getMoods = () => {
+  const moods = [
+    "Loathing",
+    "Repugnant",
+    "Revolted",
+    "Revulsion",
+    "Detestable",
+    "Aversion",
+    "Hesitant",
+    "Remoresful",
+    "Ashamed",
+    "Ignored",
+    "Victimized",
+    "Powerless",
+    "Vulnerable",
+    "Inferior",
+    "Empty",
+    "Abandoned",
+    "Isolated",
+    "Apathetic",
+    "Indifferent",
+    "Inspired",
+    "Open",
+    "Playful",
+    "Sensitive",
+    "Hopeful",
+    "Loving"
+  ]
+  return moods;
+}
+
 class MoodPage extends React.Component {
   state = {
     QuestionList: getDailyQuestions(),
+    MoodList: getMoods()
   }
   render() {
     const {QuestionList} = this.state;
+    const {MoodList} = this.state;
     return(
       <div>
         <MyMenu />
@@ -49,11 +82,10 @@ class MoodPage extends React.Component {
             <Form>
               <Form.Field>
                 <label>Mood</label>
-                <Dropdown placeholder='Select'
-                  fluid selection options={[
-                    {value:"grumpy" ,text:"grumpy"},
-                    {value:"big mood", text:"big mood"},
-                    {value:"nibblish", text:"nibblish"}]} />
+                <Dropdown placeholder='Select' fluid search selection
+                  options={MoodList.map((Mood, index) =>
+                    {return({value: Mood, text: Mood})})
+                  } />
               </Form.Field>
             </Form>
             <br />
@@ -68,5 +100,14 @@ class MoodPage extends React.Component {
     )
   }
 }
+
+// {MoodList.map((Mood, index) => {
+// return(<Dropdown placeholder='Select'
+//   fluid selection options={[
+//     {value:{Mood} ,text:"grumpy"},
+//     {value:"big mood", text:"big mood"},
+//     {value:"nibblish", text:"nibblish"}]} />)
+//   })
+// }
 
 export default MoodPage;

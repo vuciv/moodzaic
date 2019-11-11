@@ -114,6 +114,32 @@ class SetupPage extends React.Component {
             <Container text style={{ marginTop: '-1' }}>
               <Header as='h1' color='teal'>Welcome to Moodzaic!</Header>
               <p>Fill out this form so we can create your account.</p>
+              <Form>
+                <div class="two fields">
+                  <Form.Field>
+                    <label>First Name</label>
+                    <input />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Last Name</label>
+                    <input />
+                  </Form.Field>
+                </div>
+                <div class="three fields">
+                <Form.Field>
+                  <label>Age</label>
+                  <input placeholder='Replace with birthdate?'/>
+                </Form.Field>
+                <Form.Field>
+                  <label>Gender</label>
+                  <Dropdown placeholder='Select' fluid selection options={GenderOptions}/>
+                </Form.Field>
+                <Form.Field>
+                  <label>Email</label>
+                  <input />
+                </Form.Field>
+                </div>
+              </Form>
               {QuestionList.map((Question, index) => {
                 return (<Form>
                   <Form.Field>

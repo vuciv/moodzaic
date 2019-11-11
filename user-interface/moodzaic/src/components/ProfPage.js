@@ -12,11 +12,12 @@ import {
 import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 
-const ProfilePage = ({Name, Username, Age, Gender, ProgressScore}) => (
+const ProfilePage = ({Name, Username, Age, Gender, ProgressScore, Notifications}) => (
   <div>
     <MyMenu />
     <Container text style={{ marginTop: '7em' }}>
       <Header as='h1'>{Username}'s Profile</Header>
+      <p>{Notifications}</p>
       <p>My name? <strong>{Name}</strong></p>
       <p>My age? <strong>{Age}</strong></p>
       <p>My Gender? <strong>{Gender}</strong></p>
