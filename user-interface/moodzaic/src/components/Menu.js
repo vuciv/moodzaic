@@ -12,16 +12,23 @@ import {
   Segment,
 } from 'semantic-ui-react'
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 const MyMenu = () => (
   <div>
     <Menu fixed='top' inverted>
       <Container>
-        <Menu.Item as='a' header>
+        <Menu.Item as={Link} to="/MyMood" header>
           <Image size='mini' src={logo} style={{ marginRight: '1.5em' }} />
         </Menu.Item>
-        <Menu.Item as='a'>Record Mood</Menu.Item>
-        <Menu.Item as='a'>My Moodzaic</Menu.Item>
-        <Menu.Item as='a'>My Communities</Menu.Item>
+        <Menu.Item as={Link} to="/MyMood">Record Mood</Menu.Item>
+        <Menu.Item as={Link} to="/Profile">My Moodzaic</Menu.Item>
+        <Menu.Item as={Link} to="/Communities">My Communities</Menu.Item>
       </Container>
     </Menu>
   </div>
