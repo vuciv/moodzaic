@@ -1,11 +1,13 @@
 from django.test import TestCase
 from users.models import User, Profile, Goal, Mood, Observation
 from datetime import datetime, date
+#from status.models import Status
 
 
 # Create your tests here.
 
 # Testing user and user methods in the database
+'''
 class UserTestCase(TestCase):
     def setUp(self):
         User.objects.create(username = "emil", password = "snibby")
@@ -58,6 +60,7 @@ class UserTestCase(TestCase):
     def test_setUserGenderFailure(self):
         testUser = User.objects.get(username = "emil")
         self.assertFalse(testUser.setUserGender('gibberish'))
+'''
 
 # Testing the goals a user can set and keep track of
 class GoalTestCase(TestCase):
