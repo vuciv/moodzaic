@@ -7,7 +7,8 @@ class Community(models.Model):
     users = models.ManyToManyField(User)
 
     def setName(self, name):
-        self.name = name
+        if (name != '') and name.isalnum() and (len(name) <= 30):
+            self.name = name
         return
 
     def getName(self):
@@ -35,7 +36,8 @@ class Post(models.Model):
     poster = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def setPost(self, post):
-        self.post = post
+        if (len(post) > 0 and len(post) <= 1000):
+            self.post = post
         return
 
     def getPost(self):

@@ -39,19 +39,19 @@ class CommunityTestCase(TestCase):
         fitnessCommunity.setName("cwyZva1ZPOBu2UchlBAU0rXpQOr7X00") #31 chars
         self.assertEqual("cwyZva1ZPOBu2UchlBAU0rXpQOr7X0", fitnessCommunity.getName())
 
-        fitnessCommunity.set("hello world")
+        fitnessCommunity.setName("hello world")
         self.assertEqual("cwyZva1ZPOBu2UchlBAU0rXpQOr7X0", fitnessCommunity.getName())
 
-        fitnessCommunity.set("  ")
+        fitnessCommunity.setName("  ")
         self.assertEqual("cwyZva1ZPOBu2UchlBAU0rXpQOr7X0", fitnessCommunity.getName())
 
-        fitnessCommunity.set("123")
+        fitnessCommunity.setName("123")
         self.assertEqual("123", fitnessCommunity.getName())
 
-        fitnessCommunity.set("abc123%")
+        fitnessCommunity.setName("abc123%")
         self.assertEqual("123", fitnessCommunity.getName())
 
-        fitnessCommunity.set("NULL")
+        fitnessCommunity.setName("NULL")
         self.assertEqual("NULL", fitnessCommunity.getName())
 
     def test_getUsers(self):
