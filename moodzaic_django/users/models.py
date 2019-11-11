@@ -1,6 +1,8 @@
 from django.db import models
 from datetime import date
+from django.contrib.auth.models import User
 
+'''
 class User(models.Model):
     username = models.CharField(max_length=20, default='')
     password = models.CharField(max_length=20, default='')
@@ -22,6 +24,7 @@ class User(models.Model):
     def setUserGender(self, age):
         #TODO
         return 'not false'
+'''
 
 class Goal(models.Model):
     goal = models.CharField(max_length=30)
@@ -116,6 +119,8 @@ class Observation(models.Model):
     meals = models.IntegerField(default=-1)
     work = models.FloatField(default=-1)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
+    age = models.IntegerField(default=18)
+    gender = models.CharField(max_length=9, default='')
     mood = models.OneToOneField(
         Mood,
         on_delete=models.CASCADE,
