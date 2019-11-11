@@ -7,13 +7,9 @@ class Community(models.Model):
     users = models.ManyToManyField(User)
 
     def setName(self, name):
-<<<<<<< HEAD
         if (name != '') and name.isalnum() and (len(name) <= 30):
             self.name = name
-=======
-        self.name = name
-        self.save()
->>>>>>> jerseyCommunitySave
+            self.save()
         return
 
     def getName(self):
@@ -42,13 +38,9 @@ class Post(models.Model):
     poster = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def setPost(self, post):
-<<<<<<< HEAD
         if (len(post) > 0 and len(post) <= 1000):
             self.post = post
-=======
-        self.post = post
-        self.save()
->>>>>>> jerseyCommunitySave
+            self.save()
         return
 
     def getPost(self):
