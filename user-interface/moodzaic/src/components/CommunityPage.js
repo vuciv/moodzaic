@@ -16,10 +16,17 @@ class CommunityPage extends React.Component {
   state = {
         Community: '',
         AddMode: false,
-        MyCommunityList: getMyCommunityList(this.props.username),
-        CommunityList: getAllCommunities()
+        MyCommunityList: null,
+        CommunityList: null
         // should these be props?
   }
+
+  componentDidMount() {
+    fetch('')
+      .then(response => response.json())
+      .then(data => this.setState({ MyCommunityList : data }));
+  }
+
 
   toggleAddMode = () => {
     this.setState(prevState => ({
