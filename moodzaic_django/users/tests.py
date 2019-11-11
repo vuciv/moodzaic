@@ -1,6 +1,7 @@
 from django.test import TestCase
 from users.models import User, Profile, Goal, Mood, Observation
 from datetime import datetime, date
+from status.models import Status
 
 
 # Create your tests here.
