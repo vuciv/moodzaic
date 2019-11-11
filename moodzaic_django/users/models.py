@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
+#from community.models import Community
 
 '''
 class User(models.Model):
@@ -76,6 +77,8 @@ class Mood(models.Model):
 
 class Profile(models.Model):
     ProgressScore = models.IntegerField(default=0)
+    age = models.IntegerField(default=18)
+    gender = models.CharField(max_length=9, default='')
     #reminderList = models.ListCharField(base_field=CharField, size=None)
     user = models.OneToOneField(
         User,
@@ -119,8 +122,6 @@ class Observation(models.Model):
     meals = models.IntegerField(default=-1)
     work = models.FloatField(default=-1)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
-    age = models.IntegerField(default=18)
-    gender = models.CharField(max_length=9, default='')
     mood = models.OneToOneField(
         Mood,
         on_delete=models.CASCADE,
