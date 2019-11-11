@@ -8,14 +8,15 @@ class Community(models.Model):
 
     def setName(self, name):
         self.name = name
+        self.save()
         return
 
     def getName(self):
         return self.name
 
-    # can you use a setter for a ManyToMany relationship in django...?
-    def setUsers(self, users):
-        self.users = users
+    def setUsers(self, listOfUsers):
+        self.users.add(*listOfUsers)
+        self.save()
         return
 
     def getUsers(self):
@@ -23,6 +24,7 @@ class Community(models.Model):
 
     def addUserToCommunity(self, user):
         self.users.add(user)
+        self.save()
         return
 
     def removeUserFromCommunity(self, user):
@@ -36,6 +38,7 @@ class Post(models.Model):
 
     def setPost(self, post):
         self.post = post
+        self.save()
         return
 
     def getPost(self):
@@ -43,6 +46,7 @@ class Post(models.Model):
 
     def setCommunity(self, community):
         self.community = community
+        self.save()
         return
 
     def getCommunity(self):
@@ -50,6 +54,7 @@ class Post(models.Model):
 
     def setPoster(self, poster):
         self.poster = poster
+        self.save()
         return
 
     def getPoster(self):
@@ -64,6 +69,7 @@ class Comment(Post):
 
     def setOriginalPost(self, originalPost):
         self.originalPost = originalPost
+        self.save()
         return
 
     def getOriginalPost(self):
