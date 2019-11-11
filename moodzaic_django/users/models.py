@@ -8,33 +8,60 @@ class User(models.Model):
     gender = models.CharField(max_length=9, default='')
 
     def setUserUsername(self, username):
-        #TODO
-        return 'not false'
+        if not (isinstance(username, 'str')):
+            return False
+        if len(username) > 20:
+            return False
+        self.username = username
+        self.save()
+        return True
 
     def setUserPassword(self, password):
-        #TODO
-        return 'not false'
+        if not (isinstance(password, 'str')):
+            return False
+        if len(password) > 20:
+            return False
+        self.password = password
+        self.save()
+        return True
 
     def setUserAge(self, age):
-        #TODO
-        return 'not false'
+        if not (isinstance(age, 'int')):
+            return False
+        if age < 18:
+            return False
+        self.age = age
+        self.save()
+        return True
 
-    def setUserGender(self, age):
-        #TODO
-        return 'not false'
+    def setUserGender(self, gender):
+        if gender not in ['man', 'woman', 'nonbinary']:
+            return False
+        else:
+            self.gender = gender
+            self.save()
+            return True
 
 class Goal(models.Model):
     goal = models.CharField(max_length=30)
     frequency = models.IntegerField(default=1)
-    time = models.CharField(max_length=10)
+    time = models.TimeField()
 
     def setGoalGoal(self, goal):
-        #TODO
-        return 'not false'
+        if not (isinstance(goal, 'str')):
+            return False
+        if len(goal) > 30:
+            return False
+        self.goal = goal
+        self.save()
+        return True
 
     def setGoalFrequency(self, frequency):
-        #TODO
-        return 'not false'
+        if not (isinstance(frequency, 'int')):
+            return False
+        self.frequency = frequency
+        self.save()
+        return True
 
     def setGoalTime(self, time):
         #TODO
@@ -113,7 +140,6 @@ class Observation(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
-
 
     def setSleep(self, hours):
         ## TODO:
