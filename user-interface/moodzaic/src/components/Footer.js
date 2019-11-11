@@ -24,47 +24,29 @@ const Footer = () => (
             </List>
           </Grid.Column>
           <Grid.Column width={3}>
-            <Header inverted as='h4' content='Group 2' />
+            <Header inverted as='h4' content='Group Members' />
             <List link inverted>
-              <List.Item as='a'>Link One</List.Item>
-              <List.Item as='a'>Link Two</List.Item>
-              <List.Item as='a'>Link Three</List.Item>
-              <List.Item as='a'>Link Four</List.Item>
-            </List>
-          </Grid.Column>
-          <Grid.Column width={3}>
-            <Header inverted as='h4' content='Group 3' />
-            <List link inverted>
-              <List.Item as='a'>Link One</List.Item>
-              <List.Item as='a'>Link Two</List.Item>
-              <List.Item as='a'>Link Three</List.Item>
-              <List.Item as='a'>Link Four</List.Item>
+              <List.Item >Molly Fortnow</List.Item>
+              <List.Item >Daniel Steinberg</List.Item>
+              <List.Item >Jersey Fonseca</List.Item>
+              <List.Item >Emil Sohlberg</List.Item>
+              <List.Item >Marco Anaya</List.Item>
+              <List.Item >Zipporah Klain</List.Item>
+              <List.Item >Hunter</List.Item>
+              <List.Item >Chema ? I'll alphabatize this later</List.Item>
+              <List.Item >note to group: can link your name to whatever you want (linkedin, portfolio, whatever)</List.Item>
             </List>
           </Grid.Column>
           <Grid.Column width={7}>
-            <Header inverted as='h4' content='Footer Header' />
+            <Header inverted as='h4' content='Moodzaic' />
             <p>
-              Extra space for a call to action inside the footer that could help re-engage users.
+              Moodzaic was created as a project for Software Construction at UChicago in Autumn 2019.
+              We have been very tired; please excuse any bugs.
+              Thank you.
             </p>
+            <Image centered style={{ marginTop: '3em' }} size='mini' src={ logo } />
           </Grid.Column>
         </Grid>
-
-        <Divider inverted section />
-        <Image centered size='mini' src={ logo } />
-        <List horizontal inverted divided link size='small'>
-          <List.Item as='a' href='#'>
-            Site Map
-          </List.Item>
-          <List.Item as='a' href='#'>
-            Contact Us
-          </List.Item>
-          <List.Item as='a' href='#'>
-            Terms and Conditions
-          </List.Item>
-          <List.Item as='a' href='#'>
-            Privacy Policy
-          </List.Item>
-        </List>
       </Container>
     </Segment>
   </div>
