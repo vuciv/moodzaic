@@ -2,7 +2,6 @@ import React from 'react'
 import logo from '../logo.png';
 import {
   Container,
-  Divider,
   Grid,
   Header,
   Image,
@@ -12,7 +11,7 @@ import {
 
 const Footer = () => (
   <div>
-    <Segment inverted vertical style={{ margin: '5em 0em 0em', padding: '5em 0em' }}>
+    <Segment inverted vertical style={{ margin: '7em 0em 0em', padding: '4em 0em' }}>
       <Container textAlign='center'>
         <Grid divided inverted stackable>
           <Grid.Column width={3}>
