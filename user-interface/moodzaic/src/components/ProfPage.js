@@ -16,7 +16,7 @@ const ProfilePage = ({Name, Username, Age, Gender, ProgressScore, Notifications}
   <div>
     <MyMenu />
     <Grid columns={2}>
-      <Grid.Column>
+      <Grid.Column width = {10}>
         <Container text style={{ marginTop: '7em', marginLeft: '10em' }}>
           <Header as='h1'>{Username}'s Profile</Header>
             <p>{Notifications}</p>
@@ -29,7 +29,7 @@ const ProfilePage = ({Name, Username, Age, Gender, ProgressScore, Notifications}
             </p>
           </Container>
         </Grid.Column>
-        <Grid.Column>
+        <Grid.Column width = {5}>
           <Reminders/>
         </Grid.Column>
       </Grid>
