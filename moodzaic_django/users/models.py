@@ -1,6 +1,9 @@
 from django.db import models
 from datetime import date
+from django.contrib.auth.models import User
+#from community.models import Community
 
+'''
 class User(models.Model):
     username = models.CharField(max_length=20, default='')
     password = models.CharField(max_length=20, default='')
@@ -22,6 +25,7 @@ class User(models.Model):
     def setUserGender(self, age):
         #TODO
         return 'not false'
+'''
 
 class Goal(models.Model):
     goal = models.CharField(max_length=30)
@@ -53,7 +57,11 @@ class Mood(models.Model):
 
      def setName(self, name):
         #TODO
-        return
+        if len(name) < 20:
+            self.name = name
+            return True
+        else:
+            return False
 
      def getMood(self):
         #TODO
@@ -61,10 +69,16 @@ class Mood(models.Model):
 
      def setMood(self, mood):
         ## TODO:
-        return
+        if mood >= 0:
+            self.mood = mood
+            return True
+        else:
+            return False
 
 class Profile(models.Model):
     ProgressScore = models.IntegerField(default=0)
+    age = models.IntegerField(default=18)
+    gender = models.CharField(max_length=9, default='')
     #reminderList = models.ListCharField(base_field=CharField, size=None)
     user = models.OneToOneField(
         User,
@@ -118,23 +132,42 @@ class Observation(models.Model):
 
     def setSleep(self, hours):
         ## TODO:
-        return
+        if hours  >= 0 and hours <= 24:
+            self.sleep = hours
+            return True
+        else:
+            return False
 
 
     def setExercise(self, hours):
         ## TODO:
-        return
+        if hours  >= 0 and hours <= 24:
+            self.exercise = hours
+            return True
+        else:
+            return False
+
 
 
     def setMeals(self, num):
         ## TODO:
-        return
+        if num  >= 0:
+            self.meals = num
+            return True
+        else:
+            return False
 
 
     def setWork(self, hours):
         ## TODO:
-        return
+        if hours  >= 0 and hours <= 24:
+            self.work = hours
+            return True
+        else:
+            return False
 
     def setMood(self, mood_str, mood_int):
         ## TODO:
-        return
+        self.mood.setMood(mood_int)
+        self.mood.setName(mood_str)
+        return True

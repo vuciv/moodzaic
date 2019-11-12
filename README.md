@@ -67,3 +67,8 @@ Add a urlpattern for the new view.
 Find the common parts of each page (i.e., header, sidebar, footer).
 Add these parts to a base template
 Create specific. templates that inherent from the base template.
+
+# Running Front-End Scripts
+
+## Set-Up
+In /user-interface/moodzaic, and with yarn installed, run "$yarn start" to launch the React App in a browser, and "$yarn test" to run the included test suites.

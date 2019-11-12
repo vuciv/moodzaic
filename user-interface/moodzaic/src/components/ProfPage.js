@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../logo.png';
 import {
   Container,
   Divider,
@@ -12,23 +11,19 @@ import {
 import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 
-const ProfilePage = ({Name, Username, Age, Gender, ProgressScore}) => (
+const ProfilePage = ({Name, Username, Age, Gender, ProgressScore, Notifications}) => (
   <div>
     <MyMenu />
     <Container text style={{ marginTop: '7em' }}>
-      <Header as='h1'>Semantic UI React Fixed Template</Header>
-      <p>This is a basic fixed menu template using fixed size containers.</p>
+      <Header as='h1'>{Username}'s Profile</Header>
+      <p>{Notifications}</p>
+      <p>My name? <strong>{Name}</strong></p>
+      <p>My age? <strong>{Age}</strong></p>
+      <p>My Gender? <strong>{Gender}</strong></p>
+      <p>My progress score towards my big goal: <strong>{ProgressScore}</strong></p>
       <p>
-        A text container is used for the main container, which is useful for single column layouts.
+        Once we've built up some data in the backend, I can display your mood history here!
       </p>
-
-      <Image src='/images/wireframe/media-paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
-      <Image src='/images/wireframe/paragraph.png' style={{ marginTop: '2em' }} />
     </Container>
     <Footer />
   </div>
