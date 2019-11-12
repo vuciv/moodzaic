@@ -114,7 +114,7 @@ class Observation(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
-
+    moods = ["mood"] * 10
 
     def setSleep(self, hours):
         ## TODO:

@@ -29,18 +29,18 @@ class Weights(models.Model):
         default=""
     )
 
-    def getWeeklyData(self, obs, user_observations):
+    def getWeeklyData(self, obs, observations):
         today = obs.date.today()
         week_ago = today - datetime.timedelta(days=7)
-        weekly_data = user_observations.objects.filter(date__gte=week_ago,date__lte=today)
+        weekly_data = observations.objects.filter(date__gte=week_ago, date__lte=today)
 
         days_with_obs = weekly_data.__len__
 
-        if days_with_obs:
+        if days_with_obs == 0:
             return 0, 0
         
-        exercise_sum = 0
-        work_sum = 0
+        exercise_sum, work_sum = 0, 0
+
         for past_obs in weekly_data.iterator():
             exercise_sum += past_obs.exercise
             work_sum += past_obs.work
@@ -51,62 +51,57 @@ class Weights(models.Model):
     def transformUserData(self):
 
         profile = self.user.profile
-        user_observations = Observation.objects.filter(profile__user__name=profile.user.username)
-        user_observations = user_observations.objects.order_by("date")
+        observations = Observation.objects.filter(user__user__username=profile.user.username)
+        observations = observations.order_by("date")
         
-        array = []
-        for obs in user_observations.iterator():
-            weekly_exercise, weekly_work = self.getWeeklyData(obs)
+        input_data = []
+        mood_data = []
+        for obs in observations.iterator():
+            weekly_exercise, weekly_work = self.getWeeklyData(obs, observations)
             
             row = [
-                obs.sleep, 
-                obs.exercise, 
-                weekly_exercise,
-                obs.meals, 
+                obs.sleep, obs.exercise, weekly_exercise, obs.meals,
                 
-                obs.work,
-                weekly_work
+                obs.work, weekly_work
             ]
-            array.append(row)
-
-        return np.array(array)
-
-
-    def delimiterToList(self, string_list, key):
-        return string_list.split(',')
-    
-    def listToDelimiter(self, l, expected_size):
-        if len(l) != expected_size:
-            raise ValueError
-        return ",".join(l)
+            input_data.append(row)
+            mood_data.append(obs.mood.mood / obs.mood.moods.size)
+        return np.array(input_data), np.array(mood_data)
+            
 
     def retrain(self):
 
-        weights = self.delimiterToList(self.weights_int_list, "weight")
-        biases = self.delimiterToList(self.bias_int_list, "bias")
+        weights = self.weights_int_list.split(',')
+        biases = self.bias_int_list.split(',')
 
-        """
+        
         model = MoodNeuralNetwork(weights=weights, biases=biases)
-        input_data = self.transformUserData()
-        model.train(input_data)
+        input_data, mood_data = self.transformUserData()
+        model.train(input_data, mood_data)
 
-        self.setWeightsWeights(self.listToDelimiter(model.getWeights), 208)
-        self.setWeightsBias(self.listToDelimiter(model.getBiases), 21)
+        # self.setWeightsWeights(model.getWeights())
+        # self.setWeightsBias(model.getBiases())
 
 
         #self.user.profile.setNotifications()
-        """
-
-    
-
-    def setWeightsUser(self, user):
-        pass
-
-    def setWeightsWeights(self, weights_dict):
         
+    def setWeightsUser(self, user):
+        if self.user is not None:
+            return False
+        
+        self.user = user
+        return True
 
+    def setWeightsWeights(self, weights_list):
+        if len(weights_list) != 208:
+            return False
+        
+        self.weights_int_list = ",".join(str(x) for x in weights_list)
+        return True
 
-        pass
+    def setWeightsBias(self, biases_list):
+        if len(biases_list) != 21:
+            return False
+        self.bias_int_list = ",".join(str(x) for x in biases_list)
+        return True
 
-    def setWeightsBias(self, biases_dict):
-        pass
