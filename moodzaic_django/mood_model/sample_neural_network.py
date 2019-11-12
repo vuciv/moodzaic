@@ -13,7 +13,8 @@ class MoodNeuralNetwork:
     '''
     _weights = {}
     _biases = {}
-    epochs = 1000
+    _network = []
+    epochs = 20
     learn_rate = 0.1 # number of times to loop through the entire dataset
 
     def __init__(self, weights = None, biases = None):
@@ -33,6 +34,28 @@ class MoodNeuralNetwork:
         else:
             for i in range(21):
                 self._biases["bias" + str(i)] = np.random.uniform()
+        # network
+        for i in range(4):
+            self._network.append([])
+        weightCounter = 0
+        biasCounter = 0
+        for i in range(11):
+            self._network[0].append({'weights' : np.arange(weightCounter, weightCounter + 11, 1)})
+            weightCounter += 11
+            self._network[0][i]['bias'] = i
+            biasCounter += 1
+        for i in range(6):
+            self._network[1].append({'weights' : np.arange(weightCounter, weightCounter + 11, 1)})
+            weightCounter += 11
+            self._network[1][i]['bias'] = i
+            biasCounter += 1
+        for i in range(3):
+            self._network[2].append({'weights' : np.arange(weightCounter, weightCounter + 6, 1)})
+            weightCounter += 6
+            self._network[2][i]['bias'] = i
+            biasCounter += 1
+        self._network[3].append({'weights' : np.arange(weightCounter, weightCounter + 3, 1)})
+        self._network[3][0]['bias'] = biasCounter
 
     def getWeights(self):
         return self._weights
@@ -62,7 +85,6 @@ class MoodNeuralNetwork:
 
     def feedforward(self, x, training = False):
         # x is a numpy array with 11 elements.
-        layer1_sums = np.arange(11)
         layer1 = np.arange(11)
         weightCounter = 0
         biasCounter = 0
@@ -72,43 +94,40 @@ class MoodNeuralNetwork:
             for j in range(x.shape[0]):
                 h += x[j] * self._weights["weight" + str(weightCounter)]
                 weightCounter += 1
-            layer1_sums[i] = h + self._biases["bias" + str(biasCounter)]
-            layer1[i] = self.activation(layer1_sums[i])
+            sum = h + self._biases["bias" + str(biasCounter)]
+            layer1[i] = self.activation(sum)
             biasCounter += 1
 
         # layer 2
-        layer2_sums = np.arange(6)
         layer2 = np.arange(6)
         for i in range(layer2.shape[0]):
             h = 0
             for j in range(layer1.shape[0]):
                 h += layer1[j] * self._weights["weight" + str(weightCounter)]
                 weightCounter += 1
-            layer2_sums[i] = h + self._biases["bias" + str(biasCounter)]
-            layer2[i] = self.activation(layer2_sums[i])
+            sum = h + self._biases["bias" + str(biasCounter)]
+            layer2[i] = self.activation(sum)
             biasCounter += 1
 
         # layer 3
-        layer3_sums = np.arange(3)
         layer3 = np.arange(3)
         for i in range(layer3.shape[0]):
             h = 0
             for j in range(layer2.shape[0]):
                 h += layer2[j] * self._weights["weight" + str(weightCounter)]
                 weightCounter += 1
-            layer3_sums[i] = h + self._biases["bias" + str(biasCounter)]
-            layer3[i] = self.activation(layer3_sums[i])
+            sum = h + self._biases["bias" + str(biasCounter)]
+            layer3[i] = self.activation(sum)
             biasCounter += 1
 
         output = 0
-        output_sum = 0
-        for i in range(layer3_sums.shape[0]):
-            output += layer3_sums[i] * self._weights["weight" + str(weightCounter)]
+        for i in range(layer3.shape[0]):
+            output += layer3[i] * self._weights["weight" + str(weightCounter)]
             weightCounter += 1
-        output_sum = output + self._biases["bias" + str(biasCounter)]
-        output = self.activation(output_sum)
+        sum = output + self._biases["bias" + str(biasCounter)]
+        output = np.array([self.activation(sum)])
         if training:
-            return layer1_sums, layer1, layer2_sums, layer2, layer3_sums, layer3, output_sum, output
+            return layer1, layer2, layer3, output
         else:
             return output
 
@@ -118,13 +137,44 @@ class MoodNeuralNetwork:
 
     def deriv_activation(self, x):
         # Derivative of activation, normalized
-        fx = activation(x)
-        return fx * (1 - fx)
+        return x * (1 - x)
 
     def loss(self, y_true, y_pred):
         # y_true and y_pred are numpy arrays of the same length.
         # Mean squared error loss function
         return ((y_true - y_pred) ** 2).mean()
+
+    # Backpropagate error and store in neurons
+    def backward_propagate_error(self, y_true):
+        for i in reversed(range(len(self._network))):
+            layer = self._network[i]
+            errors = list()
+            if i != len(self._network)-1:
+            	for j in range(len(layer)):
+            		error = 0.0
+            		for neuron in self._network[i + 1]:
+            			error += (self._weights['weight' + str(neuron['weights'][j])] * neuron['delta'])
+            		errors.append(error)
+            else:
+            	for j in range(len(layer)):
+            		neuron = layer[j]
+            		errors.append(-2*(y_true - neuron['output']))
+            for j in range(len(layer)):
+                neuron = layer[j]
+                neuron['delta'] = errors[j] * self.deriv_activation(neuron['output'])
+
+    # Update network weights with error
+    def update_weights(self, data_input):
+        print('-------------------------------updating weights-----------------------------')
+        for i in range(len(self._network)):
+            inputs = data_input[:]
+            if i != 0:
+                inputs = [neuron['output'] for neuron in self._network[i - 1]]
+            for neuron in self._network[i]:
+                print(neuron)
+                for j in range(len(inputs)):
+                    self._weights['weight' + str(neuron['weights'][j])] += self.learn_rate * neuron['delta'] * inputs[j]
+                self._biases['bias' + str(neuron['bias'])] += self.learn_rate * neuron['delta']
 
     def train(self, data, all_y_trues):
         '''
@@ -132,56 +182,35 @@ class MoodNeuralNetwork:
         - all_y_trues is a numpy array with n elements.
           Elements in all_y_trues correspond to those in data.
         '''
-        learn_rate = 0.1
-        epochs = 1000
-
-        for epoch in range(epochs):
+        for epoch in range(self.epochs):
+            print('--------------------------ON epoch', epoch,'--------------------------')
+            counter = 1
             for x, y_true in zip(data, all_y_trues):
+                print('--------------------------data row', counter ,'--------------------------')
+                counter += 1
                 # --- Do a feedforward and save values
-                layer1_sums, layer1, layer2_sums, layer2, layer3_sums, layer3, output_sum, output = self.feedforward(x)
+                layer1, layer2, layer3, output = self.feedforward(x, True)
+                for i in range(layer1.shape[0]):
+                    self._network[0][i]['output'] = layer1[i]
+                for i in range(layer2.shape[0]):
+                    self._network[1][i]['output'] = layer2[i]
+                for i in range(layer3.shape[0]):
+                    self._network[2][i]['output'] = layer3[i]
+                self._network[3][0]['output'] = output[0]
+                # print(output)
+                print(self.loss(y_true, output[0]))
 
                 # --- Calculate partial derivatives.
-                # --- Naming: d_L_d_w1 represents "partial L / partial w1"
-                d_L_d_ypred = -2 * (y_true - y_pred)
-
-                # ouput layer
-                d_ypred_d_w205 = layer3[0] * deriv_sigmoid(output_sum)
-                d_ypred_d_w206 = layer3[1] * deriv_sigmoid(output_sum)
-                d_ypred_d_w207 = layer3[2] * deriv_sigmoid(output_sum)
-                d_ypred_d_b21 = deriv_sigmoid(output_sum)
-
-                d_ypred_d_l3_0 = self.w205 * deriv_sigmoid(output_sum)
-                d_ypred_d_l3_1 = self.w206 * deriv_sigmoid(output_sum)
-                d_ypred_d_l3_2 = self.w207 * deriv_sigmoid(output_sum)
-
-                # layer 3
-                d_ypred_d_w199 = layer2[0] * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_w200 = layer2[1] * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_w201 = layer2[2] * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_w202 = layer2[3] * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_w203 = layer2[4] * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_w204 = layer2[5] * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_b20 = deriv_sigmoid(layer3_sums[2])
-
-                d_ypred_d_l2_0 = self.w199 * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_l2_1 = self.w200 * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_l2_2 = self.w201 * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_l2_3 = self.w202 * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_l2_4 = self.w203 * deriv_sigmoid(layer3_sums[2])
-                d_ypred_d_l2_5 = self.w204 * deriv_sigmoid(layer3_sums[2])
-
-
-                # layer 2
-                # layer 1
+                self.backward_propagate_error(y_true)
 
                 # --- Update weights and biases
-                pass
+                self.update_weights(x)
 
-                # --- Calculate total loss at the end of each epoch
-                if epoch % 10 == 0:
-                    y_preds = np.apply_along_axis(self.feedforward, 1, data)
-                    loss = self.loss(all_y_trues, y_preds)
-                    print("Epoch %d loss: %.3f" % (epoch, loss))
+            # --- Calculate total loss at the end of each epoch
+            if epoch % 10 == 0:
+                y_preds = np.apply_along_axis(self.feedforward, 1, data)
+                loss = self.loss(all_y_trues, y_preds)
+                print("Epoch %d loss: %.3f" % (epoch, loss))
 
     def saveModel(self, filename):
         with open(filename + '_weights.json', 'w') as fp:
@@ -190,11 +219,37 @@ class MoodNeuralNetwork:
             json.dump(self._biases, fp)
 
 if __name__ == "__main__":
-    testModel = MoodNeuralNetwork()
-    print(testModel.getBiases())
-    print(testModel.getWeights())
+    # testModel = MoodNeuralNetwork()
     # testModel.setWeights("test_weights.json", True)
     # testModel.setBias("test_biases.json", True)
-    #testModel.saveModel("test")
-    sampleData = np.arange(11)
-    print(testModel.feedforward(sampleData))
+    # print(testModel.getBiases())
+    # print(testModel.getWeights())
+    # # #testModel.saveModel("test")
+    # sampleData = np.arange(11)
+    # print(testModel.feedforward(sampleData))
+    print('------------------------------------------------------------')
+    # Define dataset
+    data = np.array([
+      [-2, -1, -2, -1, -2, -1, -2, -1, -2, -1, 9],  # Alice
+      [25, 6, 25, 6, 25, 6, 25, 6, 25, 6, 9],   # Bob
+      [17, 4, 17, 4, 17, 4, 17, 4, 17, 4, 9],   # Charlie
+      [-15, -6, -15, -6, -15, -6, -15, -6, -15, -6, 9], # Diana
+    ])
+    all_y_trues = np.array([
+      1, # Alice
+      0, # Bob
+      0, # Charlie
+      1, # Diana
+    ])
+
+    # Train our neural network!
+    network = MoodNeuralNetwork()
+    network.train(data, all_y_trues)
+    pred = network.feedforward(data[0])
+    print(pred)
+    pred = network.feedforward(data[1])
+    print(pred)
+    pred = network.feedforward(data[2])
+    print(pred)
+    pred = network.feedforward(data[3])
+    print(pred)
