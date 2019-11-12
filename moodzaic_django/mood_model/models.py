@@ -1,11 +1,10 @@
-from django.core.validators import int_list_validator 
-import numpy as np
-
-from django.db import models
-from users.models import User, Observation
-
 import datetime
 
+from django.core.validators import int_list_validator
+from django.db import models
+import numpy as np
+
+from users.models import User, Observation
 from mood_model.sample_neural_network import MoodNeuralNetwork
 
 
@@ -49,7 +48,6 @@ class Weights(models.Model):
 
 
     def transformUserData(self):
-
         profile = self.user.profile
         observations = Observation.objects.filter(user__user__username=profile.user.username)
         observations = observations.order_by("date")
