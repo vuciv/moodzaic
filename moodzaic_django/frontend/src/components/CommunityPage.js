@@ -83,7 +83,8 @@ class CommunityPage extends React.Component {
           unless:
           user chooses to see all communities, then calls AllCommunities
           or a community is selected, then call community and open that community</p>
-          <Community/>
+          {myPage}
+          {myButton}
         </Container>
         <Footer />
       </div>

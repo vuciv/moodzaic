@@ -33,6 +33,7 @@ class App extends Component {
         LoggedIn: !prevState.LoggedIn
       }))
   }
+
   render() {
     return (
       <div>
@@ -57,8 +58,10 @@ class App extends Component {
             </Route>
             <Route path="/">
               {this.state.LoggedIn ?
-                <Community /> :
-                <LoginForm />}
+                <ProfilePage Username={this.state.Username} Name={this.state.Name}
+                  Age={this.state.Age} Gender={this.state.Gender}
+                  ProgressScore={this.state.ProgressScore}/> :
+                <LoginForm callback = {this.toggleLogIn} />}
             </Route>
           </Switch>
         </Router>
