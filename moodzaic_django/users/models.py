@@ -8,11 +8,7 @@ class User(models.Model):
     username = models.CharField(max_length=20, default='')
     password = models.CharField(max_length=20, default='')
     age = models.IntegerField(default=18)
-<<<<<<< Updated upstream
     gender = models.CharField(max_length=9, default='')
-=======
-    gender = models.CharField(max_length=9)
->>>>>>> Stashed changes
 
     def setUserUsername(self, username):
         #TODO
@@ -80,7 +76,6 @@ class Mood(models.Model):
             return False
 
 class Profile(models.Model):
-<<<<<<< Updated upstream
     ProgressScore = models.IntegerField(default=0)
     age = models.IntegerField(default=18)
     gender = models.CharField(max_length=9, default='')
@@ -90,10 +85,9 @@ class Profile(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
-=======
+
     progress_score = models.IntegerField(default=0)
-    user = User()
->>>>>>> Stashed changes
+
 
     def getProgressScore(self):
         return self.ProgressScore
@@ -124,7 +118,6 @@ class Profile(models.Model):
         return
 
 
-<<<<<<< Updated upstream
 class Observation(models.Model):
     date = models.DateField('date observed', auto_now_add=True, blank=True)
     sleep = models.FloatField(default=-1)
@@ -180,7 +173,3 @@ class Observation(models.Model):
         self.mood.setMood(mood_int)
         self.mood.setName(mood_str)
         return True
-=======
- class Mood(models.Model):
-     mood = models.IntegerField()
->>>>>>> Stashed changes

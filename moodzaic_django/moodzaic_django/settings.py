@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'frontend',
     'community.apps.CommunityConfig',
     'mood_model.apps.MoodModelConfig',
     'users.apps.UsersConfig',
