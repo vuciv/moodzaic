@@ -17,8 +17,13 @@ class AllCommunities extends React.Component {
   }
 
   handleAddClick(community) {
+    var username = this.state.Username;
+    var user_plus_community = {
+      User: username,
+      Community: community
+    }
     CommunityService.updateCommunity(community);
-    UserService.updateUser({some_user_object_with_added_community})
+    UserService.updateUser({user_plus_community})
     //do you need both? probably, right?
     //and how are we gonna change the whole user if we only have the username big fucking rip
   }
@@ -31,12 +36,12 @@ class AllCommunities extends React.Component {
 
   render() {
     const communities = this.props.allCommunities.map((com, i) => {
-      return <Button
+      return /*<Button
                 color='purple' fluid size='large'
                 key = {i}
                 onClick = {this.handleAddClick({some_community_object_with_added_user})}>
                 {com.name}: {this.props.myCommunities.includes(com) ? 'added!' : 'add?'}
-              </ Button>;
+              </ Button>;*/
     })
 
     const makeCommunityButton = () => {
