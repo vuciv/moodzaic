@@ -9,7 +9,7 @@ export default class UserService{
     //constructor(){}
 
     getUsers() {
-        const url = `${API_URL}/api/customers/`;
+        const url = `${API_URL}/api/users/`;
         return axios.get(url).then(response => response.data);
     }
     getUsersByURL(link){
@@ -17,15 +17,15 @@ export default class UserService{
         return axios.get(url).then(response => response.data);
     }
     getUser(pk) {
-        const url = `${API_URL}/api/customers/${pk}`;
+        const url = `${API_URL}/api/users/${pk}`;
         return axios.get(url).then(response => response.data);
     }
     deleteUser(user){
-        const url = `${API_URL}/api/customers/${user.pk}`;
+        const url = `${API_URL}/api/users/${user.pk}`; //should be username instead of pk, since that is the identifier?
         return axios.delete(url);
     }
     createUser(user){
-        const url = `${API_URL}/api/customers/`;
+        const url = `${API_URL}/api/users/`;
         return axios.post(url,user);
     }
     updateUser(user){

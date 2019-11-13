@@ -5,83 +5,57 @@ import {
   Form,
   Comment
 } from 'semantic-ui-react'
-import { getPosts, sendPost } from '../integration_funcs.js'
+import PostService from '../PostService.js';
+// import { getPosts, sendPost } from '../integration_funcs.js'
 
-
-
-// class FormExampleClearOnSubmit extends React.Component {
-//   state = {}
-//
-//   handleChange = (e, { name, value }) => this.setState({ [name]: value })
-//
-//   handleSubmit = () => this.setState({ email: '', name: '' })
-//
-//   render() {
-//     const { name, email } = this.state
-//
-//     return (
-//       <Form onSubmit={this.handleSubmit}>
-//         <Form.Group>
-//           <Form.Input
-//             placeholder='Name'
-//             name='name'
-//             value={name}
-//             onChange={this.handleChange}
-//           />
-//           <Form.Input
-//             placeholder='Email'
-//             name='email'
-//             value={email}
-//             onChange={this.handleChange}
-//           />
-//           <Form.Button content='Submit' />
-//         </Form.Group>
-//       </Form>
-//     )
-//   }
-// }
 
 class Community extends React.Component {
-  state = {}
+  state = {
+    message: '',
+    now: '',
+    posts: []
+  }
+
+  componentDidMount() {
+    PostService.getCommunityPosts().then(function (result) {
+        this.setState({ posts:  result.data, nextPageURL:  result.nextlink})
+        //yeah so like?? pretending this is a function??? hopefully it can be?????
+    });
+  }
 
   handleChange = (e, { message, value }) => this.setState({ [message]: value })
 
   handleSubmit = () => {
-    // sendPost({poster: u,
-    //           message: m,
-    //           time: t,
-    //           comment_list: []
-    //         });
+    PostService.createPost({
+      message: this.state.message,
+      community: this.props.myCommunity,
+      poster: this.props.username,
+      time: this.state.now, //or like probably userService.getUser by username somehow
+    });
     this.setState({ message: '' });
+  }
+
+  setTime = (time) => {
+    this.setState({ now: time });
   }
 
   render() {
     const { message } = this.state
     const community = this.props.myCommunity;
     const username = this.props.username;
-    const posts = getPosts(community);
+    const posts = this.state.posts;
 
     var today = new Date();
     var date = (today.getMonth()+1)+'-'+today.getDate()+'/'+today.getFullYear();
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var now = date+' '+time;
 
-    // function printComments(comments) {
-    //   return (
-    //     comments.map((c, i) => {
-    //       return(
-    //         <Comment key = {i}>
-    //           <Comment.Avatar src={logo} />
-    //           <Comment.Content>
-    //             <Comment.Author as='a'>{c.poster}</Comment.Author>
-    //             <Comment.Text>{c.message}</Comment.Text>
-    //           </Comment.Content>
-    //         </Comment>
-    //       )
-    //     })
-    //   )
-    // }
+    this.setTime(now);
 
+
+    // heyyyyyyy soooooo printing posts is not gonna work like this and idk how it will work
+    //big oof for the ladies in the back
+    //may help if we can get
     const printPosts = posts.map((post, i) => {
       return (
         <Comment key = {i} >
