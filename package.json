@@ -1,0 +1,38 @@
+{
+  "name": "moodzaic",
+  "version": "1.0.0",
+  "description": "# Summary Workflow The following is a basic workflow that you can use as a quick reference for developing a Django Project.",
+  "main": "index.js",
+  "dependencies": {
+    "webpack-cli": "^3.3.10"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.2",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/preset-react": "^7.7.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "cypress": "^3.6.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.11.0",
+    "react-dom": "^16.11.0",
+    "weak-key": "^1.0.1",
+    "webpack": "^4.41.2"
+  },
+  "scripts": {
+    "dev": "webpack --mode development ./moodzaic_django/frontend/src/index.js --output ./moodzaic_django/frontend/static/frontend/main.js",
+    "build": "webpack --mode production ./moodzaic_django/frontend/src/index.js --output ./moodzaic_django/frontend/static/frontend/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reyesj5/moodzaic.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reyesj5/moodzaic/issues"
+  },
+  "homepage": "https://github.com/reyesj5/moodzaic#readme"
+}

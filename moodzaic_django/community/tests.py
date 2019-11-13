@@ -49,11 +49,15 @@ class CommunityTestCase(TestCase):
         fitnessCommunity.setName("123")
         self.assertEqual("123", fitnessCommunity.getName())
 
-        fitnessCommunity.setName("abc123%")
-        self.assertEqual("123", fitnessCommunity.getName())
-
         fitnessCommunity.setName("NULL")
         self.assertEqual("NULL", fitnessCommunity.getName())
+
+        fitnessCommunity.setName("#$")
+        self.assertEqual("#$", fitnessCommunity.getName())
+
+        fitnessCommunity.setName("ideal_community")
+        self.assertEqual("ideal_community", fitnessCommunity.getName()
+        )
 
     def test_getUsers(self):
         fitnessCommunity = Community.objects.get(name = "fitness")

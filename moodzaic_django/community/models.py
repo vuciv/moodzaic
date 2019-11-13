@@ -7,7 +7,7 @@ class Community(models.Model):
     users = models.ManyToManyField(User)
 
     def setName(self, name):
-        if (name != '') and name.isalnum() and (len(name) <= 30):
+        if (name != '') and (len(name) <= 30) and not(" " in name):
             self.name = name
             self.save()
         return
