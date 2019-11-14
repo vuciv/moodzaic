@@ -1,14 +1,17 @@
 from community.models import Community
+from users.models import User
 from community.serializers import CommunitySerializer
 
 from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
+
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 import logging
 
 logger = logging.getLogger(__name__)
+
 
 # class CommunityListCreate(generics.ListCreateAPIView):
 #     queryset = Community.objects.all()
@@ -17,13 +20,19 @@ logger = logging.getLogger(__name__)
 @api_view(['POST'])
 def makeCommunity(request):
     if request.method == 'POST':
-        logger.error(request.data)
         serializer = CommunitySerializer(data=request.data)
+        # logger.error(serializer.is_valid())
+        # logger.error(serializer.data)
+        # logger.error(serializer.errors)
         if serializer.is_valid():
+            logger.error("is valid")
             serializer.save()
             return Response(serializer.data)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.data)
+
+class CommunityListCreate(generics.ListCreateAPIView):
+    queryset = Community.objects.all()
+    serializer_class = CommunitySerializer
 
 @api_view(['GET', 'POST', 'DELETE'])
 def communityDetails(request, name):
