@@ -5,8 +5,8 @@ import {
   Form,
   Comment
 } from 'semantic-ui-react'
-import PostService from '../PostService.js';
-// import { getPosts, sendPost } from '../integration_funcs.js'
+// import PostService from '../PostService.js';
+import { getPosts, createPost } from '../integration_funcs.js'
 
 
 class Community extends React.Component {
@@ -19,7 +19,7 @@ class Community extends React.Component {
   }
 
   componentDidMount() {
-    PostService.getPosts().then(function (result) {
+    getPosts().then(function (result) {
         this.setState({ allPosts:  result.data, nextPageURL:  result.nextlink})
     });
     this.setState(prevState => ({
@@ -39,7 +39,7 @@ class Community extends React.Component {
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
   handleSubmit = () => {
-    PostService.createPost({
+    createPost({
       postid: this.state.posts.length + 1,
       poster: this.props.user,
       community: this.props.myCommunity,
@@ -49,7 +49,7 @@ class Community extends React.Component {
   }
 
   handleReply = (op) => {
-    PostService.createPost({
+    createPost({
       postid: this.state.posts.length + 1,
       poster: this.props.user,
       community: this.props.myCommunity,
