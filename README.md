@@ -124,7 +124,7 @@ Notably, logging in and signing up operate through the User API to get users and
 
 Signing out takes you back to the log-in screen. Additionally, make sure to click the red panda icon!
 
-##Notes
+## Notes
 To signup, after hitting the sign-up button on the log-in landing, you must reload to see the changes take effect. This is the only routing case where this happens, and we're not sure why.
 
 Despite the components all rendering, many of the front-end (React App) render tests are failing. This is due to an annoying bug from routing, which is making our components unable to directly render to the DOM without a routing table. Know that the functionality is there, but we didn't manage to change the tests to accomodate it.
