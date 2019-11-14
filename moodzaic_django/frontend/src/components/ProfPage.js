@@ -12,17 +12,18 @@ import MyMenu from './Menu.js';
 import Footer from './Footer.js';
 import Reminders from './Reminders.js';
 
-const ProfilePage = ({User}) => (
+const ProfilePage = ({Name, Username, Age, Gender, ProgressScore, Notifications}) => (
   <div>
     <MyMenu />
     <Grid columns={2}>
       <Grid.Column width = {10}>
         <Container text style={{ marginTop: '7em', marginLeft: '10em' }}>
-          <Header as='h1'>{User.username}'s Profile</Header>
-            <p>My name? <strong>{User.first_name}</strong></p>
-            <p>My age? <strong>100</strong></p>
-            <p>My Gender? <strong>LMAO WHAT gender is FAKE AS FUCK</strong></p>
-            <p>My progress score towards my big goal: <strong>1000%</strong></p>
+          <Header as='h1'>{Username}'s Profile</Header>
+            <p>{Notifications}</p>
+            <p>My name? <strong>{Name}</strong></p>
+            <p>My age? <strong>{Age}</strong></p>
+            <p>My Gender? <strong>{Gender}</strong></p>
+            <p>My progress score towards my big goal: <strong>{ProgressScore}</strong></p>
             <p>
             Once we've built up some data in the backend, I can display your mood history here!
             </p>
