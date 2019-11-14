@@ -8,9 +8,7 @@ import Footer from './Footer.js';
 import Community from './Community.js'
 import CommunitiesPage from './MyCommunities.js'
 import AllCommunities from './AllCommunities.js'
-// import { getMyCommunityList, getAllCommunities } from '../integration_funcs.js'
-import CommunityService from '../CommunityService.js';
-
+import { getMyCommunityList, getAllCommunities } from '../integration_funcs.js'
 
 
 
@@ -23,28 +21,10 @@ class CommunityPage extends React.Component {
         // should these be props?
   }
 
-  // componentDidMount() {
-  //   fetch('')
-  //     .then(response => response.json())
-  //     .then(data => this.setState({ MyCommunityList : data }));
-  // }
-
   componentDidMount() {
-    // var  self  =  this;
-    CommunityService.getAllCommunities().then(function (result) {
-        this.setState({ CommunityList:  result.data, nextPageURL:  result.nextlink})
-    });
-    this.setState(prevState => ({
-      MyCommunityList: (this.state.CommunityList).filter((community) => {
-        return(
-          community.users.includes(this.props.user)
-        )
-      })
-    }))
-  }
-
-  componentDidUpdate() {
-    console.log(this.state);
+    fetch('')
+      .then(response => response.json())
+      .then(data => this.setState({ MyCommunityList : data }));
   }
 
 
@@ -73,13 +53,13 @@ class CommunityPage extends React.Component {
     if (community !== '') {
       myPage = <Community myCommunity = {community} username = {username} />;
       myButton =
-      <Button color='teal' fluid size='large' onClick = {this.OpenCommunity('')}>
+      <Button color='teal' fluid size='large' onClick = {this.toggleCommunity('')}>
         See My Communities
       </Button>;
     }
 
     else if (addMode === false) {
-      myPage = <CommunitiesPage communityCallback = {this.OpenCommunity()} myCommunities = {myCommunityList}/>;
+      myPage = <CommunitiesPage communityCallback = {this.OpenCommunity} myCommunities = {myCommunityList}/>;
       myButton =
       <Button color='teal' fluid size='large' onClick = {this.toggleAddMode}>
         See All Communities
@@ -87,13 +67,13 @@ class CommunityPage extends React.Component {
     }
 
     else {
-      myPage = <AllCommunities allCommunities = {communityList} myCommunities = {myCommunityList}/>;
+      myPage = <AllCommunities allCommunities = {communityList}/>;
       myButton =
       <Button color='teal' fluid size='large' onClick = {this.toggleAddMode}>
         See My Communities
       </Button>;
     }
-
+    console.log(this.state);
 
     return (
       <div>
