@@ -15,10 +15,11 @@ class MoodNeuralNetwork:
     _weights = {}
     _biases = {}
     _network = []
+    _emotions = ['Fear', 'Sad', 'Hesitant', 'Calm', 'Happy']
     epochs = 1000
     learn_rate = 0.1 # number of times to loop through the entire dataset
 
-    def __init__(self, nclasses = 2, weights = None, biases = None):
+    def __init__(self, nclasses = 5, weights = None, biases = None):
         self.nclasses = nclasses
         # Weights
         if weights:
@@ -65,6 +66,14 @@ class MoodNeuralNetwork:
 
     def getBiases(self):
         return self._biases
+
+    def getEmotions(self):
+        return self._emotions
+
+    def setEmotions(self, newEmotions):
+        if not newEmotions:
+            self._emotions = newEmotions
+            self.nclasses = len(self._emotions)
 
     def setWeights(self, newWeights, filename = False):
         if filename:
@@ -226,6 +235,7 @@ class MoodNeuralNetwork:
             json.dump(self._weights, fp)
         with open(filename + '_biases.json', 'w') as fp:
             json.dump(self._biases, fp)
+            
     def normalize(self, data):
         averages = [8,1,4,3,3,0,0,0,0,5,20]
         for i in range(data.shape[0]):
@@ -236,7 +246,8 @@ class MoodNeuralNetwork:
 
 if __name__ == "__main__":
     # Reading in emotions
-    emotions = ['Fear', 'Sad', 'Hesitant', 'Calm', 'Happy']
+    baseModel = MoodNeuralNetwork(5)
+    emotions = baseModel.getEmotions()
     emotion_map = {}
     for i in range(len(emotions)):
         emotion_map[emotions[i]] = i
@@ -265,7 +276,6 @@ if __name__ == "__main__":
     data = np.array(data)
 
     # generating model
-    baseModel = MoodNeuralNetwork(5)
     # print(true_mood)
     # print(data)
     baseModel.setWeights("base_weights.json", True)

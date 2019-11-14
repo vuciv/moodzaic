@@ -1,6 +1,6 @@
 from django.test import TestCase
 from mood_model.models import Weights
-from users.models import User
+from users.models import User, Profile
 from mood_model.sample_neural_network import MoodNeuralNetwork
 
 # Create your tests here.
@@ -8,8 +8,10 @@ from mood_model.sample_neural_network import MoodNeuralNetwork
 # Testing the weights stored in the django database, and its functions
 class WeightsTestCase(TestCase):
     def setUp(self):
-        User.objects.create(username = "user1", password = "password1")
-        User.objects.create(username = "user2", password = "password2")
+        user1 = User.objects.create(username="user1", password="password1")
+        user2 = User.objects.create(username="user2", password="password2")
+
+        Profile.objects.create(user=user1)
 
         Weights.objects.create(
             user=User.objects.get(username="user1"),
@@ -39,17 +41,17 @@ class WeightsTestCase(TestCase):
     def test_setWeightsWeightsSuccess(self):
         testWeights = Weights.objects.first()
         old_weights = testWeights.weights_int_list
-        new_weights = ','.join(["1"] * 208)
-        testWeights.setWeightsWeights(new_weights)
-        self.assertEqual(testWeights.weights_int_list, new_weights)
+        new_weights = [0] * 208
+        self.assertTrue(testWeights.setWeightsWeights(new_weights))
+        self.assertEqual(testWeights.weights_int_list, ",".join("0" * 208))
         self.assertNotEqual(testWeights.weights_int_list, old_weights)
 
     def test_setWeightsWeightsFailureWrongWeightCount(self):
         testWeights = Weights.objects.first()
         old_weights = testWeights.weights_int_list
-        new_weights = ','.join(["1"] * 207)
-        testWeights.setWeightsWeights(new_weights)
-        self.assertNotEqual(testWeights.weights_int_list, new_weights)
+        new_weights = [1] * 207
+        self.assertFalse(testWeights.setWeightsWeights(new_weights))
+        self.assertNotEqual(testWeights.weights_int_list,",".join("1" * 207))
         self.assertEqual(testWeights.weights_int_list, old_weights)
 
     def test_setWeightsWeightsFailureWrongFormat(self):
@@ -64,16 +66,16 @@ class WeightsTestCase(TestCase):
     def test_setWeightsBiasSuccess(self):
         testWeights = Weights.objects.first()
         old_bias = testWeights.bias_int_list
-        new_bias = ','.join(["0"] * 21)
-        testWeights.setWeightsBias(new_bias)
-        self.assertEqual(testWeights.bias_int_list, new_bias)
+        new_bias = [0] * 21
+        self.assertTrue(testWeights.setWeightsBias(new_bias))
+        self.assertEqual(testWeights.bias_int_list, ",".join("0" * 21))
         self.assertNotEqual(testWeights.bias_int_list, old_bias)
 
     def test_setWeightBiasFailureWrongBiasCount(self):
         testWeights = Weights.objects.first()
         old_bias = testWeights.bias_int_list
-        new_bias = ','.join(["0"] * 20)
-        testWeights.setWeightsBias(new_bias)
+        new_bias = [0] * 20
+        self.assertFalse(testWeights.setWeightsBias(new_bias))
         self.assertNotEqual(testWeights.bias_int_list, new_bias)
         self.assertEqual(testWeights.bias_int_list, old_bias)
 
@@ -81,7 +83,7 @@ class WeightsTestCase(TestCase):
         testWeights = Weights.objects.first()
         old_bias = testWeights.bias_int_list
         new_bias = '!'.join(["0"] * 21)
-        testWeights.setWeightsBias(new_bias)
+        self.assertFalse(testWeights.setWeightsBias(new_bias))
         self.assertNotEqual(testWeights.bias_int_list, new_bias)
         self.assertEqual(testWeights.bias_int_list, old_bias)
 
