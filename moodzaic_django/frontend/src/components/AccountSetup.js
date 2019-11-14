@@ -8,8 +8,9 @@ import {
   Button,
   Rating
 } from 'semantic-ui-react'
-import {createUser} from '../integration_funcs.js';
-import ProfileService from '../ProfileService.js';
+import {createUser, createProfile} from '../integration_funcs.js';
+// import ProfileService from '../ProfileService.js';
+
 
 
 
@@ -119,7 +120,7 @@ class SetupPage extends React.Component {
       last_name: this.state.last,
       email: this.state.email
     })
-    ProfileService.createProfile({
+    createProfile({
       username: this.props.user.username,
       age: this.state.age,
       gender: this.state.gender.value,
