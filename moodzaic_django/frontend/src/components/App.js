@@ -6,18 +6,19 @@ import MoodPage from './MoodInput.js'
 import CommunityPage from './CommunityPage.js'
 import SignUpForm from './SignUp.js'
 import SetupPage from './AccountSetup.js'
+// import MyMenu from './Menu.js'
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 
 class App extends Component {
 
   state = {
         LoggedIn: false,
-        Name: 'TestName',
         user: {
           username: '',
           password: '',
@@ -33,6 +34,7 @@ class App extends Component {
         ProgressScore: 0
   }
 
+
   toggleLogIn = (u) => {
       this.setState(prevState => ({
         LoggedIn: !prevState.LoggedIn,
@@ -41,6 +43,7 @@ class App extends Component {
   }
 
   render() {
+    console.log('what???')
     return (
       <div>
         <Router>
@@ -55,19 +58,15 @@ class App extends Component {
               <SetupPage />
             </Route>
             <Route path="/Profile">
-              <ProfilePage Username={this.state.user.username} Name={this.state.Name}
-                Age={this.state.Age} Gender={this.state.Gender}
-                ProgressScore={this.state.ProgressScore}/>
+              <ProfilePage User={this.state.user}/>
             </Route>
             <Route path="/Communities">
               <CommunityPage user={this.state.user}/>
             </Route>
             <Route path="/">
               {this.state.LoggedIn ?
-                <ProfilePage Username={this.state.user.username} Name={this.state.Name}
-                  Age={this.state.Age} Gender={this.state.Gender}
-                  ProgressScore={this.state.ProgressScore}/> :
-                <LoginForm callback = {this.toggleLogIn()} />}
+                <Redirect to="/Profile" /> :
+                <LoginForm callback = {this.toggleLogIn} />}
             </Route>
           </Switch>
         </Router>
