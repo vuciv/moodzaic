@@ -123,14 +123,8 @@ class SetupPage extends React.Component {
   handleEmailChange = (e) => this.setState({ email: e.target.value });
   
 
-<<<<<<< HEAD
-  handleSubmit = (event) => {
-    console.log(this.props);
-    console.log(this.state);
-=======
 
   handleSubmit = () => {
->>>>>>> master
     createUser({
       username: this.props.user.username,
       password: this.props.user.password,
@@ -158,16 +152,8 @@ class SetupPage extends React.Component {
             <Container text style={{ marginTop: '-1' }}>
               <Header as='h1' color='teal'>Welcome to Moodzaic!</Header>
               <p>Fill out this form so we can create your account.</p>
-<<<<<<< HEAD
-              <Form >
-=======
-              <Form>
-
->>>>>>> master
-              {/*creating form for basic profile info*/}
 
                 <div className="two fields">
-                  <Form.Field name='first' onChange={this.handleFirstChange}>
                     <label>First Name</label>
                     <input />
                   </Form.Field>
