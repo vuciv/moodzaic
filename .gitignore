@@ -95,4 +95,12 @@ coverage.xml
 **/migrations/
 **/migrations/*.pyc
 
+<<<<<<< HEAD
 **/webpack-stats.dev.json
+=======
+**/*webpack-stats.dev.json
+**/webpack-stats.dev.json
+._.dev.json
+_.dev.json
+.dev.json
+>>>>>>> master

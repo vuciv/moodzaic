@@ -1,6 +1,7 @@
 from django.test import TestCase
 from users.models import User, Profile, Goal, Mood, Observation
 from datetime import datetime, date
+from community.models import Community, Post
 #from status.models import Status
 
 
@@ -85,6 +86,9 @@ class GoalTestCase(TestCase):
     def test_setGoalFrequencyNotIntFailure(self):
         testGoal = Goal.objects.get(goal = "Drink water")
         self.assertFalse(testGoal.setGoalFrequency("emil"))
+    def test_setGoalFrequencyNegativeFailure(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testGoal.setGoalFrequency(-5))
 
     def test_setGoalTimeSuccess(self):
         testGoal = Goal.objects.get(goal = "Drink water")
@@ -110,9 +114,13 @@ class GoalTestCase(TestCase):
 # Every user has a profile being tested here
 class ProfileTestCase(TestCase):
     def setUp(self):
-        User.objects.create(username = "emil", password = "snibby")
+        u1 = User.objects.create(username = "emil", password = "snibby")
+        u2 = User.objects.create(username = "harry", password = "lobber")
         Profile.objects.create(ProgressScore = 10, user = User.objects.get(username = "emil"))
+        Profile.objects.create(ProgressScore = 11, user = User.objects.get(username = "harry"))
         Goal.objects.create(goal = "Drink water", frequency = "5", time = datetime.now())
+        c1 = Community.objects.create(name="FitBois")
+        c1.addUserToCommunity(u1)
     def test_setProgressScore(self):
         testProfile = Profile.objects.get(ProgressScore = 10)
         self.assertEqual(10, testProfile.getProgressScore())
@@ -122,27 +130,52 @@ class ProfileTestCase(TestCase):
         testProfile = Profile.objects.get(ProgressScore = 10)
         testProfile.setProgressScore(-5)
         self.assertEqual(-5, testProfile.getProgressScore())
-    def test_makeGoalPost(self):
-        testProfile = Profile.objects.get(ProgressScore= 10)
-        testGoal = Goal.objects.get(goal = "Drink water")
-        self.assertTrue(testProfile.makeGoalPost(testGoal, "Hi"))
-    def test_makeGoalPost_NullPost(self):
-        testProfile = Profile.objects.get(ProgressScore= 10)
-        testGoal = Goal.objects.get(goal = "Drink water")
-        self.assertFalse(testProfile.makeGoalPost(testGoal, ""))
-    def test_makeGoalPost_invalidGoal(self):
-        testProfile = Profile.objects.get(ProgressScore= 10)
-        self.assertFalse(testProfile.makeGoalPost("hello", "Hi"))
+
     def test_makePost(self):
         testProfile = Profile.objects.get(ProgressScore= 10)
-        self.assertTrue(testProfile.makePost("Hi, this is a post"))
+        self.assertTrue(testProfile.makePost("Hi, this is a post", "FitBois"))
     def test_makePost_NullPost(self):
         testProfile = Profile.objects.get(ProgressScore= 10)
-        self.assertFalse(testProfile.makePost(""))
+        self.assertFalse(testProfile.makePost("", "FitBois"))
+    def test_makePost_UserNotInSet(self):
+        testProfile = Profile.objects.get(ProgressScore= 11)
+        self.assertFalse(testProfile.makePost("Yup", "FitBois"))
     def test_getUser(self):
         testProfile = Profile.objects.get(ProgressScore= 10)
         testUser =User.objects.get(username = "emil")
         self.assertEqual(testUser.username, "emil")
+    def test_setProfileAgeSuccess(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        testProfile.setAge(21)
+        self.assertEqual(21, testProfile.age)
+    def test_setUserAgeTooYoungFailure(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        self.assertFalse(testProfile.setAge(17))
+    def test_setUserAgeTooOldFailure(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        self.assertFalse(testProfile.setAge(121))
+    def test_setUserAgeNotIntFailure(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        self.assertFalse(testProfile.setAge("emil"))
+
+    def test_setUserGenderManSuccess(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        testProfile.setGender('man')
+        self.assertEqual('man', testProfile.gender)
+    def test_setUserGenderWomanSuccess(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        testProfile.setGender('woman')
+        self.assertEqual('woman', testProfile.gender)
+    def test_setUserGenderNonbinarySuccess(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        testProfile.setGender('nonbinary')
+        self.assertEqual('nonbinary', testProfile.gender)
+    def test_setUserGenderFailureLong(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        self.assertFalse(testProfile.setGender('gibberishh'))
+    def test_setUserGenderFailureType(self):
+        testProfile = Profile.objects.get(ProgressScore= 10)
+        self.assertFalse(testProfile.setGender(4))
 
 # Observations are asked daily and stored in the database
 class ObservationTestCase(TestCase):
@@ -201,13 +234,19 @@ class ObservationTestCase(TestCase):
         testObservation = Observation.objects.get(sleep = 7)
         testObservation.setMood("happy", 3)
         self.assertEqual(testObservation.mood.name, "happy")
+    def test_setMood_wrongType(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        testObservation.setMood(3.2, 3)
+        self.assertEqual(testObservation.mood.name, "sad")
+    def test_setMood_wrongType(self):
+        testObservation = Observation.objects.get(sleep = 7)
+        self.assertFalse(testObservation.setMood("happy", "happy"))
 
 # Testing that the user moods can set and changed
 class MoodTestCase(TestCase):
     def setUp(self):
         Mood.objects.create(name = "sad", mood = 2)
-    def test_setName(self,):
-        if not (isinstance(mood, ))
+    def test_setName(self):
         testMood = Mood.objects.get(mood = 2)
         testMood.setName("happy")
         self.assertEqual(testMood.name, "happy")

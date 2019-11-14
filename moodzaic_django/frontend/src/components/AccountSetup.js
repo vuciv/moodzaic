@@ -1,9 +1,11 @@
 import React from 'react'
+
 import {
   Container,
   Header,
   Form,
   Dropdown,
+
   Grid,
   Button,
   Rating
@@ -18,6 +20,7 @@ import {
   // BrowserRouter as Router,
   // Switch,
   // Route,
+
   Link
 } from "react-router-dom";
 
@@ -85,12 +88,15 @@ const GenderOptions = [
 
 
 class SetupPage extends React.Component {
+
   //Component which displays the setup page,
   //to be displayed after inputting username and password in signup
+
   state = {
     step: 1,
     QuestionList: getInitialQuestions(),
     AnswerList: [],
+
     totalSteps: 1 + getInitialQuestions().length/5, //5 questions per page
     first: '',
     last: '',
@@ -117,9 +123,14 @@ class SetupPage extends React.Component {
   handleEmailChange = (e) => this.setState({ email: e.target.value });
   
 
+<<<<<<< HEAD
   handleSubmit = (event) => {
     console.log(this.props);
     console.log(this.state);
+=======
+
+  handleSubmit = () => {
+>>>>>>> master
     createUser({
       username: this.props.user.username,
       password: this.props.user.password,
@@ -138,6 +149,7 @@ class SetupPage extends React.Component {
 
   render() {
     // const {step} = this.state;
+
     const {QuestionList} = this.state;
     return(
       <div>
@@ -146,8 +158,14 @@ class SetupPage extends React.Component {
             <Container text style={{ marginTop: '-1' }}>
               <Header as='h1' color='teal'>Welcome to Moodzaic!</Header>
               <p>Fill out this form so we can create your account.</p>
+<<<<<<< HEAD
               <Form >
+=======
+              <Form>
+
+>>>>>>> master
               {/*creating form for basic profile info*/}
+
                 <div className="two fields">
                   <Form.Field name='first' onChange={this.handleFirstChange}>
                     <label>First Name</label>
@@ -173,7 +191,9 @@ class SetupPage extends React.Component {
                 </Form.Field>
                 </div>
               </Form>
+
               {/*creating 'rating' inputs for each of the initial questions*/}
+
               {QuestionList.map((Question, index) => {
                 return (<Form key={index}>
                   <Form.Field>

@@ -3,6 +3,7 @@ import {
   Container,
   Button,
 } from 'semantic-ui-react'
+
 // import { addCommunity, isMyCommunity } from '../integration_funcs.js'
 // import CommunityService from '../CommunityService.js';
 // import UserService from '../UserService.js';
