@@ -3,7 +3,7 @@
 # Summary Workflow
 The following is a basic workflow that you can use as a quick reference for developing a Django Project.
 
-## Setup
+## Django Setup
 Within repo directory, create and activate a virtualenv.
 
 `python3 -m venv path/env`
