@@ -5,13 +5,23 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 
 # class CommunityListCreate(generics.ListCreateAPIView):
 #     queryset = Community.objects.all()
 #     serializer_class = CommunitySerializer
 
+@csrf_exempt
 @api_view(['GET', 'PUT', 'DELETE'])
+@ensure_csrf_cookie
+def comDet(request):
+    if request.method == 'PUT':
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@csrf_exempt
+@api_view(['GET', 'POST', 'DELETE'])
+@ensure_csrf_cookie
 def communityDetails(request, name):
     """
     Retrieve, update or get a community by name.
@@ -27,12 +37,13 @@ def communityDetails(request, name):
             serializer = CommunitySerializer(community,context={'request': request})
             return Response(serializer.data)
 
-            # elif request.method == 'PUT':
-            #     serializer = CustomerSerializer(customer, data=request.data,context={'request': request})
-            #     if serializer.is_valid():
-            #         serializer.save()
-            #         return Response(serializer.data)
-            #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif request.method == 'POST':
+        #    serializer = CommunitySerializer(community, data=request.data,context={'request': request})
+        #    if serializer.is_valid():
+                #console.log('here')
+                #serializer.save()
+            #    return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
         elif request.method == 'DELETE':
             community.delete()

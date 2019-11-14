@@ -1,8 +1,14 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000/api/';
+const API_URL = 'localhost:8000/api/';
 
 export function addCommunity(c) {
+  // return axios.post(`${API_URL}community/`, c)
+  //   .then(response => {
+  //     console.log(response);
+  //     console.log(response.data);
+  //   })
+  //   .catch(error => console.log(error))
     //add the community c to the list of all communities in the overall data
     //unless it's already added lol
   }
@@ -25,8 +31,8 @@ export function addCommunity(c) {
     return axios.get(`${API_URL}users/`).then(response => response.data).catch(error => console.log(error));
   }
 
-  export function createUser(u){
-    return axios.post(`${API_URL}users/`, u)
+  export function createUser(){
+    return axios.post(`${API_URL}community/`)
       .then(response => {
         console.log(response);
         console.log(response.data);
