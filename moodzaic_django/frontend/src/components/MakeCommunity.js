@@ -5,7 +5,9 @@ import {
   Form,
   Grid,
 } from 'semantic-ui-react'
-import CommunityService from '../CommunityService.js';
+// import CommunityService from '../CommunityService.js';
+import {createCommunity} from '../integration_funcs'
+
 
 
 
@@ -18,7 +20,7 @@ class MakeCommunity extends React.Component {
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
   handleSubmit = () => {
-      CommunityService.createCommunity({name: this.state.name, users: []}); //but actually some community object with that name
+      createCommunity({name: this.state.name, users: []}); //but actually some community object with that name
       //at least, I think. I don't fucking know. it's almost 2 am im dead and also still dying somehow
       this.props.callback();
   }

@@ -1,6 +1,7 @@
 import numpy as np
 import random
 import json
+import csv
 
 class MoodNeuralNetwork:
     '''
@@ -86,6 +87,9 @@ class MoodNeuralNetwork:
             self._biases = newBiases
 
     def feedforward(self, x, training = False):
+        # normalize x
+        if not training:
+            x = self.normalize(np.array([x]))[0]
         # x is a numpy array with 11 elements.
         layer1 = np.arange(11.0)
         weightCounter = 0
@@ -185,6 +189,7 @@ class MoodNeuralNetwork:
         - all_y_trues is a numpy array with n elements.
           Elements in all_y_trues correspond to those in data.
         '''
+        data = self.normalize(data)
         for epoch in range(self.epochs):
             counter = 1
             for x, y_true in zip(data, all_y_trues):
@@ -209,43 +214,99 @@ class MoodNeuralNetwork:
             if epoch % 10 == 0:
                 y_preds = np.apply_along_axis(self.feedforward, 1, data)
                 loss = self.loss(all_y_trues, y_preds)
-                print("Epoch %d loss: %.3f" % (epoch, loss))
+                count = 0
+                for i in range(all_y_trues.shape[0]):
+                    if int(all_y_trues[i]) == int(self.roundClass(y_preds[i])):
+                        counter += 1
+                accuracy = count/y_preds.shape[0]
+                print("Epoch %d loss: %.3f accuracy: %.2f%%" % (epoch, loss, accuracy*100))
 
     def saveModel(self, filename):
         with open(filename + '_weights.json', 'w') as fp:
             json.dump(self._weights, fp)
         with open(filename + '_biases.json', 'w') as fp:
             json.dump(self._biases, fp)
+    def normalize(self, data):
+        averages = [8,1,4,3,3,0,0,0,0,5,20]
+        for i in range(data.shape[0]):
+            for j in range(data.shape[1]):
+                data[i][j] -= averages[j]*2
+        return data
+
 
 if __name__ == "__main__":
-    # testModel = MoodNeuralNetwork()
-    # testModel.setWeights("test_weights.json", True)
-    # testModel.setBias("test_biases.json", True)
-    # print(testModel.getBiases())
-    # print(testModel.getWeights())
-    # # #testModel.saveModel("test")
-    # sampleData = np.arange(11)
-    # print(testModel.feedforward(sampleData))
-    print('------------------------------------------------------------')
-    # Define dataset sample
-    data = np.array([
-      [-2, -1, -2, -1, -2, -1, -2, -1, -2, -1, 9],  # Alice
-      [25, 6, 25, 6, 25, 6, 25, 6, 25, 6, 9],   # Bob
-      [17, 4, 17, 4, 17, 4, 17, 4, 17, 4, 9],   # Charlie
-      [-15, -6, -15, -6, -15, -6, -15, -6, -15, -6, 9], # Diana
-    ])
-    all_y_trues = np.array([
-      1, # Alice
-      0, # Bob
-      0, # Charlie
-      1, # Diana
-    ])
+    # Reading in emotions
+    emotions = ['Fear', 'Sad', 'Hesitant', 'Calm', 'Happy']
+    emotion_map = {}
+    for i in range(len(emotions)):
+        emotion_map[emotions[i]] = i
+    # with open('emotions.json', 'w') as fp:
+    #     json.dump(emotions), fp)
 
-    # Train our neural network!
-    network = MoodNeuralNetwork()
-    for i in range(4):
-        print(network.feedforward(data[i]))
-    network.train(data, all_y_trues)
-    print('----------------------end-------------------------------')
-    for i in range(4):
-        print(network.feedforward(data[i]))
+    # Reading in sample data
+    with open('mood_tracking_responses.csv', 'r') as f:
+        reader = csv.reader(f)
+        data = list(reader)
+    true_mood = []
+    for i in range(1, len(data)):
+        true_mood.append(emotion_map[data[i][-1]])
+        data[i] = data[i][2:-1]
+    data = data[1:]
+
+    for i in range(len(data)):
+        for j in range(len(data[0])):
+            if j == 1 or j == 0 or j == 9:
+                values = data[i][j].split(":")
+                data[i][j] = int(values[0]) + (int(values[1])/60.0)
+            else:
+                data[i][j] = float(data[i][j])
+
+    true_mood = np.array(true_mood)
+    data = np.array(data)
+
+    # generating model
+    baseModel = MoodNeuralNetwork(5)
+    # print(true_mood)
+    # print(data)
+    baseModel.setWeights("base_weights.json", True)
+    baseModel.setBias("base_biases.json", True)
+    # for i in range(data.shape[0]):
+    #     result = baseModel.feedforward(data[i])
+    #     print(result)
+    #     print("Actual mood:",true_mood[i], "Predicted mood:", baseModel.roundClass(result))
+    #     print("Actual mood:",emotions[true_mood[i]], "Predicted mood:", emotions[int(baseModel.roundClass(result)[0])])
+    print('-------------beggining training-------------------------')
+    baseModel.train(data, true_mood)
+    print('--------------------end---------------------------------')
+    # for i in range(data.shape[0]):
+    #     result = baseModel.feedforward(data[i])
+    #     print(result)
+    #     print("Actual mood:",true_mood[i], "Predicted mood:", baseModel.roundClass(result))
+    #     print("Actual mood:",emotions[true_mood[i]], "Predicted mood:", emotions[int(baseModel.roundClass(result)[0])])
+    baseModel.saveModel("base")
+    # print(true_mood)
+    # print(data)
+
+
+    # # Define dataset sample for debugging
+    # data = np.array([
+    #   [-2, -1, -2, -1, -2, -1, -2, -1, -2, -1, 9],  # Alice
+    #   [25, 6, 25, 6, 25, 6, 25, 6, 25, 6, 9],   # Bob
+    #   [17, 4, 17, 4, 17, 4, 17, 4, 17, 4, 9],   # Charlie
+    #   [-15, -6, -15, -6, -15, -6, -15, -6, -15, -6, 9], # Diana
+    # ])
+    # all_y_trues = np.array([
+    #   1, # Alice
+    #   0, # Bob
+    #   0, # Charlie
+    #   1, # Diana
+    # ])
+    #
+    # # Train our neural network!
+    # network = MoodNeuralNetwork()
+    # for i in range(4):
+    #     print(network.feedforward(data[i]))
+    # network.train(data, all_y_trues)
+    # print('----------------------end-------------------------------')
+    # for i in range(4):
+    #     print(network.feedforward(data[i]))

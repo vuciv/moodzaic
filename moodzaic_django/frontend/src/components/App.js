@@ -4,22 +4,28 @@ import LoginForm from './LogIn.js'
 import ProfilePage from './ProfPage.js'
 import MoodPage from './MoodInput.js'
 import CommunityPage from './CommunityPage.js'
-import Community from './Community.js'
 import SignUpForm from './SignUp.js'
 import SetupPage from './AccountSetup.js'
+// import MyMenu from './Menu.js'
 
 import {
   BrowserRouter as Router,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 
 class App extends Component {
 
   state = {
         LoggedIn: false,
-        Name: 'TestName',
-        Username: 'TestUsername',
+        user: {
+          username: '',
+          password: '',
+          email: '',
+          first_name: '',
+          last_name: ''
+        },
         MyCommunityList: [],
         MyObservationList: [],
         LastObservationTime: '',
@@ -28,13 +34,16 @@ class App extends Component {
         ProgressScore: 0
   }
 
-  toggleLogIn = () => {
+
+  toggleLogIn = (u) => {
       this.setState(prevState => ({
-        LoggedIn: !prevState.LoggedIn
+        LoggedIn: !prevState.LoggedIn,
+        user: u
       }))
   }
 
   render() {
+    console.log('what???')
     return (
       <div>
         <Router>
@@ -49,18 +58,14 @@ class App extends Component {
               <SetupPage />
             </Route>
             <Route path="/Profile">
-              <ProfilePage Username={this.state.Username} Name={this.state.Name}
-                Age={this.state.Age} Gender={this.state.Gender}
-                ProgressScore={this.state.ProgressScore}/>
+              <ProfilePage User={this.state.user}/>
             </Route>
             <Route path="/Communities">
-              <CommunityPage username={this.state.Username}/>
+              <CommunityPage user={this.state.user}/>
             </Route>
             <Route path="/">
               {this.state.LoggedIn ?
-                <ProfilePage Username={this.state.Username} Name={this.state.Name}
-                  Age={this.state.Age} Gender={this.state.Gender}
-                  ProgressScore={this.state.ProgressScore}/> :
+                <Redirect to="/Profile" /> :
                 <LoginForm callback = {this.toggleLogIn} />}
             </Route>
           </Switch>

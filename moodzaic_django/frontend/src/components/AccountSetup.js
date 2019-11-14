@@ -1,21 +1,22 @@
 import React from 'react'
-import logo from '../logo.png';
 import {
   Container,
   Header,
   Form,
   Dropdown,
-  Image,
   Grid,
   Button,
   Rating
 } from 'semantic-ui-react'
-import MyMenu from './Menu.js';
-import Footer from './Footer.js';
+import {createUser} from '../integration_funcs.js';
+import ProfileService from '../ProfileService.js';
+
+
+
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
   Link
 } from "react-router-dom";
 
@@ -83,11 +84,18 @@ const GenderOptions = [
 
 
 class SetupPage extends React.Component {
+  //Component which displays the setup page,
+  //to be displayed after inputting username and password in signup
   state = {
     step: 1,
     QuestionList: getInitialQuestions(),
     AnswerList: [],
-    totalSteps: 1 + getInitialQuestions().length/5 //5 questions per page
+    totalSteps: 1 + getInitialQuestions().length/5, //5 questions per page
+    first: '',
+    last: '',
+    age: 0,
+    gender: '',
+    email: ''
   }
   nextStep = () => {
         const { step } = this.state
@@ -101,11 +109,26 @@ class SetupPage extends React.Component {
           step : step - 1
       })
   }
-  handleChange = input => event => {
-    this.setState({ [input] : event.target.value })
-    }
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+  handleSubmit = () => {
+    createUser({
+      username: this.props.user.username,
+      password: this.props.user.password,
+      first_name: this.state.first,
+      last_name: this.state.last,
+      email: this.state.email
+    })
+    ProfileService.createProfile({
+      username: this.props.user.username,
+      age: this.state.age,
+      gender: this.state.gender.value,
+      reminder_list: []
+    })
+  }
+
   render() {
-    const {step} = this.state;
+    // const {step} = this.state;
     const {QuestionList} = this.state;
     return(
       <div>
@@ -115,31 +138,33 @@ class SetupPage extends React.Component {
               <Header as='h1' color='teal'>Welcome to Moodzaic!</Header>
               <p>Fill out this form so we can create your account.</p>
               <Form>
+              {/*creating form for basic profile info*/}
                 <div className="two fields">
-                  <Form.Field>
+                  <Form.Field name='first' onChange={this.handleChange}>
                     <label>First Name</label>
                     <input />
                   </Form.Field>
-                  <Form.Field>
+                  <Form.Field name='last' onChange={this.handleChange}>
                     <label>Last Name</label>
                     <input />
                   </Form.Field>
                 </div>
                 <div className="three fields">
-                <Form.Field>
+                <Form.Field name='age' onChange={this.handleChange}>
                   <label>Age</label>
-                  <input placeholder='Replace with birthdate?'/>
+                  <input placeholder='Age'/>
                 </Form.Field>
-                <Form.Field>
+                <Form.Field name='gender' onChange={this.handleChange}>
                   <label>Gender</label>
                   <Dropdown placeholder='Select' fluid selection options={GenderOptions}/>
                 </Form.Field>
-                <Form.Field>
+                <Form.Field name='email' onChange={this.handleChange}>
                   <label>Email</label>
                   <input />
                 </Form.Field>
                 </div>
               </Form>
+              {/*creating 'rating' inputs for each of the initial questions*/}
               {QuestionList.map((Question, index) => {
                 return (<Form key={index}>
                   <Form.Field>
