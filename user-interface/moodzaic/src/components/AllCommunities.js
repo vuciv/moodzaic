@@ -25,8 +25,12 @@ class AllCommunities extends React.Component {
   // }
 
   handleAddClick(community) {
+    // var username = this.state.Username;
+    // var user_plus_community = {
+    //   User: username,
+    //   Community: community
+    // }
     CommunityService.updateCommunity(community);
-    //do you need both? probably, right? NOPE LOL
   }
 
   toggleMakeMode = () => {
