@@ -164,13 +164,6 @@ class Profile(models.Model):
         ## TODO:
         #goal: goal
         #post: str
-        if not (isinstance(goal, type('str'))):
-            return False
-        if len(goal) > 30:
-            return False
-        self.goal = goal
-        self.save()
-        return True
         return
 
     def makePost(self, post):
