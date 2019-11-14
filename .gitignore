@@ -96,3 +96,7 @@ coverage.xml
 **/migrations/*.pyc
 
 **/*webpack-stats.dev.json
+**/webpack-stats.dev.json
+._.dev.json
+_.dev.json
+.dev.json
