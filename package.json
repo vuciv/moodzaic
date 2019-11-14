@@ -4,7 +4,8 @@
   "description": "# Summary Workflow The following is a basic workflow that you can use as a quick reference for developing a Django Project.",
   "main": "index.js",
   "dependencies": {
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "yarn": "^1.19.1"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",

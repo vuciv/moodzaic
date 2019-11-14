@@ -89,7 +89,8 @@ class GoalTestCase(TestCase):
     def test_setGoalTimeSuccess(self):
         testGoal = Goal.objects.get(goal = "Drink water")
         testGoal.setGoalTime("14:00")
-        self.assertEqual("14:00", testGoal.time)
+        testTime = testGoal.time.strftime('%H:%M')
+        self.assertEqual("14:00", testTime)
     def test_setGoalTimeAMPMFormatFailure(self):
         testGoal = Goal.objects.get(goal = "Drink water")
         self.assertFalse(testGoal.setGoalTime("2:00 PM"))
@@ -120,8 +121,7 @@ class ProfileTestCase(TestCase):
     def test_setProgressScoreNeg(self):
         testProfile = Profile.objects.get(ProgressScore = 10)
         testProfile.setProgressScore(-5)
-        self.assertEqual(5, testProfile.getProgressScore())
-        testProfile.setProgressScore(10)
+        self.assertEqual(-5, testProfile.getProgressScore())
     def test_makeGoalPost(self):
         testProfile = Profile.objects.get(ProgressScore= 10)
         testGoal = Goal.objects.get(goal = "Drink water")
@@ -135,7 +135,7 @@ class ProfileTestCase(TestCase):
         self.assertFalse(testProfile.makeGoalPost("hello", "Hi"))
     def test_makePost(self):
         testProfile = Profile.objects.get(ProgressScore= 10)
-        self.assertTrue(testProfile.makePost( "Hi, this is a post"))
+        self.assertTrue(testProfile.makePost("Hi, this is a post"))
     def test_makePost_NullPost(self):
         testProfile = Profile.objects.get(ProgressScore= 10)
         self.assertFalse(testProfile.makePost(""))
@@ -206,7 +206,8 @@ class ObservationTestCase(TestCase):
 class MoodTestCase(TestCase):
     def setUp(self):
         Mood.objects.create(name = "sad", mood = 2)
-    def test_setName(self):
+    def test_setName(self,):
+        if not (isinstance(mood, ))
         testMood = Mood.objects.get(mood = 2)
         testMood.setName("happy")
         self.assertEqual(testMood.name, "happy")

@@ -1,32 +1,39 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import logo from '../logo.png'
-import {createUser, getUserByUsername} from '../integration_funcs.js';
+import {getUserByUsername} from '../integration_funcs.js';
+import SetupPage from './AccountSetup.js';
+
 
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
   Link,
-  Redirect
+  // Redirect
 } from "react-router-dom";
 
 
 class SignUpForm extends React.Component {
   state = {
-    redirect: false
+    redirect: false,
+    user:{}
   }
 
   userCreation = (user, username, password) => {
     if (!user) {
       let name = "cs154";
       const u = {
-        Username: username,
-        Password: password
+        name: username,
+        users: user
       };
+<<<<<<< HEAD
       createUser(name).then(res => {
         this.setState({redirect: true});
       });
+=======
+        this.setState({redirect: true, user: u});
+>>>>>>> 76b65dfb6043e2b7e2258cb24249f0c89f024fd5
     }
   }
   handleSubmit = (event) => {
@@ -47,7 +54,8 @@ class SignUpForm extends React.Component {
   render() {
     const {redirect} = this.state;
     if (redirect) {
-       return <Redirect to='/Welcome'/>;
+       // return <Redirect to='/Welcome'/>;
+       return <SetupPage user={this.state.user}/>
      }
     return(
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>

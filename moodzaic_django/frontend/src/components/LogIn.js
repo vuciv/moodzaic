@@ -5,8 +5,6 @@ import {getUserByUsername} from '../integration_funcs';
 
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   Link
 } from "react-router-dom";
 
@@ -16,12 +14,13 @@ class LoginForm extends React.Component {
   }
 
 
-  logIn = () => {
-    //here we need to somehow check that the person is legit lol
-
-
-    this.props.callback();
+  logIn = (u) => {
+    const user = getUserByUsername(u.username);
+    if (user) {
+      this.props.callback(user);
+    }
   }
+
   handleSubmit = (event) => {
     let username = event.target[0].value;
     let password = event.target[1].value;
@@ -31,7 +30,7 @@ class LoginForm extends React.Component {
         this.logIn();
       }
     });
-    
+
 
   }
 

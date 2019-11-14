@@ -11,13 +11,19 @@ import {
 
 class LoginForm extends React.Component {
   state = {
-    LoggedIn: false
+    LoggedIn: false,
+    username: '',
+    password: ''
   }
 
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
-  logIn = () => {
-    //here we need to somehow check that the person is legit lol
-    this.props.callback();
+  logIn = (u) => {
+    if (u) {
+      CommunityService.createCommunity(this.state.name);
+      //here we need to somehow check that the person is legit lol
+      this.props.callback();
+    }
   }
 
 
@@ -30,7 +36,7 @@ class LoginForm extends React.Component {
           </Header>
           <Form size='large'>
             <Segment stacked>
-              <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' />
+              <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' onChange:{this.handleChange}>
               <Form.Input
                 fluid
                 icon='lock'
@@ -38,7 +44,7 @@ class LoginForm extends React.Component {
                 placeholder='Password'
                 type='password'
               />
-              <Button color='teal' fluid size='large' onClick={this.logIn}>
+              <Button color='teal' fluid size='large' onClick={this.logIn({UserService.getUser(this.username)})}>
                 Login
               </Button>
             </Segment>
