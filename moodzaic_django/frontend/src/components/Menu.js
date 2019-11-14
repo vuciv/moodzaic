@@ -24,6 +24,15 @@ class MyMenu extends React.Component {
   toggleVisibility = () =>
       this.setState((prevState) => ({ visible: !prevState.visible }))
 
+  signOut() {
+    console.log("Hey")
+    this.toggleLogIn();
+    // this.setState(state => ({
+    //
+    //   })
+    // )
+  }
+
   render() {
     return(
       <div>
@@ -41,6 +50,11 @@ class MyMenu extends React.Component {
             <Menu.Item as={Link} to="/MyMood">Record Mood</Menu.Item>
             <Menu.Item as={Link} to="/Profile">My Moodzaic</Menu.Item>
             <Menu.Item as={Link} to="/Communities">My Communities</Menu.Item>
+            <Menu.Item>
+              <Button basic color="red" onClick={this.signOut}>
+                Sign Out
+              </Button>
+            </Menu.Item>
           </Container>
         </Menu>
       </div>
@@ -49,21 +63,3 @@ class MyMenu extends React.Component {
 }
 
 export default MyMenu;
-
-// <Dropdown item simple text='Dropdown'>
-//   <Dropdown.Menu>
-//     <Dropdown.Item>List Item</Dropdown.Item>
-//     <Dropdown.Item>List Item</Dropdown.Item>
-//     <Dropdown.Divider />
-//     <Dropdown.Header>Header Item</Dropdown.Header>
-//     <Dropdown.Item>
-//       <i className='dropdown icon' />
-//       <span className='text'>Submenu</span>
-//       <Dropdown.Menu>
-//         <Dropdown.Item>List Item</Dropdown.Item>
-//         <Dropdown.Item>List Item</Dropdown.Item>
-//       </Dropdown.Menu>
-//     </Dropdown.Item>
-//     <Dropdown.Item>List Item</Dropdown.Item>
-//   </Dropdown.Menu>
-// </Dropdown>
