@@ -66,7 +66,7 @@ class Goal(models.Model):
         return True
 
     def setGoalFrequency(self, frequency):
-        if not (isinstance(frequency, 'int')):
+        if not (isinstance(frequency, int)):
             return False
         if frequency < 1:
             return False
@@ -91,6 +91,8 @@ class Mood(models.Model):
 
      def setName(self, name):
         if not (isinstance(name, type('a'))):
+            return False
+        if not name:
             return False
         if len(name) < 20:
             self.name = name
@@ -129,6 +131,29 @@ class Profile(models.Model):
         self.ProgressScore = ProgressScore
         self.save()
 
+    def setAge(self, age):
+        if not (isinstance(mood, type(2))):
+            return False
+        if age >= 18 and age <= 120:
+            self.age = age
+            self.save()
+            return True
+        else:
+            return False
+
+    def setGender(self, name):
+       if not (isinstance(name, type('a'))):
+           return False
+       if not name:
+           return False
+       if len(name) <= 9:
+           self.gender = name
+           self.save()
+           return True
+       else:
+           return False
+
+
     def ProgressScoreCalc(self, goals, observations):
         #TODO
         #goals: list of goals
@@ -139,6 +164,13 @@ class Profile(models.Model):
         ## TODO:
         #goal: goal
         #post: str
+        if not (isinstance(goal, type('str'))):
+            return False
+        if len(goal) > 30:
+            return False
+        self.goal = goal
+        self.save()
+        return True
         return
 
     def makePost(self, post):
@@ -160,37 +192,50 @@ class Observation(models.Model):
     )
 
     def setSleep(self, hours):
+        if not (isinstance(hours, type(2.0))) and not (isinstance(hours, type(2))):
+            return False
         if hours  >= 0 and hours <= 24:
             self.sleep = hours
+            self.save()
             return True
         else:
             return False
 
 
     def setExercise(self, hours):
+        if not (isinstance(hours, type(2.0))) and not (isinstance(hours, type(2))):
+            return False
         if hours  >= 0 and hours <= 24:
             self.exercise = hours
+            self.save()
             return True
         else:
             return False
 
     def setMeals(self, num):
+        if not (isinstance(num, type(2))):
+            return False
         if num  >= 0:
             self.meals = num
+            self.save()
             return True
         else:
             return False
 
 
     def setWork(self, hours):
+        if not (isinstance(hours, type(2.0))) and not (isinstance(hours, type(2))):
+            return False
         if hours  >= 0 and hours <= 24:
             self.work = hours
+            self.save()
             return True
         else:
             return False
 
     def setMood(self, mood_str, mood_int):
-        self.mood.setMood(mood_int)
-        self.mood.setName(mood_str)
-        self.save()
-        return True
+        if self.mood.setMood(mood_int) and self.mood.setName(mood_str):
+            self.save()
+            return True
+        else:
+            return False
