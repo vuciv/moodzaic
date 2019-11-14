@@ -8,8 +8,9 @@ import {
   Button,
   Rating
 } from 'semantic-ui-react'
-import {createUser} from '../integration_funcs.js';
-import ProfileService from '../ProfileService.js';
+import {createUser, createProfile} from '../integration_funcs.js';
+// import ProfileService from '../ProfileService.js';
+
 
 
 
@@ -109,9 +110,16 @@ class SetupPage extends React.Component {
           step : step - 1
       })
   }
-  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+  handleFirstChange = (e) => this.setState({ first: e.target.value });
+  handleLastChange = (e) => this.setState({ last: e.target.value });
+  handleAgeChange = (e) => this.setState({ age: e.target.value });
+  handleGenderChange = (e) => this.setState({ gender: e.target.value });
+  handleEmailChange = (e) => this.setState({ email: e.target.value });
+  
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    console.log(this.props);
+    console.log(this.state);
     createUser({
       username: this.props.user.username,
       password: this.props.user.password,
@@ -119,10 +127,11 @@ class SetupPage extends React.Component {
       last_name: this.state.last,
       email: this.state.email
     })
-    ProfileService.createProfile({
+    createProfile({
       username: this.props.user.username,
       age: this.state.age,
       gender: this.state.gender.value,
+      
       reminder_list: []
     })
   }
@@ -137,28 +146,28 @@ class SetupPage extends React.Component {
             <Container text style={{ marginTop: '-1' }}>
               <Header as='h1' color='teal'>Welcome to Moodzaic!</Header>
               <p>Fill out this form so we can create your account.</p>
-              <Form>
+              <Form >
               {/*creating form for basic profile info*/}
                 <div className="two fields">
-                  <Form.Field name='first' onChange={this.handleChange}>
+                  <Form.Field name='first' onChange={this.handleFirstChange}>
                     <label>First Name</label>
                     <input />
                   </Form.Field>
-                  <Form.Field name='last' onChange={this.handleChange}>
+                  <Form.Field name='last' onChange={this.handleLastChange}>
                     <label>Last Name</label>
                     <input />
                   </Form.Field>
                 </div>
                 <div className="three fields">
-                <Form.Field name='age' onChange={this.handleChange}>
+                <Form.Field name='age' onChange={this.handleAgeChange}>
                   <label>Age</label>
                   <input placeholder='Age'/>
                 </Form.Field>
-                <Form.Field name='gender' onChange={this.handleChange}>
+                <Form.Field name='gender' onChange={this.handleGenderChange}>
                   <label>Gender</label>
                   <Dropdown placeholder='Select' fluid selection options={GenderOptions}/>
                 </Form.Field>
-                <Form.Field name='email' onChange={this.handleChange}>
+                <Form.Field name='email' onChange={this.handleEmailChange}>
                   <label>Email</label>
                   <input />
                 </Form.Field>
@@ -172,8 +181,8 @@ class SetupPage extends React.Component {
                     <Rating icon="heart" defaultRating={0} maxRating={5} size="huge" />
                   </Form.Field>
                 </Form>)})}
-                <Link to="/MyMood">
-                  <Button color='teal' fluid size='large'>
+                <Link to="/Profile">
+                  <Button color='teal' fluid size='large' onClick={this.handleSubmit}>
                     Create Account
                   </Button>
                 </Link>

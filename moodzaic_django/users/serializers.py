@@ -11,7 +11,7 @@ class ProfileSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ('username', 'age', 'gender', 'user', 'reminder_list')
+        fields = ('username', 'age', 'gender', 'user')
 
 # class ObservationSerializer(serializers.ModelSerializer):
 #     user = serializers.RelatedField(many=True, read_only=True)

@@ -38,7 +38,6 @@ class SignUpForm extends React.Component {
     console.log([username, password]);
     if (password === confirm_password) {
       getUserByUsername(username).then(user => {
-        console.log(user);
         this.userCreation(user, username, password);
       })
       //console.log([username, password]);
