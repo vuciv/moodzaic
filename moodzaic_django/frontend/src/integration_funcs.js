@@ -27,7 +27,7 @@ const API_URL = 'http://localhost:8000/api/';
 
 
   export function getAllCommunities() {
-      const url = `${API_URL}community/`;
+      const url = `${API_URL}community/all`;
       return axios.get(url).then(response => response.data);
   }
   export function getCommunity(name) {
@@ -38,10 +38,23 @@ const API_URL = 'http://localhost:8000/api/';
   //     const url = `${API_URL}$/community/{community.name}`;
   //     return axios.delete(url);
   // }
+  // export function createCommunity(community){
+  //     const url = `${API_URL}community/`;
+  //     return axios.post(url,community);
+  // }
+
   export function createCommunity(community){
-      const url = `${API_URL}community/`;
-      return axios.post(url,community);
-  }
+      return axios.post('${API_URL}community/', {
+        name: community.name,
+        users: community.users
+      })
+        .then(response => {
+          console.log(response);
+          console.log(response.data);
+        })
+        .catch(error => console.log(error))
+    }
+
   export function updateCommunity(community){
       const url = `${API_URL}community/${community.name}`;
       return axios.put(url,community);
