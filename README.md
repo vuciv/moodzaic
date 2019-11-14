@@ -1,7 +1,8 @@
 # moodzaic
 
 ## For graders!
-#Initial Setup
+
+# Initial Setup
 
 Clone https://github.com/reyesj5/moodzaic
 
@@ -37,7 +38,7 @@ Run python3 manage.py runserver
 
 It will possibly fail, so run  python3 manage.py runserver again until it works
 
-#Navigation
+# Navigation
 
 Go to http://127.0.0.1:8000/ to see the login screen
 
