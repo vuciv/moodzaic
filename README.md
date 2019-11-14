@@ -114,3 +114,19 @@ Create specific. templates that inherent from the base template.
 
 ## Set-Up
 In /user-interface/moodzaic, and with yarn installed, run "$yarn start" to launch the React App in a browser, and "$yarn test" to run the included test suites.
+
+Running "$yarn start" will launch the React App on your browser in port 3000. It can communicate with your backend if you also have that running on port 8000 (follow instructions above).
+
+# Information for Milestone 3.b (11/14/19)
+As we've learned, making a web app is complicated, and our goals for the first iteration were overly ambitious. Nevertheless, we've built an app over the past week that works a long way (but not all the way) towards our goals. Laying out Moodzaic It.1:
+
+On the front-end (Molly and Daniel), we have 14 React components, which are spread across 7 screens: log-in, sign-up, account setup, mood input, profile, my communities, and individual communities. These screens are actually all part of a single page web app that uses routing to redirect the user. Through Axios and REST APIs, this front-end is integrated with models for users and profiles (Emil and Hunter), communities (Zippy and Jersey), and observations (as part of the larger ML suite worked on by Marco and Chema).
+
+Notably, logging in and signing up operate through the User API to get users and post new ones, respectively. Communities can be created and deleted from the communities tab, with corresponding changes on the back-end. Recording your mood posts the observation to the back-end, where it's used to train the ML algorithm for predicting mood.
+
+Signing out takes you back to the log-in screen. Additionally, make sure to click the red panda icon!
+
+## Notes
+To signup, after hitting the sign-up button on the log-in landing, you must reload to see the changes take effect. This is the only routing case where this happens, and we're not sure why.
+
+Despite the components all rendering, many of the front-end (React App) render tests are failing. This is due to an annoying bug from routing, which is making our components unable to directly render to the DOM without a routing table. Know that the functionality is there, but we didn't manage to change the tests to accomodate it.
