@@ -4,5 +4,5 @@ from . import views
 
 urlpatterns = [
     path('api/community/', views.makeCommunity),
-    # url(r'^api/community/(?P<name>[\w]+)$', views.communityDetails),
+    url(r'^api/community/(?P<name>[\w]+)$', views.communityDetails),
 ]
