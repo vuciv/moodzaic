@@ -59,7 +59,7 @@ class Weights(models.Model):
 
             row = [
                 obs.sleep, obs.exercise, weekly_exercise, obs.meals,
-                0, 0, 0, 0, 0 # goals, goals completed, goals missed, goals ratio, past mood score
+                0, 0, 0, 0, 0, # goals, goals completed, goals missed, goals ratio, past mood score
                 obs.work, weekly_work
             ]
             input_data.append(row)
