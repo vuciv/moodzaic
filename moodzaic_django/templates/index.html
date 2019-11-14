@@ -1,0 +1,24 @@
+{% load render_bundle from webpack_loader %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" />
+    <link rel="icon" href="https://scontent-ort2-2.xx.fbcdn.net/v/t1.15752-9/75233403_431734194197125_3641731160012226560_n.png?_nc_cat=103&_nc_oc=AQmAfP6w1AKqr5G32v_JNYqtVKAIydCdJpaIynC0Zw0lKQKg_Z6xJX26-X2Zs5Fiprg&_nc_ht=scontent-ort2-2.xx&oh=0f6e1b978b774656aa78e493939d1170&oe=5E4E0D5C" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <link rel="apple-touch-icon" href="logo192.png" />
+    <title>Moodzaic</title>
+  </head>
+  <body>
+    <div id="root">
+    </div>
+      {% render_bundle 'main' %}
+      {% render_bundle "undefined" %}
+      {% render_bundle "runtime-main" %}
+  </body>
+</html>

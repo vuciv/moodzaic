@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
+from datetime import datetime
 #from community.models import Community
 
 '''
@@ -11,12 +12,22 @@ class User(models.Model):
     gender = models.CharField(max_length=9, default='')
 
     def setUserUsername(self, username):
-        #TODO
-        return 'not false'
+        if not (isinstance(username, 'str')):
+            return False
+        if len(username) > 20:
+            return False
+        self.username = username
+        self.save()
+        return True
 
     def setUserPassword(self, password):
-        #TODO
-        return 'not false'
+        if not (isinstance(password, 'str')):
+            return False
+        if len(password) > 20:
+            return False
+        self.password = password
+        self.save()
+        return True
 
     def setUserAge(self, age):
         #TODO
@@ -30,47 +41,55 @@ class User(models.Model):
 class Goal(models.Model):
     goal = models.CharField(max_length=30)
     frequency = models.IntegerField(default=1)
-    time = models.CharField(max_length=10)
+    time = models.TimeField()
 
     def setGoalGoal(self, goal):
-        #TODO
-        return 'not false'
+        if not (isinstance(goal, type('str'))):
+            return False
+        if len(goal) > 30:
+            return False
+        self.goal = goal
+        self.save()
+        return True
 
     def setGoalFrequency(self, frequency):
-        #TODO
-        return 'not false'
+        if not (isinstance(frequency, 'int')):
+            return False
+        self.frequency = frequency
+        self.save()
+        return True
 
-    def setGoalTime(self, time):
-        #TODO
-        return 'not false'
-
-
+    def setGoalTime(self, time_string):
+        try:
+            time = datetime.strptime(time_string, '%H:%M').time()
+            self.time = time
+            self.save()
+        except Exception as e:
+            print(e)
+            return False
 
 class Mood(models.Model):
      name = models.CharField(max_length=20, default="")
-     mood = models.FloatField(default=-1)
+     mood = models.IntegerField(default=-1)
      #date = models.DateField('date observed', auto_now_add=True, blank=True)
      #make list of moods that will be kept track of
-     def getName(self):
-         #TODO
-         return
 
      def setName(self, name):
-        #TODO
+        if not (isinstance(name, type('a'))):
+            return False
         if len(name) < 20:
             self.name = name
+            self.save()
             return True
         else:
             return False
 
-     def getMood(self):
-        #TODO
-        return
-
      def setMood(self, mood):
-        ## TODO:
+        if not (isinstance(mood, type(2))):
+            return False
         if mood >= 0:
             self.mood = mood
+            self.save()
             return True
         else:
             return False
@@ -80,6 +99,7 @@ class Profile(models.Model):
     age = models.IntegerField(default=18)
     gender = models.CharField(max_length=9, default='')
     #reminderList = models.ListCharField(base_field=CharField, size=None)
+    username = models.CharField(max_length=150, default='')
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -91,6 +111,7 @@ class Profile(models.Model):
 
     def setProgressScore(self, ProgressScore):
         self.ProgressScore = ProgressScore
+        self.save()
 
     def ProgressScoreCalc(self, goals, observations):
         #TODO
@@ -109,12 +130,6 @@ class Profile(models.Model):
         #post: str
         return
 
-    def getUser(self):
-        ## TODO:
-
-        return
-
-
 class Observation(models.Model):
     date = models.DateField('date observed', auto_now_add=True, blank=True)
     sleep = models.FloatField(default=-1)
@@ -128,9 +143,7 @@ class Observation(models.Model):
         null=True
     )
 
-
     def setSleep(self, hours):
-        ## TODO:
         if hours  >= 0 and hours <= 24:
             self.sleep = hours
             return True
@@ -139,17 +152,13 @@ class Observation(models.Model):
 
 
     def setExercise(self, hours):
-        ## TODO:
         if hours  >= 0 and hours <= 24:
             self.exercise = hours
             return True
         else:
             return False
 
-
-
     def setMeals(self, num):
-        ## TODO:
         if num  >= 0:
             self.meals = num
             return True
@@ -158,7 +167,6 @@ class Observation(models.Model):
 
 
     def setWork(self, hours):
-        ## TODO:
         if hours  >= 0 and hours <= 24:
             self.work = hours
             return True
@@ -166,7 +174,7 @@ class Observation(models.Model):
             return False
 
     def setMood(self, mood_str, mood_int):
-        ## TODO:
         self.mood.setMood(mood_int)
         self.mood.setName(mood_str)
+        self.save()
         return True
