@@ -85,6 +85,9 @@ class GoalTestCase(TestCase):
     def test_setGoalFrequencyNotIntFailure(self):
         testGoal = Goal.objects.get(goal = "Drink water")
         self.assertFalse(testGoal.setGoalFrequency("emil"))
+    def test_setGoalFrequencyNegativeFailure(self):
+        testGoal = Goal.objects.get(goal = "Drink water")
+        self.assertFalse(testGoal.setGoalFrequency(-5))
 
     def test_setGoalTimeSuccess(self):
         testGoal = Goal.objects.get(goal = "Drink water")
