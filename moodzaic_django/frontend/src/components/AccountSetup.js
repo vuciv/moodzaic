@@ -1,13 +1,16 @@
 import React from 'react'
+
 import {
   Container,
   Header,
   Form,
   Dropdown,
+
   Grid,
   Button,
   Rating
 } from 'semantic-ui-react'
+
 import {createUser} from '../integration_funcs.js';
 
 
@@ -16,6 +19,7 @@ import {
   // BrowserRouter as Router,
   // Switch,
   // Route,
+
   Link
 } from "react-router-dom";
 
@@ -83,16 +87,20 @@ const GenderOptions = [
 
 
 class SetupPage extends React.Component {
+
   //Component which displays the setup page,
   //to be displayed after inputting username and password in signup
+
   state = {
     step: 1,
     QuestionList: getInitialQuestions(),
     AnswerList: [],
+
     totalSteps: 1 + getInitialQuestions().length/5, //5 questions per page
     first: '',
     last: '',
     
+
   }
   nextStep = () => {
         const { step } = this.state
@@ -110,12 +118,14 @@ class SetupPage extends React.Component {
     this.setState({ [input] : event.target.value })
     }
 
+
   handleSubmit = () => {
     createUser()
   }
 
   render() {
     // const {step} = this.state;
+
     const {QuestionList} = this.state;
     return(
       <div>
@@ -125,7 +135,9 @@ class SetupPage extends React.Component {
               <Header as='h1' color='teal'>Welcome to Moodzaic!</Header>
               <p>Fill out this form so we can create your account.</p>
               <Form>
+
               {/*creating form for basic profile info*/}
+
                 <div className="two fields">
                   <Form.Field>
                     <label>First Name</label>
@@ -151,7 +163,9 @@ class SetupPage extends React.Component {
                 </Form.Field>
                 </div>
               </Form>
+
               {/*creating 'rating' inputs for each of the initial questions*/}
+
               {QuestionList.map((Question, index) => {
                 return (<Form key={index}>
                   <Form.Field>

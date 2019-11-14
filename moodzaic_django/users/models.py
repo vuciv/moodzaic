@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
 from datetime import datetime
+
 #from community.models import Community
 
 '''
@@ -103,7 +104,8 @@ class Profile(models.Model):
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
-        null=True
+        null=True,
+        related_name='profile'
     )
 
     def getProgressScore(self):

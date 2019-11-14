@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 const API_URL = 'http://localhost:8000/api/';
-
 // export function addCommunity(c) {
 //     //add the community c to the list of all communities in the overall data
 //     //unless it's already added lol
