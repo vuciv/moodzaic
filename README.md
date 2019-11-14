@@ -40,13 +40,15 @@ It will possibly fail, so run  python3 manage.py runserver again until it works
 
 ## Navigation
 
-Go to http://127.0.0.1:8000/ to see the login screen
+Go to http://localhost:8000/ to see the login screen
 
-Go to http://127.0.0.1:8000/api/users/ to add a user, then click Post to submit
+Go to http://localhost:8000/api/users/ to add a user, then click Post to submit
 
-Return to http://127.0.0.1:8000/ and login with the credentials you just created
+Return to http://localhost:8000/ and login with the credentials you just created
 
 Enjoy the Profile page, and feel free to click the Record Mood link to see the Record Mood page
+
+For the community aspect, go to http://localhost:8000/api/community/fitness to see an example of a functioning community. Try another query parameter (e.g. http://localhost:8000/api/community/crerar) to see the API handle a call to a nonexistent community. 
 
 # Summary Workflow
 The following is a basic workflow that you can use as a quick reference for developing a Django Project.
@@ -120,6 +122,3 @@ Create specific. templates that inherent from the base template.
 
 ## Set-Up
 In /user-interface/moodzaic, and with yarn installed, run "$yarn start" to launch the React App in a browser, and "$yarn test" to run the included test suites.
-
-## Communities
-With the server running, go to localhost:8000/api/community/fitness to see an example of a functioning community. Try another query parameter (e.g. localhost:8000/api/community/crerar) to see the API handle a call to a nonexistent community.
