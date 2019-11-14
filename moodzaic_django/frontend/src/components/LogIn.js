@@ -10,7 +10,9 @@ import {
 
 class LoginForm extends React.Component {
   state = {
-    LoggedIn: false
+    LoggedIn: false,
+    username: '',
+    password: ''
   }
 
 
@@ -21,12 +23,15 @@ class LoginForm extends React.Component {
     }
   }
 
-  handleSubmit = (event) => {
-    let username = event.target[0].value;
-    let password = event.target[1].value;
-    getUserByUsername(username).then(user => {
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+
+  handleSubmit = () => {
+    // let username = event.target[0].value;
+    // let password = event.target[1].value;
+    getUserByUsername(this.state.username).then(user => {
       console.log(user);
-      if (user && (password === user.password)) {
+      if (user && (this.state.password === user.password)) {
         this.logIn();
       }
     });
@@ -35,23 +40,31 @@ class LoginForm extends React.Component {
   }
 
   render() {
+    console.log("ahhhhh", this.state)
     return(
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as='h2' color='teal' textAlign='center'>
             <Image src={logo} /> Log-in to your account
           </Header>
-          <Form size='large' onSubmit={this.handleSubmit}>
+          <Form size='large'>
             <Segment stacked>
-              <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' />
+              <Form.Input fluid
+                name='username'
+                icon='user'
+                iconPosition='left'
+                placeholder='Username'
+                onChange={this.handleChange}/>
               <Form.Input
                 fluid
+                name='password'
                 icon='lock'
                 iconPosition='left'
                 placeholder='Password'
                 type='password'
+                onChange={this.handleChange}
               />
-              <Button color='teal' fluid size='large' > {/*<onClick={this.logIn}>*/}
+              <Button color='teal' type='submit' fluid size='large' onClick={this.handleSubmit}> {/*<onClick={this.logIn}>*/}
                 Login
               </Button>
             </Segment>

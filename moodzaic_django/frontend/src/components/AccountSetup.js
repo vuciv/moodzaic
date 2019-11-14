@@ -92,7 +92,7 @@ class SetupPage extends React.Component {
     totalSteps: 1 + getInitialQuestions().length/5, //5 questions per page
     first: '',
     last: '',
-
+    
   }
   nextStep = () => {
         const { step } = this.state
