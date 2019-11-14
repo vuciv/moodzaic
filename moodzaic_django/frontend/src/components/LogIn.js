@@ -32,7 +32,7 @@ class LoginForm extends React.Component {
     getUserByUsername(this.state.username).then(user => {
       console.log(user);
       if (user && (this.state.password === user.password)) {
-        this.logIn();
+        this.logIn(user);
       }
     });
 
@@ -40,7 +40,6 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    console.log("ahhhhh", this.state)
     return(
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
