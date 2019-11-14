@@ -33,9 +33,10 @@ class App extends Component {
         ProgressScore: 0
   }
 
-  toggleLogIn = () => {
+  toggleLogIn = (u) => {
       this.setState(prevState => ({
-        LoggedIn: !prevState.LoggedIn
+        LoggedIn: !prevState.LoggedIn,
+        user: u
       }))
   }
 
@@ -59,14 +60,14 @@ class App extends Component {
                 ProgressScore={this.state.ProgressScore}/>
             </Route>
             <Route path="/Communities">
-              <CommunityPage username={this.state.user}/>
+              <CommunityPage user={this.state.user}/>
             </Route>
             <Route path="/">
               {this.state.LoggedIn ?
                 <ProfilePage Username={this.state.user.username} Name={this.state.Name}
                   Age={this.state.Age} Gender={this.state.Gender}
                   ProgressScore={this.state.ProgressScore}/> :
-                <LoginForm callback = {this.toggleLogIn} />}
+                <LoginForm callback = {this.toggleLogIn()} />}
             </Route>
           </Switch>
         </Router>

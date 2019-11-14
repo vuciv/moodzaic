@@ -1,21 +1,21 @@
 import React from 'react'
-import logo from '../logo.png';
 import {
   Container,
   Header,
   Form,
   Dropdown,
-  Image,
   Grid,
   Button,
   Rating
 } from 'semantic-ui-react'
-import MyMenu from './Menu.js';
-import Footer from './Footer.js';
+import {createUser} from '../integration_funcs.js';
+
+
+
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
+  // BrowserRouter as Router,
+  // Switch,
+  // Route,
   Link
 } from "react-router-dom";
 
@@ -83,11 +83,16 @@ const GenderOptions = [
 
 
 class SetupPage extends React.Component {
+  //Component which displays the setup page,
+  //to be displayed after inputting username and password in signup
   state = {
     step: 1,
     QuestionList: getInitialQuestions(),
     AnswerList: [],
-    totalSteps: 1 + getInitialQuestions().length/5 //5 questions per page
+    totalSteps: 1 + getInitialQuestions().length/5, //5 questions per page
+    first: '',
+    last: '',
+
   }
   nextStep = () => {
         const { step } = this.state
@@ -104,8 +109,13 @@ class SetupPage extends React.Component {
   handleChange = input => event => {
     this.setState({ [input] : event.target.value })
     }
+
+  handleSubmit = () => {
+    createUser()
+  }
+
   render() {
-    const {step} = this.state;
+    // const {step} = this.state;
     const {QuestionList} = this.state;
     return(
       <div>
@@ -115,6 +125,7 @@ class SetupPage extends React.Component {
               <Header as='h1' color='teal'>Welcome to Moodzaic!</Header>
               <p>Fill out this form so we can create your account.</p>
               <Form>
+              {/*creating form for basic profile info*/}
                 <div className="two fields">
                   <Form.Field>
                     <label>First Name</label>
@@ -140,6 +151,7 @@ class SetupPage extends React.Component {
                 </Form.Field>
                 </div>
               </Form>
+              {/*creating 'rating' inputs for each of the initial questions*/}
               {QuestionList.map((Question, index) => {
                 return (<Form key={index}>
                   <Form.Field>
