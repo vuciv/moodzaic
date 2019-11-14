@@ -60,30 +60,21 @@ class Goal(models.Model):
 
     def setGoalTime(self, time):
         #TODO
-        return 'not false'
-
-
+        self.time = time
+        self.save()
 
 class Mood(models.Model):
      name = models.CharField(max_length=20, default="")
      mood = models.FloatField(default=-1)
      #date = models.DateField('date observed', auto_now_add=True, blank=True)
      #make list of moods that will be kept track of
-     def getName(self):
-         #TODO
-         return
 
      def setName(self, name):
-        #TODO
         if len(name) < 20:
             self.name = name
             return True
         else:
             return False
-
-     def getMood(self):
-        #TODO
-        return
 
      def setMood(self, mood):
         ## TODO:
@@ -127,12 +118,6 @@ class Profile(models.Model):
         #post: str
         return
 
-    def getUser(self):
-        ## TODO:
-
-        return
-
-
 class Observation(models.Model):
     date = models.DateField('date observed', auto_now_add=True, blank=True)
     sleep = models.FloatField(default=-1)
@@ -147,7 +132,6 @@ class Observation(models.Model):
     )
 
     def setSleep(self, hours):
-        ## TODO:
         if hours  >= 0 and hours <= 24:
             self.sleep = hours
             return True
@@ -156,17 +140,13 @@ class Observation(models.Model):
 
 
     def setExercise(self, hours):
-        ## TODO:
         if hours  >= 0 and hours <= 24:
             self.exercise = hours
             return True
         else:
             return False
 
-
-
     def setMeals(self, num):
-        ## TODO:
         if num  >= 0:
             self.meals = num
             return True
@@ -175,7 +155,6 @@ class Observation(models.Model):
 
 
     def setWork(self, hours):
-        ## TODO:
         if hours  >= 0 and hours <= 24:
             self.work = hours
             return True
@@ -183,7 +162,6 @@ class Observation(models.Model):
             return False
 
     def setMood(self, mood_str, mood_int):
-        ## TODO:
         self.mood.setMood(mood_int)
         self.mood.setName(mood_str)
         return True
