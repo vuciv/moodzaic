@@ -13,7 +13,7 @@ class User(models.Model):
     gender = models.CharField(max_length=9, default='')
 
     def setUserUsername(self, username):
-        if not (isinstance(username, 'str')):
+        if not (isinstance(username, type('string'))):
             return False
         if len(username) > 20:
             return False
@@ -22,7 +22,7 @@ class User(models.Model):
         return True
 
     def setUserPassword(self, password):
-        if not (isinstance(password, 'str')):
+        if not (isinstance(password, type('string'))):
             return False
         if len(password) > 20:
             return False
@@ -31,12 +31,24 @@ class User(models.Model):
         return True
 
     def setUserAge(self, age):
-        #TODO
-        return 'not false'
+        if not (isinstance(age, type(1))):
+            return False
+        if age > 120:
+            return False
+        if age < 18:
+            return False
+        self.age = age
+        self.save()
+        return True
 
-    def setUserGender(self, age):
-        #TODO
-        return 'not false'
+    def setUserGender(self, gender):
+        if not (isinstance(gender, type('string'))):
+            return False
+        if gender not in ['man', 'woman', 'nonbinary']:
+            return False
+        self.gender = gender
+        self.save()
+        return True
 '''
 
 class Goal(models.Model):
@@ -55,6 +67,8 @@ class Goal(models.Model):
 
     def setGoalFrequency(self, frequency):
         if not (isinstance(frequency, 'int')):
+            return False
+        if frequency < 1:
             return False
         self.frequency = frequency
         self.save()
