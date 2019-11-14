@@ -115,6 +115,8 @@ Create specific. templates that inherent from the base template.
 ## Set-Up
 In /user-interface/moodzaic, and with yarn installed, run "$yarn start" to launch the React App in a browser, and "$yarn test" to run the included test suites.
 
+Running "$yarn start" will launch the React App on your browser in port 3000. It can communicate with your backend if you also have that running on port 8000 (follow instructions above).
+
 # Information for Milestone 3.b (11/14/19)
 As we've learned, making a web app is complicated, and our goals for the first iteration were overly ambitious. Nevertheless, we've built an app over the past week that works a long way (but not all the way) towards our goals. Laying out Moodzaic It.1:
 
