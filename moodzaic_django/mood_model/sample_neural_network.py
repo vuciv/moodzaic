@@ -14,10 +14,11 @@ class MoodNeuralNetwork:
     _weights = {}
     _biases = {}
     _network = []
-    epochs = 20
+    epochs = 1000
     learn_rate = 0.1 # number of times to loop through the entire dataset
 
-    def __init__(self, weights = None, biases = None):
+    def __init__(self, nclasses = 2, weights = None, biases = None):
+        self.nclasses = nclasses
         # Weights
         if weights:
             if len(weights) != 208:
@@ -33,7 +34,8 @@ class MoodNeuralNetwork:
             self.setBias(biases)
         else:
             for i in range(21):
-                self._biases["bias" + str(i)] = np.random.uniform()
+                # self._biases["bias" + str(i)] = np.random.uniform()
+                self._biases["bias" + str(i)] = 1.0
         # network
         for i in range(4):
             self._network.append([])
@@ -85,7 +87,7 @@ class MoodNeuralNetwork:
 
     def feedforward(self, x, training = False):
         # x is a numpy array with 11 elements.
-        layer1 = np.arange(11)
+        layer1 = np.arange(11.0)
         weightCounter = 0
         biasCounter = 0
         # layer 1
@@ -99,7 +101,7 @@ class MoodNeuralNetwork:
             biasCounter += 1
 
         # layer 2
-        layer2 = np.arange(6)
+        layer2 = np.arange(6.0)
         for i in range(layer2.shape[0]):
             h = 0
             for j in range(layer1.shape[0]):
@@ -110,7 +112,7 @@ class MoodNeuralNetwork:
             biasCounter += 1
 
         # layer 3
-        layer3 = np.arange(3)
+        layer3 = np.arange(3.0)
         for i in range(layer3.shape[0]):
             h = 0
             for j in range(layer2.shape[0]):
@@ -130,6 +132,9 @@ class MoodNeuralNetwork:
             return layer1, layer2, layer3, output
         else:
             return output
+
+    def roundClass(self, output):
+        return np.rint(output*(self.nclasses-1))
 
     def activation(self, x):
         # activation function: sigmoid function
@@ -153,7 +158,7 @@ class MoodNeuralNetwork:
             	for j in range(len(layer)):
             		error = 0.0
             		for neuron in self._network[i + 1]:
-            			error += (self._weights['weight' + str(neuron['weights'][j])] * neuron['delta'])
+            			error += (self._weights['weight' + str(neuron['weights'][j])] * neuron['delta'] * self.deriv_activation(neuron['output']))
             		errors.append(error)
             else:
             	for j in range(len(layer)):
@@ -165,16 +170,14 @@ class MoodNeuralNetwork:
 
     # Update network weights with error
     def update_weights(self, data_input):
-        print('-------------------------------updating weights-----------------------------')
         for i in range(len(self._network)):
             inputs = data_input[:]
             if i != 0:
                 inputs = [neuron['output'] for neuron in self._network[i - 1]]
             for neuron in self._network[i]:
-                print(neuron)
                 for j in range(len(inputs)):
-                    self._weights['weight' + str(neuron['weights'][j])] += self.learn_rate * neuron['delta'] * inputs[j]
-                self._biases['bias' + str(neuron['bias'])] += self.learn_rate * neuron['delta']
+                    self._weights['weight' + str(neuron['weights'][j])] -= self.learn_rate * neuron['delta'] * inputs[j] * self.deriv_activation(neuron['output'])
+                #self._biases['bias' + str(neuron['bias'])] += self.learn_rate * neuron['delta']
 
     def train(self, data, all_y_trues):
         '''
@@ -183,10 +186,8 @@ class MoodNeuralNetwork:
           Elements in all_y_trues correspond to those in data.
         '''
         for epoch in range(self.epochs):
-            print('--------------------------ON epoch', epoch,'--------------------------')
             counter = 1
             for x, y_true in zip(data, all_y_trues):
-                print('--------------------------data row', counter ,'--------------------------')
                 counter += 1
                 # --- Do a feedforward and save values
                 layer1, layer2, layer3, output = self.feedforward(x, True)
@@ -197,8 +198,6 @@ class MoodNeuralNetwork:
                 for i in range(layer3.shape[0]):
                     self._network[2][i]['output'] = layer3[i]
                 self._network[3][0]['output'] = output[0]
-                # print(output)
-                print(self.loss(y_true, output[0]))
 
                 # --- Calculate partial derivatives.
                 self.backward_propagate_error(y_true)
@@ -228,7 +227,7 @@ if __name__ == "__main__":
     # sampleData = np.arange(11)
     # print(testModel.feedforward(sampleData))
     print('------------------------------------------------------------')
-    # Define dataset
+    # Define dataset sample
     data = np.array([
       [-2, -1, -2, -1, -2, -1, -2, -1, -2, -1, 9],  # Alice
       [25, 6, 25, 6, 25, 6, 25, 6, 25, 6, 9],   # Bob
@@ -244,12 +243,9 @@ if __name__ == "__main__":
 
     # Train our neural network!
     network = MoodNeuralNetwork()
+    for i in range(4):
+        print(network.feedforward(data[i]))
     network.train(data, all_y_trues)
-    pred = network.feedforward(data[0])
-    print(pred)
-    pred = network.feedforward(data[1])
-    print(pred)
-    pred = network.feedforward(data[2])
-    print(pred)
-    pred = network.feedforward(data[3])
-    print(pred)
+    print('----------------------end-------------------------------')
+    for i in range(4):
+        print(network.feedforward(data[i]))
