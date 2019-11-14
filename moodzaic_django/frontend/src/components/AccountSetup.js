@@ -115,7 +115,7 @@ class SetupPage extends React.Component {
               <Header as='h1' color='teal'>Welcome to Moodzaic!</Header>
               <p>Fill out this form so we can create your account.</p>
               <Form>
-                <div class="two fields">
+                <div className="two fields">
                   <Form.Field>
                     <label>First Name</label>
                     <input />
@@ -125,7 +125,7 @@ class SetupPage extends React.Component {
                     <input />
                   </Form.Field>
                 </div>
-                <div class="three fields">
+                <div className="three fields">
                 <Form.Field>
                   <label>Age</label>
                   <input placeholder='Replace with birthdate?'/>
@@ -141,7 +141,7 @@ class SetupPage extends React.Component {
                 </div>
               </Form>
               {QuestionList.map((Question, index) => {
-                return (<Form>
+                return (<Form key={index}>
                   <Form.Field>
                     <label>{Question}</label>
                     <Rating icon="heart" defaultRating={0} maxRating={5} size="huge" />
