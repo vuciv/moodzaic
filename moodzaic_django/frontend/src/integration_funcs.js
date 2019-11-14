@@ -22,13 +22,12 @@ export function addCommunity(c) {
   }
 
   function getUsers() {
-    return axios.get(`${API_URL}users/`).then(response => response.data).catch(error => console.log(error));
+    return axios.get(`${API_URL}community/all`).then(response => response.data).catch(error => console.log(error));
   }
 
-  export function createUser(community){
+  export function createUser(){
     return axios.post(`${API_URL}community/`, {
-      name: "jerseysCommunity",
-      users: []
+      name: "jerseysCommunity"
     })
       .then(response => {
         console.log(response);

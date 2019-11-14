@@ -23,7 +23,7 @@ class SignUpForm extends React.Component {
         name: username,
         users: user
       };
-      createUser(u).then(res => {
+      createUser().then(res => {
         this.setState({redirect: true});
       });
     }
