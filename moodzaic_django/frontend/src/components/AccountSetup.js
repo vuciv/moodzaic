@@ -9,6 +9,7 @@ import {
   Rating
 } from 'semantic-ui-react'
 import {createUser} from '../integration_funcs.js';
+import ProfileService from './ProfileService.js';
 
 
 
@@ -92,7 +93,9 @@ class SetupPage extends React.Component {
     totalSteps: 1 + getInitialQuestions().length/5, //5 questions per page
     first: '',
     last: '',
-    
+    age: 0,
+    gender: '',
+    email: ''
   }
   nextStep = () => {
         const { step } = this.state
@@ -111,7 +114,14 @@ class SetupPage extends React.Component {
     }
 
   handleSubmit = () => {
-    createUser()
+    createUser({
+      username: this.props.user,
+      first_name: this.state.first,
+      last_name: this.state.last
+    })
+    ProfileService.createProfile({
+
+    })
   }
 
   render() {
