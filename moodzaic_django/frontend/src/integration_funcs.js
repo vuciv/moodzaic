@@ -26,7 +26,10 @@ export function addCommunity(c) {
   }
 
   export function createUser(community){
-    return axios.post(`${API_URL}community/`)
+    return axios.post(`${API_URL}community/`, {
+      name: "jerseysCommunity",
+      users: []
+    })
       .then(response => {
         console.log(response);
         console.log(response.data);

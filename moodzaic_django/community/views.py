@@ -18,8 +18,13 @@ logger = logging.getLogger(__name__)
 @api_view(['POST'])
 def makeCommunity(request):
     if request.method == 'POST':
-        logger.error('Success!')
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        logger.error(request.data)
+        serializer = CommunitySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.data)
 
 @api_view(['GET', 'POST', 'DELETE'])
 def communityDetails(request, name):

@@ -20,8 +20,8 @@ class SignUpForm extends React.Component {
   userCreation = (user, username, password) => {
     if (!user) {
       const u = {
-        Username: username,
-        Password: password
+        name: username,
+        users: user
       };
       createUser(u).then(res => {
         this.setState({redirect: true});
