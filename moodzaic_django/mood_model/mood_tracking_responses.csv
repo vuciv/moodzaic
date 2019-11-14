@@ -1,0 +1,18 @@
+Timestamp,Name,"How much sleep did you get in the last 24hrs (last time you slept longer than just nap, please enter in time format, e.g. 8:32 for 8 hours and 32 minutes)?","If you exercised in the las 24 hrs, for how long? (please enter in time format, e.g. 8:32 for 8 hours and 32 minutes)",How many hours per week do you exercise?,How many meals did you eat in the last 24hrs?,"If you have any personal goals for improving your well being, how many? (Input 0 if none)",Goals Completed,Goals missed,Goal ratio,Past mood score,"How many hours did you work in last 24hrs? (please enter in time format, e.g. 8:32 for 8 hours and 32 minutes)",How many hours do you work per week?,How are you feeling right now? Please select one of the emotions that best match how you're feeling or felt in last 24hrs.
+11/13/2019 0:48:09,Berenice ,05:53,00:00,0,2,2,0,0,0,0,00:00,17,Sad
+11/13/2019 0:52:38,Chema,08:00,00:00,0,2,1,0,0,0,0,00:00,10,Happy
+11/13/2019 5:08:45,Will R,06:00,01:30,1,2,3,0,0,0,0,04:00,10,Hesitant
+11/13/2019 13:10:55,Daniel Steinberg,08:00,00:05,2,2,2,0,0,0,0,14:00,80,Fear
+11/13/2019 13:27:40,Molly Fortnow,05:00,00:00,5,3,3,0,0,0,0,10:00,35,Sad
+11/13/2019 13:30:09,ocram ayana,06:40,00:00,0,3,5,0,0,0,0,15:00,60,Sad
+11/13/2019 14:35:53,Zipporah Klain,08:30,00:30,5,3,1,0,0,0,0,07:00,50,Calm
+11/13/2019 15:26:09,Emil,07:30,00:00,2,3,1,0,0,0,0,06:00,30,Calm
+11/13/2019 18:21:55,David Mendieta,09:31,00:00,1,3,4,0,0,0,0,02:00,15,Calm
+11/13/2019 18:21:55,David,05:31,00:00,0,0,0,0,0,0,0,05:00,45,Sad
+11/13/2019 18:21:55,Carl,04:31,00:00,0,0,0,0,0,0,0,08:00,35,Fear
+11/13/2019 18:21:55,Charlie,09:31,10:00,1,3,4,3,0,0,5,02:00,5,Happy
+11/13/2019 18:21:55,Dave,09:31,08:00,1,3,4,3,0,0,5,02:00,5,Happy
+11/13/2019 18:21:55,David,05:31,00:00,0,0,0,0,0,0,0,05:00,45,Sad
+11/13/2019 18:21:55,Carl,04:31,00:00,0,0,0,0,0,0,0,08:00,35,Fear
+11/13/2019 18:21:55,Charlie,09:31,10:00,1,3,4,3,0,0,5,02:00,5,Happy
+11/13/2019 18:21:55,Dave,09:31,08:00,1,3,4,3,0,0,5,02:00,5,Happy

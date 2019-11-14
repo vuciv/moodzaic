@@ -4,7 +4,6 @@ import LoginForm from './LogIn.js'
 import ProfilePage from './ProfPage.js'
 import MoodPage from './MoodInput.js'
 import CommunityPage from './CommunityPage.js'
-import Community from './Community.js'
 import SignUpForm from './SignUp.js'
 import SetupPage from './AccountSetup.js'
 
@@ -19,7 +18,13 @@ class App extends Component {
   state = {
         LoggedIn: false,
         Name: 'TestName',
-        Username: 'TestUsername',
+        user: {
+          username: '',
+          password: '',
+          email: '',
+          first_name: '',
+          last_name: ''
+        },
         MyCommunityList: [],
         MyObservationList: [],
         LastObservationTime: '',
@@ -49,16 +54,16 @@ class App extends Component {
               <SetupPage />
             </Route>
             <Route path="/Profile">
-              <ProfilePage Username={this.state.Username} Name={this.state.Name}
+              <ProfilePage Username={this.state.user.username} Name={this.state.Name}
                 Age={this.state.Age} Gender={this.state.Gender}
                 ProgressScore={this.state.ProgressScore}/>
             </Route>
             <Route path="/Communities">
-              <CommunityPage username={this.state.Username}/>
+              <CommunityPage username={this.state.user}/>
             </Route>
             <Route path="/">
               {this.state.LoggedIn ?
-                <ProfilePage Username={this.state.Username} Name={this.state.Name}
+                <ProfilePage Username={this.state.user.username} Name={this.state.Name}
                   Age={this.state.Age} Gender={this.state.Gender}
                   ProgressScore={this.state.ProgressScore}/> :
                 <LoginForm callback = {this.toggleLogIn} />}
