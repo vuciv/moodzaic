@@ -3,6 +3,41 @@ from datetime import date
 from django.contrib.auth.models import User
 from datetime import datetime
 
+#from community.models import Community
+
+'''
+class User(models.Model):
+    username = models.CharField(max_length=20, default='')
+    password = models.CharField(max_length=20, default='')
+    age = models.IntegerField(default=18)
+    gender = models.CharField(max_length=9, default='')
+
+    def setUserUsername(self, username):
+        if not (isinstance(username, 'str')):
+            return False
+        if len(username) > 20:
+            return False
+        self.username = username
+        self.save()
+        return True
+
+    def setUserPassword(self, password):
+        if not (isinstance(password, 'str')):
+            return False
+        if len(password) > 20:
+            return False
+        self.password = password
+        self.save()
+        return True
+
+    def setUserAge(self, age):
+        #TODO
+        return 'not false'
+
+    def setUserGender(self, age):
+        #TODO
+        return 'not false'
+'''
 
 class Goal(models.Model):
     goal = models.CharField(max_length=30)
@@ -109,8 +144,6 @@ class Observation(models.Model):
         on_delete=models.CASCADE,
         null=True
     )
-
-    moods = ["mood"] * 10
 
     def setSleep(self, hours):
         if hours  >= 0 and hours <= 24:
