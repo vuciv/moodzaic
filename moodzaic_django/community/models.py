@@ -64,6 +64,7 @@ class Post(models.Model):
 
     #TODO TIME?
 
+## (For Iteration 2)
 ## Ahh! A data-class!
 ## IDK what to do about this because you can't have recursive objects.
 class Comment(Post):
