@@ -26,7 +26,7 @@ class MyMenu extends React.Component {
 
   signOut() {
     console.log("Hey")
-    this.toggleLogIn();
+    //this.toggleLogIn();
     // this.setState(state => ({
     //
     //   })
