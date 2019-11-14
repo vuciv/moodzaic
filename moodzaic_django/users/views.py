@@ -1,5 +1,5 @@
-from users.models import User, Profile
-from users.serializers import UserSerializer, ProfileSerializer
+from users.models import User, Profile#, Observation
+from users.serializers import UserSerializer, ProfileSerializer, ObservationSerializer
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -80,24 +80,24 @@ def profile_detail(request, username):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'POST'])
-def user_observations_list(request, username):
-    """
-    List all code snippets, or create a new snippet.
-    """
-    try:
-        observations = Observation.objects.filter(user__username=username)
-    except Profile.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+# @api_view(['GET', 'POST'])
+# def user_observations_list(request, username):
+#     """
+#     List all code snippets, or create a new snippet.
+#     """
+#     try:
+#         observations = Observation.objects.filter(user__username=username)
+#     except Profile.DoesNotExist:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'GET':
-        serializer = ObservationSerializer(observations, many=True)
-        return Response(serializer.data)
+#     if request.method == 'GET':
+#         serializer = ObservationSerializer(observations, many=True)
+#         return Response(serializer.data)
 
-    elif request.method == 'POST':
-        serializer = ObservationSerializer(data=request.data.observation)
+#     elif request.method == 'POST':
+#         serializer = ObservationSerializer(data=request.data.observation)
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
