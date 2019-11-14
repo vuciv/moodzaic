@@ -2,13 +2,13 @@
 // for users, unique personal key (pk) is username
 
 import axios from 'axios';
-const API_URL = 'http://localhost:8000/api/users/';
+const API_URL = 'http://localhost:8000/api/profile/';
 
 export default class UserService{
 
     //constructor(){}
 
-    getUsers() {
+    getProfiles() {
         const url = `${API_URL}`;
         return axios.get(url).then(response => response.data);
     }
@@ -16,20 +16,20 @@ export default class UserService{
     //     const url = `${API_URL}${link}`;
     //     return axios.get(url).then(response => response.data);
     // }
-    getUser(username) {
+    getProfile(username) {
         const url = `${API_URL}${username}`;
         return axios.get(url).then(response => response.data);
     }
-    deleteUser(user){
-        const url = `${API_URL}${user.username}`; //should be username instead of pk, since that is the identifier?
+    deleteProfile(username){
+        const url = `${API_URL}${username}`; //should be username instead of pk, since that is the identifier?
         return axios.delete(url);
     }
-    createUser(user){
+    createProfile(username){
         const url = `${API_URL}`;
-        return axios.post(url,user);
+        return axios.post(url,username);
     }
-    updateUser(user){
-        const url = `${API_URL}${user.username}`;
-        return axios.put(url,user);
+    updateProfile(username){
+        const url = `${API_URL}${username}`;
+        return axios.put(url,username);
     }
 }

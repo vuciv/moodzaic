@@ -37,7 +37,7 @@ class CommunityPage extends React.Component {
     this.setState(prevState => ({
       MyCommunityList: (this.state.CommunityList).filter((community) => {
         return(
-          community.user === this.props.username //ok so!!!! no idea if this works or not!!!! check with api ppl!!!
+          community.users.includes(this.props.user)
         )
       })
     }))

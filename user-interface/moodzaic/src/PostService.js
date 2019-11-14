@@ -1,34 +1,34 @@
 // Module to call REST API from Django back-end
 
 import axios from 'axios';
-const API_URL = 'http://localhost:8000';
+const API_URL = 'http://localhost:8000/api/posts/';
 
 export default class PostService{
 
     //constructor(){}
 
-    getAllCommunities() {
-        const url = `${API_URL}/api/customers/`;
+    getPosts() {
+        const url = `${API_URL}`;
         return axios.get(url).then(response => response.data);
     }
-    getCommunitiesByURL(link){
-        const url = `${API_URL}${link}`;
+    // getCommunitiesByURL(link){
+    //     const url = `${API_URL}${link}`;
+    //     return axios.get(url).then(response => response.data);
+    // }
+    getPost(id) {
+        const url = `${API_URL}${id}`;
         return axios.get(url).then(response => response.data);
     }
-    getCommunity(pk) {
-        const url = `${API_URL}/api/customers/${pk}`;
-        return axios.get(url).then(response => response.data);
-    }
-    deleteCommunity(community){
-        const url = `${API_URL}/api/customers/${community.pk}`;
+    deletePost(post){
+        const url = `${API_URL}${post.id}`;
         return axios.delete(url);
     }
-    createCommunity(community){
-        const url = `${API_URL}/api/customers/`;
-        return axios.post(url,community);
+    createPost(post){
+        const url = `${API_URL}`;
+        return axios.post(url,post);
     }
-    updateCommunity(community){
-        const url = `${API_URL}/api/customers/${community.pk}`;
-        return axios.put(url,community);
+    updatePost(post){
+        const url = `${API_URL}${post.id}`;
+        return axios.put(url, post);
     }
 }
