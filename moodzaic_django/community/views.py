@@ -6,21 +6,18 @@ from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
-<<<<<<< HEAD
+
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
-=======
 import logging
 
 logger = logging.getLogger(__name__)
 
 
->>>>>>> 76b65dfb6043e2b7e2258cb24249f0c89f024fd5
-
 # class CommunityListCreate(generics.ListCreateAPIView):
 #     queryset = Community.objects.all()
 #     serializer_class = CommunitySerializer
 
-<<<<<<< HEAD
+
 @csrf_exempt
 @api_view(['GET', 'PUT', 'DELETE'])
 @ensure_csrf_cookie
@@ -32,7 +29,7 @@ def comDet(request):
 @csrf_exempt
 @api_view(['GET', 'POST', 'DELETE'])
 @ensure_csrf_cookie
-=======
+
 @api_view(['POST'])
 def makeCommunity(request):
     if request.method == 'POST':
@@ -51,7 +48,6 @@ class CommunityListCreate(generics.ListCreateAPIView):
     serializer_class = CommunitySerializer
 
 @api_view(['GET', 'POST', 'DELETE'])
->>>>>>> 76b65dfb6043e2b7e2258cb24249f0c89f024fd5
 def communityDetails(request, name):
     """
     Retrieve, update or get a community by name.
@@ -67,7 +63,6 @@ def communityDetails(request, name):
             serializer = CommunitySerializer(community,context={'request': request})
             return Response(serializer.data)
 
-<<<<<<< HEAD
         elif request.method == 'POST':
         #    serializer = CommunitySerializer(community, data=request.data,context={'request': request})
         #    if serializer.is_valid():
@@ -79,7 +74,6 @@ def communityDetails(request, name):
         elif request.method == 'DELETE':
             community.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-=======
         # elif request.method == 'POST':
         #         serializer = CustomerSerializer(customer, data=request.data,context={'request': request})
         #         if serializer.is_valid():
@@ -90,4 +84,3 @@ def communityDetails(request, name):
         # elif request.method == 'DELETE':
         #     community.delete()
         #     return Response(status=status.HTTP_204_NO_CONTENT)
->>>>>>> 76b65dfb6043e2b7e2258cb24249f0c89f024fd5
