@@ -5,9 +5,11 @@ import {
 } from 'semantic-ui-react'
 
 // import { addCommunity, isMyCommunity } from '../integration_funcs.js'
-import CommunityService from '../CommunityService.js';
+// import CommunityService from '../CommunityService.js';
 // import UserService from '../UserService.js';
 import MakeCommunity from './MakeCommunity.js';
+import {updateCommunity} from '../integration_funcs'
+
 
 
 
@@ -31,7 +33,7 @@ class AllCommunities extends React.Component {
     //   User: username,
     //   Community: community
     // }
-    CommunityService.updateCommunity(community);
+    updateCommunity(community);
   }
 
   toggleMakeMode = () => {

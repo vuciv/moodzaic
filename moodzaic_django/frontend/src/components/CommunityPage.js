@@ -9,7 +9,8 @@ import Community from './Community.js'
 import CommunitiesPage from './MyCommunities.js'
 import AllCommunities from './AllCommunities.js'
 // import { getMyCommunityList, getAllCommunities } from '../integration_funcs.js'
-import CommunityService from '../CommunityService.js';
+// import CommunityService from '../CommunityService.js';
+import {getAllCommunities} from '../integration_funcs'
 
 
 
@@ -18,8 +19,8 @@ class CommunityPage extends React.Component {
   state = {
         Community: '',
         AddMode: false,
-        MyCommunityList: null,
-        CommunityList: null
+        MyCommunityList: [],
+        CommunityList: []
         // should these be props?
   }
 
@@ -31,8 +32,9 @@ class CommunityPage extends React.Component {
 
   componentDidMount() {
     // var  self  =  this;
-    CommunityService.getAllCommunities().then(function (result) {
-        this.setState({ CommunityList:  result.data, nextPageURL:  result.nextlink})
+    const communities = getAllCommunities();
+    communities.then(function (result) {
+        this.setState({ CommunityList:  result.data })
     });
     this.setState(prevState => ({
       MyCommunityList: (this.state.CommunityList).filter((community) => {
@@ -60,14 +62,12 @@ class CommunityPage extends React.Component {
     }))
   }
 
-
-
   render() {
     const addMode = this.state.AddMode;
     const community = this.state.Community;
     const myCommunityList = this.state.MyCommunityList;
     const communityList = this.state.CommunityList;
-    const username = this.props.username;
+    const username = this.props.user.username;
     let myPage, myButton;
 
     if (community !== '') {
@@ -79,7 +79,7 @@ class CommunityPage extends React.Component {
     }
 
     else if (addMode === false) {
-      myPage = <CommunitiesPage communityCallback = {this.OpenCommunity()} myCommunities = {myCommunityList}/>;
+      myPage = <CommunitiesPage communityCallback = {this.OpenCommunity} myCommunities = {myCommunityList}/>;
       myButton =
       <Button color='teal' fluid size='large' onClick = {this.toggleAddMode}>
         See All Communities
