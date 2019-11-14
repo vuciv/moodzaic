@@ -7,6 +7,7 @@ const API_URL = 'http://localhost:8000/api/';
   }
 
   export function createUser(u){
+    console.log(u);
     return axios.post(`${API_URL}users/`, u)
       .then(response => {
         console.log(response);
@@ -97,6 +98,7 @@ const API_URL = 'http://localhost:8000/api/';
       return axios.delete(url);
   }
   export function createProfile(username){
+      console.log(username);
       const url = `${API_URL}profiles/`;
       return axios.post(url,username);
   }
