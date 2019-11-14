@@ -132,7 +132,7 @@ class Profile(models.Model):
         self.save()
 
     def setAge(self, age):
-        if not (isinstance(mood, type(2))):
+        if not (isinstance(age, type(2))):
             return False
         if age >= 18 and age <= 120:
             self.age = age
