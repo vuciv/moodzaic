@@ -43,7 +43,28 @@ const API_URL = 'http://localhost:8000/api/';
 
   }
 
-  // 
+  export function getAllCommunities() {
+      const url = `${API_URL}/community/`;
+      return axios.get(url).then(response => response.data);
+  }
+  export function getCommunity(name) {
+      const url = `${API_URL}$/community/{name}`;
+      return axios.get(url).then(response => response.data);
+  }
+  // export function deleteCommunity(community){
+  //     const url = `${API_URL}$/community/{community.name}`;
+  //     return axios.delete(url);
+  // }
+  export function createCommunity(community){
+      const url = `${API_URL}/community/`;
+      return axios.post(url,community);
+  }
+  export function updateCommunity(community){
+      const url = `${API_URL}/community/${community.name}`;
+      return axios.put(url,community);
+  }
+
+  //
   // export const getPosts = (com) => {
   //   //get a list of all the posts from the community
   //   const ret = [];

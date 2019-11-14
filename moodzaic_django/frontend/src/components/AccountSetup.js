@@ -109,9 +109,7 @@ class SetupPage extends React.Component {
           step : step - 1
       })
   }
-  handleChange = input => event => {
-    this.setState({ [input] : event.target.value })
-    }
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
   handleSubmit = () => {
     createUser({
@@ -123,7 +121,9 @@ class SetupPage extends React.Component {
     })
     ProfileService.createProfile({
       username: this.props.user.username,
-      password: this.props.user.password
+      age: this.state.age,
+      gender: this.state.gender.value,
+      reminder_list: []
     })
   }
 
@@ -140,25 +140,25 @@ class SetupPage extends React.Component {
               <Form>
               {/*creating form for basic profile info*/}
                 <div className="two fields">
-                  <Form.Field>
+                  <Form.Field name='first' onChange={this.handleChange}>
                     <label>First Name</label>
                     <input />
                   </Form.Field>
-                  <Form.Field>
+                  <Form.Field name='last' onChange={this.handleChange}>
                     <label>Last Name</label>
                     <input />
                   </Form.Field>
                 </div>
                 <div className="three fields">
-                <Form.Field>
+                <Form.Field name='age' onChange={this.handleChange}>
                   <label>Age</label>
-                  <input placeholder='Replace with birthdate?'/>
+                  <input placeholder='Age'/>
                 </Form.Field>
-                <Form.Field>
+                <Form.Field name='gender' onChange={this.handleChange}>
                   <label>Gender</label>
                   <Dropdown placeholder='Select' fluid selection options={GenderOptions}/>
                 </Form.Field>
-                <Form.Field>
+                <Form.Field name='email' onChange={this.handleChange}>
                   <label>Email</label>
                   <input />
                 </Form.Field>
