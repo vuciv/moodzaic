@@ -23,6 +23,7 @@ class SignUpForm extends React.Component {
         Username: username,
         Password: password
       };
+      console.log(u)
       createUser(u).then(res => {
         this.setState({redirect: true});
       });
@@ -33,10 +34,11 @@ class SignUpForm extends React.Component {
     let password = event.target[1].value;
     let confirm_password = event.target[2].value;
     //const [username, password, confirm_password] = event.target.map(t => t.value);
+    console.log([username, password]);
     if (password === confirm_password) {
       getUserByUsername(username).then(user => {
         console.log(user);
-        this.userCreation(user);
+        this.userCreation(user, username, password);
 
       })
       //console.log([username, password]);
