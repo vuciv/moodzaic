@@ -95,4 +95,4 @@ coverage.xml
 **/migrations/
 **/migrations/*.pyc
 
-moodzaic_django/webpack-stats.dev.json
+**/webpack-stats.dev.json
