@@ -46,9 +46,8 @@ class AllCommunities extends React.Component {
     const communities = this.props.allCommunities.map((com, i) => {
       return <Button
                 color='purple' fluid size='large'
-                key = {i}
-                onClick = {this.handleAddClick({name: com.name, users: com.users.append(this.props.user)})}>
-                {com.name}: {this.props.myCommunities.includes(com) ? 'added!' : 'add?'}
+                key = {i}>
+                {com.name}
               </ Button>;
     })
 

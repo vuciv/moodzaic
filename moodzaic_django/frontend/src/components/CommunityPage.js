@@ -30,19 +30,17 @@ class CommunityPage extends React.Component {
   //     .then(data => this.setState({ MyCommunityList : data }));
   // }
 
-  componentDidMount() {
+  async componentDidMount() {
     // var  self  =  this;
-    const communities = getAllCommunities();
-    communities.then(function (result) {
-        this.setState({ CommunityList:  result.data })
-    });
-    this.setState(prevState => ({
-      MyCommunityList: (this.state.CommunityList).filter((community) => {
-        return(
-          community.users.includes(this.props.user)
-        )
-      })
-    }))
+    const communities = await getAllCommunities();
+    this.setState({ CommunityList: communities});
+    // this.setState(prevState => ({
+    //   MyCommunityList: (this.state.CommunityList).filter((community) => {
+    //     return(
+    //       community.users.includes(this.props.user)
+    //     )
+    //   })
+    // }))
   }
 
   componentDidUpdate() {
